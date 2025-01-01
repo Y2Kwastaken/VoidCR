@@ -1,0 +1,18 @@
+[versions]
+diffpatch-version = "2.0.0.36"
+vineflower-version = "1.11.0-SNAPSHOT"
+libgdx-version = "1.12.1"
+tuningfork-version = "4.3.0"
+netty-version = "4.1.24.Final"
+
+[libraries]
+vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower-version" }
+diffpath = { module = "io.codechicken:DiffPatch", version.ref = "diffpatch-version" }
+# Cosmic Reach
+libgdx-api = { module = "com.badlogicgames.gdx:gdx", version.ref = "libgdx-version" }
+libgdx-headless = { module = "com.badlogicgames.gdx:gdx-backend-headless", version.ref = "libgdx-version" }
+tuningfork = { module = "com.github.Hangman:TuningFork", version.ref = "tuningfork-version" }
+netty-all = { module = "io.netty:netty-all", version.ref = "netty-version" }
+
+
+[plugins]

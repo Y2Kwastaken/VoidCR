@@ -14,3 +14,11 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
+
+buildSrc/build/
+
+void-server/build/
+
+void-server/decompile/
+
+void-server/src/cosmic-reach/
