@@ -2,9 +2,9 @@ package sh.miles.voidcr.task
 
 import io.codechicken.diffpatch.cli.PatchOperation
 import io.codechicken.diffpatch.match.FuzzyLineMatcher
-import io.codechicken.diffpatch.util.Input.PathArchiveMultiInput
+import io.codechicken.diffpatch.util.Input.MultiInput
 import io.codechicken.diffpatch.util.LogLevel
-import io.codechicken.diffpatch.util.Output.PathArchiveMultiOutput
+import io.codechicken.diffpatch.util.Output.MultiOutput
 import io.codechicken.diffpatch.util.PatchMode
 import io.codechicken.diffpatch.util.archiver.ArchiveFormat
 import org.gradle.api.DefaultTask
@@ -55,9 +55,10 @@ abstract class ApplyPatchesTask : DefaultTask() {
 
         val result = PatchOperation.builder()
             .logTo { logger.lifecycle(it) }
-            .baseInput(PathArchiveMultiInput.archive(ArchiveFormat.ZIP, input))
-            .patchedOutput(PathArchiveMultiOutput.archive(ArchiveFormat.ZIP, output))
-            .rejectsOutput(PathArchiveMultiOutput.archive(ArchiveFormat.ZIP, output))
+            .baseInput(MultiInput.archive(ArchiveFormat.ZIP, input))
+            .patchedOutput(MultiOutput.archive(ArchiveFormat.ZIP, output.outputStream()))
+            .patchesInput(MultiInput.folder(patchDir.asFile.get().toPath()))
+            .rejectsOutput(MultiOutput.archive(ArchiveFormat.ZIP, output.outputStream()))
             .level(LogLevel.ALL)
             .mode(PatchMode.OFFSET)
             .minFuzz(FuzzyLineMatcher.DEFAULT_MIN_MATCH_SCORE)

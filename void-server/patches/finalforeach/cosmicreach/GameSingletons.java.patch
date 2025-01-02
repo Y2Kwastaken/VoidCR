@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/GameSingletons.java
++++ b/finalforeach/cosmicreach/GameSingletons.java
+@@ -51,7 +_,7 @@
+ public class GameSingletons {
+    public static World world;
+    private static ObjectMap<String, Player> uniqueIdsToPlayers = new ObjectMap();
+-   private static WeakHashMap<Player, String> playersToUniqueIds = new WeakHashMap<Player, String>();
++   public final static WeakHashMap<Player, String> playersToUniqueIds = new WeakHashMap<Player, String>(); // VoidCR - expose players map
+    private static WeakHashMap<Player, Account> playersToAccounts = new WeakHashMap<Player, Account>();
+    private static int NUMBER_OF_PLAYERS = 0;
+    public static boolean isAllFlaggedForRemeshing;

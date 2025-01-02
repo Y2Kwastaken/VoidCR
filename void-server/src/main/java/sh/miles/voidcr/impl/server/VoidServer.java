@@ -1,5 +1,7 @@
 package sh.miles.voidcr.impl.server;
 
+import finalforeach.cosmicreach.chat.commands.Command;
+import sh.miles.voidcr.feature.chat.command.VoidServerStopCommand;
 import sh.miles.voidcr.impl.plugin.PluginLoadGraph;
 import sh.miles.voidcr.impl.plugin.VoidPluginLoader;
 import sh.miles.voidcr.impl.plugin.meta.VoidPluginMeta;
@@ -16,8 +18,13 @@ public final class VoidServer implements Server {
     }
 
     public VoidServer load() {
+        registerCommands();
         loadPlugins();
         return this;
+    }
+
+    private void registerCommands() {
+        Command.registerCommand(VoidServerStopCommand::new, "stop", "shutdown");
     }
 
     private void loadPlugins() {

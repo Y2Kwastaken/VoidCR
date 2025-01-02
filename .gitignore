@@ -22,3 +22,7 @@ void-server/build/
 void-server/decompile/
 
 void-server/src/cosmic-reach/
+
+VoidCR.iml
+
+void-api/build/

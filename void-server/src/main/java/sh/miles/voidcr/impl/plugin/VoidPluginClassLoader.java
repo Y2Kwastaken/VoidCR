@@ -63,7 +63,7 @@ public class VoidPluginClassLoader extends URLClassLoader {
             throw new ClassNotFoundException(name);
         }
 
-        if (!(result.getClassLoader() instanceof OrbitPluginClassLoader oloader)) {
+        if (!(result.getClassLoader() instanceof VoidPluginClassLoader oloader)) {
             throw new ClassNotFoundException(name);
         }
 
@@ -72,7 +72,7 @@ public class VoidPluginClassLoader extends URLClassLoader {
 
     @Override
     protected Class<?> findClass(final String name) throws ClassNotFoundException {
-        if (name.startsWith("io.github.orbitemc.impl") || name.startsWith("net.minecraft.")) {
+        if (name.startsWith("sh.miles.voidcr") || name.startsWith("finalforeach.cosmicreach")) {
             throw new ClassNotFoundException("%s, this is likely because of inclusion of internal classes.".formatted(name));
         }
 

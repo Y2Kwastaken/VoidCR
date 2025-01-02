@@ -9,7 +9,7 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
-val crVersion = "0.3.11"
+val crVersion = "0.3.14"
 
 group = rootProject.group
 version = rootProject.name
@@ -23,22 +23,10 @@ repositories {
     }
 }
 
-val cosmicReach by configurations.creating {
-    extendsFrom(configurations.implementation.get())
-}
-
 sourceSets {
-    val cosmicReach by creating {
-        java.srcDirs("src/cosmic-reach/java")
-        resources.srcDirs("src/cosmic-reach/resources")
+    main {
+        java.srcDir(files("src/cosmic-reach/java"))
     }
-
-    sourceSets["main"].compileClasspath += sourceSets["cosmicReach"].output
-    sourceSets["main"].runtimeClasspath += sourceSets["cosmicReach"].output
-
-    sourceSets["cosmicReach"].compileClasspath += sourceSets["main"].output
-    sourceSets["cosmicReach"].runtimeClasspath += sourceSets["main"].output
-
 }
 
 dependencies {
@@ -52,12 +40,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.guava:guava:33.4.0-jre")
     implementation(project(":void-api"))
-
-    cosmicReach(sourceSets["main"].output)
-}
-
-tasks.compileJava {
-    source(sourceSets["main"].java, sourceSets["cosmicReach"].java)
 }
 
 tasks.shadowJar {
@@ -99,11 +81,7 @@ val filterJar by tasks.registering(FilterZipTask::class) {
             }
         }
 
-        if (!entry.endsWith(".class")) {
-            return@set false
-        }
-
-        return@set true
+        return@set entry.endsWith(".class")
     }
 }
 
