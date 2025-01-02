@@ -32,7 +32,7 @@ abstract class BuildPatchesTask : DefaultTask() {
         val source = sourceDir.asFile.get().toPath()
         val patches = patchDir.asFile.get().toPath()
 
-        val result = DiffOperation.builder()
+        DiffOperation.builder()
             .logTo { logger.lifecycle(it) }
             .baseInput(MultiInput.archive(ArchiveFormat.ZIP, decompile))
             .changedInput(MultiInput.folder(source))
@@ -44,9 +44,5 @@ abstract class BuildPatchesTask : DefaultTask() {
             .summary(true)
             .build()
             .operate()
-
-        if (result.exit != 0) {
-            throw Exception("Failed to build patches exited with code ${result.exit}")
-        }
     }
 }

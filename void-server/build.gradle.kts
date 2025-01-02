@@ -6,6 +6,7 @@ import sh.miles.voidcr.task.SetupSourcesTask
 
 plugins {
     java
+    id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
 val crVersion = "0.3.11"
@@ -46,6 +47,28 @@ dependencies {
     implementation(libs.netty.all)
 
     cosmicReach(sourceSets["main"].output)
+}
+
+tasks.compileJava {
+    source(sourceSets["main"].java, sourceSets["cosmicReach"].java)
+}
+
+tasks.shadowJar {
+    manifest {
+        attributes(
+            "Implementation-Title" to "VoidCR",
+            "Implementation-Version" to rootProject.version,
+            "Main-Class" to "sh.miles.voidcr.Main"
+        )
+    }
+
+    from(project.layout.buildDirectory.file("generated/cosmic-reach-assets"))
+
+    dependsOn(generateResources)
+}
+
+tasks.build {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.register("setup") {
@@ -110,4 +133,10 @@ val buildPatches by tasks.registering(BuildPatchesTask::class) {
     this.patchDir = file("patches")
     this.sourceDir = file("src/cosmic-reach/java")
     this.decompiledJar = file("decompile/Cosmic-Reach-Server-$crVersion-decompiled.jar")
+}
+
+val generateResources by tasks.registering(Copy::class) {
+    from(zipTree("decompile/Cosmic-Reach-Server-$crVersion.jar"))
+    include("base/**", "build_assets/**", "icons/**", "post_build/**", "assets.txt")
+    into(project.layout.buildDirectory.file("generated/cosmic-reach-assets"))
 }
