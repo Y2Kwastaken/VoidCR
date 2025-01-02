@@ -1,0 +1,20 @@
+--- a/finalforeach/cosmicreach/util/Point3DMap.java
++++ b/finalforeach/cosmicreach/util/Point3DMap.java
+@@ -83,7 +_,7 @@
+    public void forEach(Consumer<T> consumer) {
+       this.map.forEach(lt -> {
+          if (lt.value != null) {
+-            ((IntMap)lt.value).forEach(t -> consumer.accept((T)t.value));
++            ((IntMap<T>)lt.value).forEach(t -> consumer.accept((T)t.value)); // VoidCR - decompile fix
+          }
+       });
+    }
+@@ -94,7 +_,7 @@
+          long l = lt.key;
+          int x = (int)(l >> 32);
+          int y = (int)(l & 4294967295L);
+-         ((IntMap)lt.value).forEach(it -> {
++         ((IntMap<T>)lt.value).forEach(it -> { // VoidCR - decompile fix
+             int z = it.key;
+             consumer.consume((T)it.value, x, y, z);
+          });

@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "io.github.voidcr"
+group = "sh.miles.voidcr"
 version = "1.0-SNAPSHOT"
 
 repositories {

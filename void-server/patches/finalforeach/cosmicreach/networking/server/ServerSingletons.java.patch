@@ -1,0 +1,21 @@
+--- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
++++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
+@@ -33,8 +_,10 @@
+ import finalforeach.cosmicreach.world.World;
+ import finalforeach.cosmicreach.world.Zone;
+ import io.netty.util.AttributeKey;
++import sh.miles.voidcr.impl.server.VoidServer;
+ 
+ public class ServerSingletons {
++   public static VoidServer VOID; // VoidCR - add server accessor
+    public static NettyServer SERVER;
+    private static ObjectMap<NetworkIdentity, Account> netIdsToAccounts = new ObjectMap();
+    private static ObjectMap<Account, NetworkIdentity> accountsToNetIds = new ObjectMap();
+@@ -152,6 +_,7 @@
+       });
+       registerBlockEntityOpeners();
+       GameSingletons.postCreate();
++      VOID = new VoidServer().load(); // VoidCR - initialize server
+    }
+ 
+    private static void registerBlockEntityOpeners() {

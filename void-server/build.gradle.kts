@@ -31,20 +31,27 @@ sourceSets {
     val cosmicReach by creating {
         java.srcDirs("src/cosmic-reach/java")
         resources.srcDirs("src/cosmic-reach/resources")
-
-        compileClasspath += sourceSets["main"].compileClasspath
-        runtimeClasspath += sourceSets["main"].runtimeClasspath
     }
 
     sourceSets["main"].compileClasspath += sourceSets["cosmicReach"].output
     sourceSets["main"].runtimeClasspath += sourceSets["cosmicReach"].output
+
+    sourceSets["cosmicReach"].compileClasspath += sourceSets["main"].output
+    sourceSets["cosmicReach"].runtimeClasspath += sourceSets["main"].output
+
 }
 
 dependencies {
+    // Cosmic Reach
     implementation(libs.libgdx.api)
     implementation(libs.libgdx.headless)
     implementation(libs.tuningfork)
     implementation(libs.netty.all)
+    // Cosmic Reach
+
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.google.guava:guava:33.4.0-jre")
+    implementation(project(":void-api"))
 
     cosmicReach(sourceSets["main"].output)
 }

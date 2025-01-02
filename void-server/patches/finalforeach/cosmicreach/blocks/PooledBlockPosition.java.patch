@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/blocks/PooledBlockPosition.java
++++ b/finalforeach/cosmicreach/blocks/PooledBlockPosition.java
+@@ -14,7 +_,7 @@
+    @Override
+    public void free() {
+       if (this.positionPool != null) {
+-         this.positionPool.free(this);
++         this.positionPool.free((TSelf) this); // VoidCR - decompile fix
+       }
+    }
+ }
