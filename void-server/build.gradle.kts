@@ -37,8 +37,12 @@ dependencies {
     implementation(libs.netty.all)
     // Cosmic Reach
 
-    implementation("com.google.code.gson:gson:2.11.0")
-    implementation("com.google.guava:guava:33.4.0-jre")
+    implementation(libs.gson)
+    implementation(libs.guava)
+    implementation(platform(libs.log4j.bom))
+    implementation(libs.log4j.api)
+    runtimeOnly(libs.log4j.core)
+
     implementation(project(":void-api"))
 }
 
