@@ -34,12 +34,12 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
 
     @Override
     public Vector3 getPosition() {
-        return mirror.position;
+        return mirror.position.cpy();
     }
 
     @Override
     public Vector3 getVelocity() {
-        return mirror.velocity;
+        return mirror.velocity.cpy();
     }
 
     @Override

@@ -5,11 +5,11 @@
  import java.util.function.Predicate;
  
 -public class Entity implements ICRBinSerializable {
-+public class Entity implements ICRBinSerializable {// VoidCR start - Add VoidEntity API
++public class Entity implements ICRBinSerializable {// VoidCR start - add API conversion
 +   private sh.miles.voidcr.impl.entity.VoidEntity cache;
 +   protected sh.miles.voidcr.impl.entity.VoidEntity createVoidEntity() { return new sh.miles.voidcr.impl.entity.VoidEntity(this); }
 +   public sh.miles.voidcr.impl.entity.VoidEntity getVoidMirror() { return cache == null ? cache = createVoidEntity() : cache; }
-+   // VoidCR end - Add VoidEntity API
++   // VoidCR end - add API conversion
     public static Vector3 gravity = new Vector3(0.0F, -29.400002F, 0.0F);
     public boolean shouldSaveInChunks = true;
     @CRBSerialized

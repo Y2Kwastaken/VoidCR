@@ -1,0 +1,14 @@
+--- a/finalforeach/cosmicreach/world/Zone.java
++++ b/finalforeach/cosmicreach/world/Zone.java
+@@ -42,7 +_,10 @@
+ import java.util.concurrent.ConcurrentHashMap;
+ import java.util.function.Consumer;
+ 
+-public class Zone implements Serializable, Disposable {
++public class Zone implements Serializable, Disposable { // VoidCR start - add API conversion
++   private sh.miles.voidcr.impl.world.VoidWorld cache;
++   public sh.miles.voidcr.impl.world.VoidWorld getVoidMirror() { return cache == null ? new sh.miles.voidcr.impl.world.VoidWorld(this) : cache; }
++   // VoidCR end - add API conversion
+    public PriorityQueue<ScheduledTrigger> eventQueue = new PriorityQueue<ScheduledTrigger>(
+       (a, b) -> a.triggerTick() - b.triggerTick()
+    );

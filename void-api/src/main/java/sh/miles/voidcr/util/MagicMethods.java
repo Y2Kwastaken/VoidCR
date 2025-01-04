@@ -24,4 +24,25 @@ public interface MagicMethods {
      * @since 0.3.14
      */
     <T> T deserialize(Class<T> clazz, byte[] bytes) throws IllegalArgumentException;
+
+    /**
+     * Delegation for NamedKey static method
+     *
+     * @param namespace the namespace
+     * @param key       the key
+     * @return the named key
+     * @throws IllegalArgumentException thrown if entries don't pass tests
+     * @since 0.3.14
+     */
+    NamedKey createNamedKey(String namespace, String key) throws IllegalArgumentException;
+
+    /**
+     * Delegation for NamedKey static method
+     *
+     * @param keyString the keyString to turn into a NamedKey
+     * @return the named key
+     * @throws IllegalArgumentException thrown if parameter doesn't past test
+     * @since 0.3.14
+     */
+    NamedKey createNamedKey(String keyString) throws IllegalArgumentException;
 }
