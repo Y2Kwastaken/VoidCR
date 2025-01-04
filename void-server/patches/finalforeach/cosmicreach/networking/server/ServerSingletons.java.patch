@@ -1,18 +1,10 @@
 --- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
 +++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
-@@ -36,6 +_,7 @@
- import io.netty.util.AttributeKey;
- 
- public class ServerSingletons {
-+   public static sh.miles.voidcr.impl.server.VoidServer VOID; // VoidCR - add server accessor
-    public static NettyServer SERVER;
-    private static ObjectMap<NetworkIdentity, Account> netIdsToAccounts = new ObjectMap();
-    private static ObjectMap<Account, NetworkIdentity> accountsToNetIds = new ObjectMap();
 @@ -153,6 +_,7 @@
        });
        registerBlockEntityOpeners();
        GameSingletons.postCreate();
-+      VOID = new sh.miles.voidcr.impl.server.VoidServer().load(); // VoidCR - initialize server
++      sh.miles.voidcr.impl.server.VoidServer.SERVER.load(); // VoidCR - initialize server
     }
  
     private static void registerBlockEntityOpeners() {

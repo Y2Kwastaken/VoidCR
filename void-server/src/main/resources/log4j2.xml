@@ -3,7 +3,7 @@
                xmlns="https://logging.apache.org/xml/ns"
                xsi:schemaLocation="
                        https://logging.apache.org/xml/ns
-                       https://logging.apache.org/xml/ns/log4j-config-2.xsd" status="ALL">
+                       https://logging.apache.org/xml/ns/log4j-config-2.xsd" status="OFF">
 
     <Appenders>
         <Console name="CONSOLE">

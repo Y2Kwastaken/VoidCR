@@ -64,7 +64,6 @@ public final class PluginLoadGraph {
                 insert(depNode, plugins);
             }
 
-
             if (inserting.hasChild(depNode) && depNode.hasChild(inserting)) {
                 throw new PluginLoadException("Can not load %s because it has a circular dependency with %s".formatted(meta.name(), dependency.name()));
             }

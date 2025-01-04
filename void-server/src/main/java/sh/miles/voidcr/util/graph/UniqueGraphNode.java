@@ -36,6 +36,7 @@ public class UniqueGraphNode<T> {
         for (final UniqueGraphNode<T> child : children) {
             relatives.addAll(child.collectRelatives());
         }
+        relatives.add(this);
 
         return relatives;
     }

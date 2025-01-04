@@ -5,10 +5,13 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import sh.miles.voidcr.Main;
 import sh.miles.voidcr.impl.plugin.meta.VoidPluginApiVersion;
 import sh.miles.voidcr.impl.plugin.meta.VoidPluginDependency;
 import sh.miles.voidcr.impl.plugin.meta.VoidPluginMeta;
+import sh.miles.voidcr.impl.server.VoidServer;
 import sh.miles.voidcr.plugin.exception.InvalidPluginMetaException;
+import sh.miles.voidcr.plugin.exception.PluginLoadException;
 import sh.miles.voidcr.plugin.meta.PluginApiVersion;
 import sh.miles.voidcr.plugin.meta.PluginDependency;
 import sh.miles.voidcr.plugin.meta.PluginMeta;
@@ -20,24 +23,70 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.function.Function;
+import java.util.stream.Stream;
 import java.util.zip.ZipFile;
 
 public class VoidPluginLoader {
-    public static final VoidPluginLoader INSTANCE = new VoidPluginLoader();
-
     private final Map<String, PluginMeta> metas = new HashMap<>();
     private final List<VoidPluginClassLoader> loaders = new ArrayList<>();
-    private final Queue<PluginMeta> loadOrder = new ArrayDeque<>();
+    private final VoidServer server;
 
-    private VoidPluginLoader() {
+    public VoidPluginLoader(VoidServer server) {
+        this.server = server;
+    }
+
+    public void enablePlugins() {
+        for (final VoidPluginClassLoader loader : loaders) {
+            if (loader.getStandardPlugin() != null) {
+                loader.getStandardPlugin().initialize(server);
+                server.getLogger().info("Enabled plugin {}", loader.getPluginMeta().name());
+            }
+        }
+    }
+
+    public void disablePlugins() {
+        for (final VoidPluginClassLoader loader : loaders) {
+            if (loader.getStandardPlugin() != null) {
+                loader.getStandardPlugin().disable(server);
+                server.getLogger().info("Disabled plugin {}", loader.getPluginMeta().name());
+            }
+        }
+    }
+
+    public void loadPlugins() {
+        Main.LOGGER.info("Loading Plugins...");
+        final PluginLoadGraph graph = new PluginLoadGraph(getMetas().size());
+        final List<PluginMeta> loadOrder;
+        try {
+            loadOrder = graph.generate(getMetas());
+        } catch (PluginLoadException e) {
+            throw new IllegalStateException(e);
+        }
+
+        for (final PluginMeta meta : loadOrder) {
+            loadClassLoader((VoidPluginMeta) meta);
+            Main.LOGGER.info("Loaded Plugin Classloader {}", meta.name());
+        }
+    }
+
+    public void loadPluginFiles(final Path folder) {
+        try {
+            if (Files.notExists(folder)) {
+                Files.createDirectories(folder);
+            }
+            try (Stream<Path> files = Files.list(folder)) {
+                files.filter((path) -> path.getFileName().toString().endsWith(".jar")).forEach(this::loadMeta);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void loadMeta(final Path jarFile) throws InvalidPluginMetaException {
@@ -69,7 +118,7 @@ public class VoidPluginLoader {
                 } else mergeClasspath = true;
                 return new VoidPluginDependency(dependencyObject.get("name").getAsString(), required, loadBefore, mergeClasspath);
             }));
-//            LogManager.getLogger().info("Loaded %s from %s".formatted(name, jarFile));
+            Main.LOGGER.info("Loaded {} from {}", name, jarFile);
             metas.put(name, new VoidPluginMeta(jarFile, name, main, version, author, contributors, apiVersion, dependencies));
         } catch (IOException exception) {
             throw new IllegalStateException(exception);
@@ -82,6 +131,7 @@ public class VoidPluginLoader {
         try {
             Constructor<? extends StandardPlugin> constructor = meta.mainClass().getDeclaredConstructor();
             loader.setStandardPlugin(constructor.newInstance());
+            loaders.add(loader);
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
                  InvocationTargetException e) {
             throw new RuntimeException(e);

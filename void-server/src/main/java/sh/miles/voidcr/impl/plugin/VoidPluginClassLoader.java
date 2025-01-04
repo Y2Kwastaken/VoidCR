@@ -53,7 +53,6 @@ public class VoidPluginClassLoader extends URLClassLoader {
         } catch (ClassNotFoundException ignored) {
         }
 
-
         if (!checkTransitive) {
             throw new ClassNotFoundException(name);
         }
@@ -72,7 +71,7 @@ public class VoidPluginClassLoader extends URLClassLoader {
 
     @Override
     protected Class<?> findClass(final String name) throws ClassNotFoundException {
-        if (name.startsWith("sh.miles.voidcr") || name.startsWith("finalforeach.cosmicreach")) {
+        if (name.startsWith("sh.miles.voidcr.impl") || name.startsWith("finalforeach.cosmicreach")) {
             throw new ClassNotFoundException("%s, this is likely because of inclusion of internal classes.".formatted(name));
         }
 
@@ -91,7 +90,6 @@ public class VoidPluginClassLoader extends URLClassLoader {
     public StandardPlugin getStandardPlugin() {
         return standardPlugin;
     }
-
 
     public static VoidPluginClassLoader create(final Path jarFile, ClassLoader parent, final VoidPluginLoader loader, final PluginMeta pluginMeta) {
         Preconditions.checkArgument(jarFile != null, "The given jarFile must not be null");

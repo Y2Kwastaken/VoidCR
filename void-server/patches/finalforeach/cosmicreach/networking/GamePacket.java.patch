@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/networking/GamePacket.java
++++ b/finalforeach/cosmicreach/networking/GamePacket.java
+@@ -153,7 +_,7 @@
+             packetsToIntIds.put(packetClass, numId);
+             packetNamesToIntIds.put(strId, numId);
+             packetNamesToClasses.put(strId, packetClass);
+-            Logger.info("Registered packet ( id = " + numId + " ):" + strId);
++            Logger.debug("Registered packet ( id = " + numId + " ):" + strId); // VoidCR - better logging
+          }
+       } catch (Exception var5) {
+          throw new RuntimeException(var5);

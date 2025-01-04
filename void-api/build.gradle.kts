@@ -10,8 +10,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains:annotations:24.0.0") // for now switch to jspecify later
-
+    api(libs.jspecify)
     api(libs.gson)
     api(libs.guava)
+    api(platform(libs.log4j.bom))
+    api(libs.log4j.api)
 }

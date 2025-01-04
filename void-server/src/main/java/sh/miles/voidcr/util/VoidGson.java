@@ -15,11 +15,15 @@ public final class VoidGson {
         throw new UnsupportedOperationException("Can not initialize utility class");
     }
 
-    public static JsonObject fromPath(final Path path) {
+    public static <T> T toObjectFromPath(final Path path, final Class<T> type) {
         try {
-            return GSON.fromJson(Files.newBufferedReader(path), JsonObject.class);
+            return GSON.fromJson(Files.newBufferedReader(path), type);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static JsonObject fromPath(final Path path) {
+        return toObjectFromPath(path, JsonObject.class);
     }
 }

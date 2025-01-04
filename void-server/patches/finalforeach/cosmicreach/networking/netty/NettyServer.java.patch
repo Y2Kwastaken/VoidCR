@@ -8,7 +8,16 @@
     public final ServerBroadcastIdentity broadcastIdentity;
     ObjectMap<ChannelHandlerContext, ServerIdentity> contextToIdentity = new ObjectMap();
     private Array<ServerIdentity> unauthenticatedConnections = new Array();
-@@ -90,7 +_,7 @@
+@@ -47,7 +_,7 @@
+          if (account != null) {
+             Logger.info(account.getUsername() + ": " + messageText);
+          } else {
+-            Logger.info("\n" + messageText);
++            Logger.info(messageText); // VoidCR - better logging
+          }
+       }
+    };
+@@ -90,11 +_,11 @@
           String inputString = null;
           Logger.info("Server started, type 'stop' to shutdown and 'help' for commands.");
  
@@ -17,3 +26,8 @@
              inputString = bufferRead.readLine();
              this.processCommand(inputString);
           }
+-
++         sh.miles.voidcr.impl.server.VoidServer.SERVER.unload(); // VoidCR - unload server
+          this.shutdown();
+          this.channelFuture.channel().closeFuture().sync();
+       } finally {

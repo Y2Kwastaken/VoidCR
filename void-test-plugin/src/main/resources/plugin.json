@@ -1,0 +1,8 @@
+{
+  "name": "TestPlugin",
+  "main": "sh.miles.voidcr.testplugin.TestStandardPlugin",
+  "version": "1.0.0-TEST",
+  "author": "Y2K_",
+  "contributors": [],
+  "apiVersion": "0.3.14"
+}

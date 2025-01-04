@@ -42,6 +42,7 @@ dependencies {
     implementation(platform(libs.log4j.bom))
     implementation(libs.log4j.api)
     runtimeOnly(libs.log4j.core)
+    implementation(libs.jspecify)
 
     implementation(project(":void-api"))
 }
