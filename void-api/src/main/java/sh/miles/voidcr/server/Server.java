@@ -1,8 +1,8 @@
 package sh.miles.voidcr.server;
 
 import org.apache.logging.log4j.Logger;
-import org.jspecify.annotations.NullMarked;
 import sh.miles.voidcr.server.configuration.ServerConfiguration;
+import sh.miles.voidcr.util.MagicMethods;
 
 import java.nio.file.Path;
 
@@ -11,7 +11,6 @@ import java.nio.file.Path;
  *
  * @since 0.3.14
  */
-@NullMarked
 public interface Server {
 
     /**
@@ -37,4 +36,14 @@ public interface Server {
      * @since 0.3.14
      */
     Path getServerFolder();
+
+    /**
+     * Gets the magic methods class see {@link MagicMethods} on why you should probably not be accessing this class.
+     *
+     * @return magic methods
+     * @since 0.3.14
+     * @deprecated do not use this in standard API unless absolutely necessary. Maybe suggest a PR or open an issue?
+     */
+    @Deprecated
+    MagicMethods getMagic();
 }

@@ -13,7 +13,7 @@ public interface StandardPlugin {
      * Initializes the standard plugin.
      *
      * @param server the server instance at time of initialization
-     * @since 1.21
+     * @since 0.3.14
      */
     void initialize(Server server);
 
@@ -21,7 +21,7 @@ public interface StandardPlugin {
      * Disables the standard plugin.
      *
      * @param server the server instance at time of disabling
-     * @since 1.21
+     * @since 0.3.14
      */
     void disable(Server server);
 }

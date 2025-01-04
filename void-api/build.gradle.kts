@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    api(libs.libgdx.api)
     api(libs.jspecify)
     api(libs.gson)
     api(libs.guava)
