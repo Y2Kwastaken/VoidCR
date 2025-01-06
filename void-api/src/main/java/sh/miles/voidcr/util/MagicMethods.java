@@ -1,5 +1,7 @@
 package sh.miles.voidcr.util;
 
+import sh.miles.voidcr.server.registry.Registry;
+
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
  * around interfaces and isolation from internals sometimes these interchanges are needed. Seeing as they are
@@ -45,4 +47,15 @@ public interface MagicMethods {
      * @since 0.3.14
      */
     NamedKey createNamedKey(String keyString) throws IllegalArgumentException;
+
+    /**
+     * Delegation for registry access
+     *
+     * @param clazz the class to get the registry of
+     * @param <E>   type of registry
+     * @return the registry
+     * @throws IllegalArgumentException thrown if the parameter doesn't past tests
+     * @since 0.3.14
+     */
+    <E extends Keyed> Registry<E> getRegistry(Class<E> clazz) throws IllegalArgumentException;
 }

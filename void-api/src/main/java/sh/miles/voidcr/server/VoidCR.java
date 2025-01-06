@@ -47,4 +47,15 @@ public final class VoidCR {
     public static MagicMethods getMagic() {
         return server.getMagic();
     }
+
+    /**
+     * Internal
+     *
+     * @param server set server
+     * @since 0.3.14
+     */
+    @Deprecated
+    public static void setServer(final Server server) {
+        VoidCR.server = server;
+    }
 }

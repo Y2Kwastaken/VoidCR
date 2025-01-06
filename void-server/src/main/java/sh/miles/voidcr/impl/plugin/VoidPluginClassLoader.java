@@ -11,7 +11,7 @@ import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.Enumeration;
 
-public class VoidPluginClassLoader extends URLClassLoader {
+public final class VoidPluginClassLoader extends URLClassLoader {
 
     private final VoidPluginLoader loader;
     private final PluginMeta pluginMeta;

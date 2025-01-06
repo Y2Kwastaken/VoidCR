@@ -6,7 +6,11 @@ import sh.miles.voidcr.Main;
 import sh.miles.voidcr.feature.chat.command.VoidServerStopCommand;
 import sh.miles.voidcr.impl.plugin.VoidPluginLoader;
 import sh.miles.voidcr.impl.server.configuration.VoidServerConfiguration;
+import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.server.Server;
+import sh.miles.voidcr.server.VoidCR;
+import sh.miles.voidcr.util.MagicMethods;
+import sh.miles.voidcr.util.ReflectionUtils;
 import sh.miles.voidcr.util.VoidConstants;
 
 import java.nio.file.Path;
@@ -17,6 +21,7 @@ public final class VoidServer implements Server {
 
     private final VoidServerConfiguration configuration;
     private final VoidPluginLoader pluginLoader;
+    private final VoidMagicMethods magicMethods;
     private final Path serverFolder;
     private final Logger logger;
 
@@ -24,6 +29,7 @@ public final class VoidServer implements Server {
         this.logger = Main.LOGGER;
         this.serverFolder = VoidConstants.JAR_DIRECTORY;
         this.pluginLoader = new VoidPluginLoader(this);
+        this.magicMethods = new VoidMagicMethods();
         this.configuration = VoidServerConfiguration.read(this);
     }
 
@@ -42,12 +48,19 @@ public final class VoidServer implements Server {
         return this.serverFolder;
     }
 
+    @Override
+    public MagicMethods getMagic() {
+        return this.magicMethods;
+    }
+
     public VoidPluginLoader getPluginLoader() {
         return pluginLoader;
     }
 
     public VoidServer load() {
         registerCommands();
+
+        VoidCR.setServer(this);
         pluginLoader.enablePlugins();
         return this;
     }

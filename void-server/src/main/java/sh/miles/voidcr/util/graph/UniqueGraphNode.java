@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class UniqueGraphNode<T> {
+public final class UniqueGraphNode<T> {
 
     private final T value;
     private final List<UniqueGraphNode<T>> children = new ArrayList<>();

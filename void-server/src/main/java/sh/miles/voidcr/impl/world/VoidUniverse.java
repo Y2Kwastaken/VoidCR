@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class VoidUniverse implements Universe, Mirrored<World> {
+public final class VoidUniverse implements Universe, Mirrored<World> {
 
     private final World mirror;
     private final NamedKey defaultWorldKey;

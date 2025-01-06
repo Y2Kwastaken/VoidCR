@@ -8,6 +8,9 @@ import finalforeach.cosmicreach.savelib.crbin.CRBinSerializer;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.impl.entity.VoidEntityIdentifier;
+import sh.miles.voidcr.impl.server.registry.VoidRegistries;
+import sh.miles.voidcr.server.registry.Registry;
+import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.MagicMethods;
 import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.util.collection.Pair;
@@ -61,6 +64,11 @@ public final class VoidMagicMethods implements MagicMethods {
         Preconditions.checkArgument(split.length == 2, "keyString must be splittable by ':'. key %s is not splittable array results in %s".formatted(keyString, Arrays.toString(split)));
 
         return new VoidNamedKey(split[0], split[1]);
+    }
+
+    @Override
+    public <E extends Keyed> Registry<E> getRegistry(final Class<E> clazz) throws IllegalArgumentException {
+        return (Registry<E>) VoidRegistries.createRegistry(clazz);
     }
 
     @Override

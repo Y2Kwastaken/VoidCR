@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class VoidWorld implements World, Mirrored<Zone> {
+public final class VoidWorld implements World, Mirrored<Zone> {
 
     private final Zone mirror;
+    private final NamedKey key;
 
     public VoidWorld(Zone mirror) {
         this.mirror = mirror;
+        this.key = NamedKey.key(mirror.zoneId);
     }
 
     @Override
@@ -56,11 +58,11 @@ public class VoidWorld implements World, Mirrored<Zone> {
 
     @Override
     public Universe getUniverse() {
-        return null;
+        return mirror.getWorld().getVoidMirror();
     }
 
     @Override
     public NamedKey getWorldId() {
-        return null;
+        return this.key;
     }
 }

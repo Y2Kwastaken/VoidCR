@@ -33,7 +33,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.zip.ZipFile;
 
-public class VoidPluginLoader {
+public final class VoidPluginLoader {
     private final Map<String, PluginMeta> metas = new HashMap<>();
     private final List<VoidPluginClassLoader> loaders = new ArrayList<>();
     private final VoidServer server;

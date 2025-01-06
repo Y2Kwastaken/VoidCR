@@ -5,7 +5,7 @@ import sh.miles.voidcr.util.NamedKey;
 
 import java.util.Objects;
 
-public class VoidNamedKey implements NamedKey {
+public final class VoidNamedKey implements NamedKey {
 
     private static final String REGEX = "[a-zA-Z_-]";
 
@@ -36,7 +36,9 @@ public class VoidNamedKey implements NamedKey {
 
     private static void validate(String... strings) {
         for (final String string : strings) {
-            Preconditions.checkArgument(string.matches(REGEX));
+            for (int i = 0; i < string.length(); i++) {
+                Preconditions.checkArgument(isValidChar(string.charAt(i)), "The string '%s' does not match the regex '%s'".formatted(string, REGEX));
+            }
         }
     }
 
@@ -50,5 +52,14 @@ public class VoidNamedKey implements NamedKey {
     @Override
     public int hashCode() {
         return Objects.hash(namespace, key);
+    }
+
+    @Override
+    public String toString() {
+        return this.namespace + ":" + this.key;
+    }
+
+    private static boolean isValidChar(char c) {
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-';
     }
 }

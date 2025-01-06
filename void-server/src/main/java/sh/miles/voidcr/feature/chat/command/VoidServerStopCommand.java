@@ -6,7 +6,7 @@ import finalforeach.cosmicreach.chat.commands.Command;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 
-public class VoidServerStopCommand extends Command {
+public final class VoidServerStopCommand extends Command {
 
     @Override
     public void run(final IChat chat) {
