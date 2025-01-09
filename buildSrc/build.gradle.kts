@@ -10,4 +10,5 @@ repositories {
 dependencies {
     implementation(libs.vineflower)
     implementation(libs.diffpath)
+    implementation(libs.asm)
 }

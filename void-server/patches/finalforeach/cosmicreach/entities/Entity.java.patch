@@ -13,12 +13,3 @@
     public static Vector3 gravity = new Vector3(0.0F, -29.400002F, 0.0F);
     public boolean shouldSaveInChunks = true;
     @CRBSerialized
-@@ -42,7 +_,7 @@
-    @CRBSerialized
-    public String entityTypeId;
-    @CRBSerialized
--   float sightRange = 64.0F;
-+   public float sightRange = 64.0F; // VoidCR AT -> package-protected -> public
-    @CRBSerialized
-    public float gravityModifier = 1.0F;
-    @CRBSerialized

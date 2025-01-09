@@ -1,7 +1,7 @@
 import sh.miles.voidcr.task.ApplyPatchesTask
 import sh.miles.voidcr.task.BuildPatchesTask
 import sh.miles.voidcr.task.DecompileTask
-import sh.miles.voidcr.task.FilterZipTask
+import sh.miles.voidcr.task.FilterAndTransformZipTask
 import sh.miles.voidcr.task.SetupSourcesTask
 
 plugins {
@@ -69,7 +69,7 @@ tasks.register("setup") {
     group = "voidcr-setup"
 }
 
-val filterJar by tasks.registering(FilterZipTask::class) {
+val filterJar by tasks.registering(FilterAndTransformZipTask::class) {
     group = "voidcr-setup"
     val exclusions = listOf(
         "de/",
@@ -79,6 +79,7 @@ val filterJar by tasks.registering(FilterZipTask::class) {
 
     this.inputJar = file("decompile/Cosmic-Reach-Server-$crVersion.jar")
     this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion-filtered.jar")
+    this.atFile = file("data/void.at")
     this.filterFunction.set { entry ->
         for (exclusion in exclusions) {
             if (entry.startsWith(exclusion)) {
