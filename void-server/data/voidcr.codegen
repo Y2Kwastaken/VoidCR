@@ -1,0 +1,9 @@
+# Access Transformers
+<AT
+# Fields
+public finalforeach/cosmicreach/entities/Entity sightRange
+public finalforeach/cosmicreach/GameSingletons playerToUniqueIds
+
+# Methods
+public finalforeach/cosmicreach/blocks/loadGeneratorsFromFile(Lcom/badlogic/gdx/files/FileHandle;)V
+>

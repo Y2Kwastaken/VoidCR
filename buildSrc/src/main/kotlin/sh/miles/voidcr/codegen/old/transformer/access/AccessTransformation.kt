@@ -1,4 +1,4 @@
-package sh.miles.voidcr.codegen.transformer
+package sh.miles.voidcr.codegen.old.transformer.access
 
 data class AccessTransformation private constructor (val access: Int, val fileName: String, val name: String, val type: Byte) {
     companion object {

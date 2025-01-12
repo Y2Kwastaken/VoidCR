@@ -7,13 +7,10 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import sh.miles.voidcr.codegen.CodeGen
-import sh.miles.voidcr.codegen.TransformationData
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import sh.miles.voidcr.codegen.Codegen
+import sh.miles.voidcr.codegen.old.transformer.access.TransformationData
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
-import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 abstract class FilterAndTransformZipTask : DefaultTask() {
@@ -49,7 +46,7 @@ abstract class FilterAndTransformZipTask : DefaultTask() {
                 val bytes = inputZip.getInputStream(entry).readAllBytes()
                 if (transData.has(entry.name)) {
                     writer.putNextEntry(ZipEntry(entry.name))
-                    writer.write(CodeGen.applyAccessTransformations(transData, bytes))
+                    writer.write(Codegen.applyAccessTransformations(transData, bytes))
                 } else {
                     writer.putNextEntry(entry)
                     writer.write(bytes)

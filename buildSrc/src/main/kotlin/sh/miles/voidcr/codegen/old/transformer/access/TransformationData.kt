@@ -1,25 +1,9 @@
-package sh.miles.voidcr.codegen
+package sh.miles.voidcr.codegen.old.transformer.access
 
-import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes
-import sh.miles.voidcr.codegen.transformer.AccessTransformation
-import sh.miles.voidcr.codegen.transformer.ClassAccessTransformer
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.readLines
-
-object CodeGen {
-
-    fun applyAccessTransformations(transformation: TransformationData, bytes: ByteArray): ByteArray {
-        val reader = ClassReader(bytes)
-        val writer = ClassWriter(reader, 0)
-        val transform = ClassAccessTransformer(transformation.fields, transformation.methods, writer)
-        reader.accept(transform, 0)
-        return writer.toByteArray()
-    }
-
-}
 
 data class TransformationData(
     val fields: Map<String, AccessTransformation>,
