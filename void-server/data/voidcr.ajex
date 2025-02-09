@@ -1,0 +1,7 @@
+~AT
+# Fields
+public finalforeach/cosmicreach/entities/Entity sightRange
+public finalforeach/cosmicreach/GameSingletons playersToUniqueIds
+
+# Methods
+~AT

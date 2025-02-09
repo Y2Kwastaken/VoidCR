@@ -79,7 +79,7 @@ val filterJar by tasks.registering(FilterAndTransformZipTask::class) {
 
     this.inputJar = file("decompile/Cosmic-Reach-Server-$crVersion.jar")
     this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion-filtered.jar")
-    this.atFile = file("data/void.at")
+    this.atFile = file("data/voidcr.ajex")
     this.filterFunction.set { entry ->
         for (exclusion in exclusions) {
             if (entry.startsWith(exclusion)) {

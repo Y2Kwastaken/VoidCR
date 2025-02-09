@@ -7,11 +7,13 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import sh.miles.voidcr.codegen.Codegen
-import sh.miles.voidcr.codegen.old.transformer.access.TransformationData
+import sh.miles.artisan.ArtisanExtensions
+import sh.miles.artisan.ArtisanFormat
+import sh.miles.voidcr.GradleArtisanLogger
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
+import kotlin.io.path.inputStream
 
 abstract class FilterAndTransformZipTask : DefaultTask() {
 
@@ -38,20 +40,21 @@ abstract class FilterAndTransformZipTask : DefaultTask() {
         val input = inputJar.get().asFile
         val output = outputJar.get().asFile
 
-        val transData = TransformationData.read(atFile.get().asFile.toPath())
+        val reader = ArtisanFormat.asReader(atFile.get().asFile.toPath().inputStream())
+        val classEditor = ArtisanExtensions.newDefaultEditor()
+            .logger(GradleArtisanLogger(project.logger))
+            .syntaxTreeReader(reader)
         val inputZip = ZipFile(input)
         ZipOutputStream(output.outputStream()).use { writer ->
             for (entry in inputZip.entries()) {
                 if (!filterFunc(entry.name)) continue
                 val bytes = inputZip.getInputStream(entry).readAllBytes()
-                if (transData.has(entry.name)) {
-                    writer.putNextEntry(ZipEntry(entry.name))
-                    writer.write(Codegen.applyAccessTransformations(transData, bytes))
-                } else {
-                    writer.putNextEntry(entry)
-                    writer.write(bytes)
-                }
-
+                writer.putNextEntry(ZipEntry(entry.name))
+                writer.write(
+                    classEditor.clearClassProvider()
+                        .classBytes(bytes)
+                        .run()
+                )
                 writer.closeEntry()
             }
         }
