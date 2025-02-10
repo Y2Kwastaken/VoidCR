@@ -1,11 +1,11 @@
 --- a/finalforeach/cosmicreach/savelib/crbin/CRBinSerializer.java
 +++ b/finalforeach/cosmicreach/savelib/crbin/CRBinSerializer.java
-@@ -225,7 +_,7 @@
-       if (var4 != null) {
-          var4.accept(this, var2, var3);
-       } else if (ICRBinSerializable.class.isAssignableFrom(var1)) {
--         this.writeObj(var2, (T)((ICRBinSerializable)var3));
+@@ -228,7 +_,7 @@
+       if (consumer != null) {
+          consumer.accept(this, name, (T)item);
+       } else if (ICRBinSerializable.class.isAssignableFrom(elementType)) {
+-         this.writeObj(name, (T)((ICRBinSerializable)item));
 +         this.writeObj(name, ((ICRBinSerializable)item)); // VoidCR decompile fix
        } else {
           throw new RuntimeException(
-             var1.getSimpleName()
+             elementType.getSimpleName()

@@ -1,11 +1,11 @@
 --- a/finalforeach/cosmicreach/blocks/BlockState.java
 +++ b/finalforeach/cosmicreach/blocks/BlockState.java
-@@ -419,7 +_,7 @@
+@@ -423,7 +_,7 @@
        if (this.stateGenerators != null) {
-          for (String var5 : this.stateGenerators) {
-             BlockStateGenerator var6 = BlockStateGenerator.getInstance(var5);
--            System.out.println("Applying generator " + var5 + " for blockstate: " + this.getSaveKey());
+          for (String genKey : this.stateGenerators) {
+             BlockStateGenerator generator = BlockStateGenerator.getInstance(genKey);
+-            System.out.println("Applying generator " + genKey + " for blockstate: " + this.getSaveKey());
 +            sh.miles.voidcr.adjust.redirect.NaiveLogger.info("Applying generator " + genKey + " for blockstate: " + this.getSaveKey()); // VoidCR - better logging
-             var6.generate(this);
+             generator.generate(this);
           }
        }

@@ -1,19 +1,19 @@
 --- a/finalforeach/cosmicreach/networking/netty/ServerHandler.java
 +++ b/finalforeach/cosmicreach/networking/netty/ServerHandler.java
-@@ -32,14 +_,14 @@
-          new DisconnectPacket("You are banned on this server.").setupAndSend(var1);
-          var1.close();
+@@ -34,14 +_,14 @@
+          new DisconnectPacket("You are banned on this server.").setupAndSend(ctx);
+          ctx.close();
        } else {
 -         Logger.info("Handler added");
 +         Logger.debug("Handler added"); // VoidCR - better logging
-          this.nettyServer.addContext(var1);
-          new ProtocolSyncPacket(RuntimeInfo.version).setupAndSend(var1);
+          this.nettyServer.addContext(ctx);
+          new ProtocolSyncPacket(RuntimeInfo.version).setupAndSend(ctx);
        }
     }
  
-    public void handlerRemoved(ChannelHandlerContext var1) {
+    public void handlerRemoved(ChannelHandlerContext ctx) {
 -      Logger.info("Handler removed");
 +      Logger.debug("Handler removed"); // VoidCR - better logging
-       Account var2 = this.nettyServer.getAccount(var1);
-       if (var2 != null) {
-          this.nettyServer.broadcastToAll(new RemovedPlayerPacket(var2));
+       Account account = this.nettyServer.getAccount(ctx);
+       if (account != null) {
+          this.nettyServer.broadcastToAll(new RemovedPlayerPacket(account));

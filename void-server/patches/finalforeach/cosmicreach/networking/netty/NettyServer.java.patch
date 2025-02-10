@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/networking/netty/NettyServer.java
 +++ b/finalforeach/cosmicreach/networking/netty/NettyServer.java
-@@ -34,6 +_,7 @@
+@@ -35,6 +_,7 @@
  import java.io.InputStreamReader;
  
  public class NettyServer {
@@ -8,23 +8,23 @@
     public final ServerBroadcastIdentity broadcastIdentity;
     ObjectMap<ChannelHandlerContext, ServerIdentity> contextToIdentity = new ObjectMap();
     private Array<ServerIdentity> unauthenticatedConnections = new Array();
-@@ -46,7 +_,7 @@
-          if (var1 != null) {
-             Logger.info(var1.getUsername() + ": " + var2);
+@@ -47,7 +_,7 @@
+          if (account != null) {
+             Logger.info(account.getUsername() + ": " + messageText);
           } else {
--            Logger.info("\n" + var2);
+-            Logger.info("\n" + messageText);
 +            Logger.info(messageText); // VoidCR - better logging
           }
        }
     };
-@@ -89,11 +_,11 @@
-          String var5 = null;
+@@ -90,11 +_,11 @@
+          String inputString = null;
           Logger.info("Server started, type 'stop' to shutdown and 'help' for commands.");
  
--         while (!"stop".equals(var5) && this.channelFuture.channel().isActive()) {
+-         while (!"stop".equals(inputString) && this.channelFuture.channel().isActive()) {
 +         while (!"".equals(inputString) && this.channelFuture.channel().isActive() && running) { // VoidCR - allow control of server termination
-             var5 = var4.readLine();
-             this.processCommand(var5);
+             inputString = bufferRead.readLine();
+             this.processCommand(inputString);
           }
 -
 +         sh.miles.voidcr.impl.server.VoidServer.SERVER.unload(); // VoidCR - unload server
