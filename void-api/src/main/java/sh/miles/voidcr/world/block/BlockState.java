@@ -1,5 +1,8 @@
 package sh.miles.voidcr.world.block;
 
+import org.jspecify.annotations.Nullable;
+import sh.miles.voidcr.world.inventory.item.ItemType;
+
 /**
  * Generally represents the overall state of a {@link BlockData}.
  *
@@ -43,10 +46,17 @@ public interface BlockState {
      * Gets whether or not the given block state is within the creative catalog
      *
      * @return true if in the catalog, otherwise false
+     * @since 0.3.14
      */
     boolean isInCatalog();
 
-
+    /**
+     * the type of item this state belongs to
+     *
+     * @return the item type related to this state
+     * @since 0.3.22
+     */
+    ItemType getItemType();
 
     /**
      * the type of block this state belongs to

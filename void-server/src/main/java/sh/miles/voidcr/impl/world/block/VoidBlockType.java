@@ -71,4 +71,9 @@ public class VoidBlockType implements BlockType, Mirrored<Block> {
     public int hashCode() {
         return Objects.hashCode(mirror);
     }
+
+    @Override
+    public String toString() {
+        return this.key.toString();
+    }
 }

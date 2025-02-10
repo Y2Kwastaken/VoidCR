@@ -1,11 +1,14 @@
 package sh.miles.voidcr.impl.server.registry;
 
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.google.common.base.Preconditions;
 import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.server.registry.exception.RegistryValueNotFoundException;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.NamedKey;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -59,6 +62,16 @@ public final class VoidRegistry<E extends Keyed> implements Registry<E> {
     }
 
     public static <E extends Keyed, I> VoidRegistry<E> fromNaiveInternalSource(Collection<I> provision, Function<I, E> map) {
+        final VoidRegistry<E> registry = new VoidRegistry<>();
+        for (final I entry : provision) {
+            registry.register(map.apply(entry));
+        }
+
+        registry.freeze();
+        return registry;
+    }
+
+    public static <E extends Keyed, I> VoidRegistry<E> fromGdxNaiveInternalSource(Array<I> provision, Function<I, E> map) {
         final VoidRegistry<E> registry = new VoidRegistry<>();
         for (final I entry : provision) {
             registry.register(map.apply(entry));

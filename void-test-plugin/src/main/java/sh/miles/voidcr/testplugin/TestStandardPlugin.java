@@ -1,8 +1,14 @@
 package sh.miles.voidcr.testplugin;
 
+import org.apache.logging.log4j.LogManager;
 import org.jspecify.annotations.NullMarked;
 import sh.miles.voidcr.plugin.type.StandardPlugin;
 import sh.miles.voidcr.server.Server;
+import sh.miles.voidcr.server.registry.Registries;
+import sh.miles.voidcr.server.registry.Registry;
+import sh.miles.voidcr.world.block.BlockState;
+import sh.miles.voidcr.world.block.BlockType;
+import sh.miles.voidcr.world.inventory.item.ItemType;
 
 @NullMarked
 public class TestStandardPlugin implements StandardPlugin {

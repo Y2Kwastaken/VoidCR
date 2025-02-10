@@ -1,8 +1,10 @@
 package sh.miles.voidcr.impl.world.block;
 
+import sh.miles.voidcr.impl.world.inventory.item.VoidItemType;
 import sh.miles.voidcr.util.Mirrored;
 import sh.miles.voidcr.world.block.BlockState;
 import sh.miles.voidcr.world.block.BlockType;
+import sh.miles.voidcr.world.inventory.item.ItemType;
 
 public class VoidBlockState implements BlockState, Mirrored<finalforeach.cosmicreach.blocks.BlockState> {
 
@@ -57,6 +59,11 @@ public class VoidBlockState implements BlockState, Mirrored<finalforeach.cosmicr
     @Override
     public boolean isInCatalog() {
         return !this.mirror.catalogHidden;
+    }
+
+    @Override
+    public ItemType getItemType() {
+        return VoidItemType.toVoid(this.mirror.getItem());
     }
 
     @Override
