@@ -10,6 +10,7 @@ import org.gradle.api.tasks.TaskAction
 import sh.miles.artisan.ArtisanExtensions
 import sh.miles.artisan.ArtisanFormat
 import sh.miles.voidcr.GradleArtisanLogger
+import sh.miles.voidcr.artisan.APIMethodExtension
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
@@ -42,6 +43,7 @@ abstract class FilterAndTransformZipTask : DefaultTask() {
 
         val reader = ArtisanFormat.asReader(atFile.get().asFile.toPath().inputStream())
         val classEditor = ArtisanExtensions.newDefaultEditor()
+            .extension(APIMethodExtension())
             .logger(GradleArtisanLogger(project.logger))
             .syntaxTreeReader(reader)
         val inputZip = ZipFile(input)

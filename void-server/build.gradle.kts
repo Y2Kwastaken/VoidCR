@@ -1,3 +1,4 @@
+import sh.miles.voidcr.task.ApplyPatchesFuzzyTask
 import sh.miles.voidcr.task.ApplyPatchesTask
 import sh.miles.voidcr.task.BuildPatchesTask
 import sh.miles.voidcr.task.DecompileTask
@@ -112,6 +113,14 @@ val setupSources by tasks.registering(SetupSourcesTask::class) {
 }
 
 val applyPatches by tasks.registering(ApplyPatchesTask::class) {
+    group = "voidcr-patching"
+    this.patchDir = file("patches")
+    this.inputFile = file("decompile/Cosmic-Reach-Server-$crVersion-decompiled.jar")
+    this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion-patched.jar")
+    this.failedPatchesJar = file("decompile/Cosmic-Reach-Server-$crVersion-failed-patched.jar")
+}
+
+val applyPatchesFuzzy by tasks.registering(ApplyPatchesFuzzyTask::class) {
     group = "voidcr-patching"
     this.patchDir = file("patches")
     this.inputFile = file("decompile/Cosmic-Reach-Server-$crVersion-decompiled.jar")

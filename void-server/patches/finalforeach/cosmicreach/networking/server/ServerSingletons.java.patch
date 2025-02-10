@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
 +++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
-@@ -153,6 +_,7 @@
+@@ -151,6 +_,7 @@
        });
        registerBlockEntityOpeners();
        GameSingletons.postCreate();

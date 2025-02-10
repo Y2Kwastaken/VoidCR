@@ -3,27 +3,27 @@
 @@ -35,20 +_,24 @@
     }
  
-    public static void info(Object message) {
--      log(Logger.Level.INFO, message.toString());
+    public static void info(Object var0) {
+-      log(Logger.Level.INFO, var0.toString());
 +      sh.miles.voidcr.adjust.redirect.NaiveLogger.info(message); // VoidCR - better logging
 +      // log(Logger.Level.INFO, message.toString());
     }
  
-    public static void warn(Object message) {
--      log(Logger.Level.WARNING, message.toString());
+    public static void warn(Object var0) {
+-      log(Logger.Level.WARNING, var0.toString());
 +      sh.miles.voidcr.adjust.redirect.NaiveLogger.warn(message); // VoidCR - better logging
 +      // log(Logger.Level.WARNING, message.toString());
     }
  
-    public static void error(Object message) {
--      log(Logger.Level.ERROR, message.toString());
+    public static void error(Object var0) {
+-      log(Logger.Level.ERROR, var0.toString());
 +      sh.miles.voidcr.adjust.redirect.NaiveLogger.error(message); // VoidCR - better logging
 +      // log(Logger.Level.ERROR, message.toString());
     }
  
-    public static void debug(Object message) {
+    public static void debug(Object var0) {
        if (debug) {
--         log(Logger.Level.DEBUG, message.toString());
+-         log(Logger.Level.DEBUG, var0.toString());
 +         sh.miles.voidcr.adjust.redirect.NaiveLogger.debug(message); // VoidCR - better logging
 +         // log(Logger.Level.DEBUG, message.toString());
        }

@@ -7,5 +7,5 @@
 -
 +         sh.miles.voidcr.impl.server.VoidServer.SERVER.getPluginLoader().loadPlugins(); // VoidCR - load plugins
           ServerSingletons.create();
-          String serverWorldName = "server-world-1";
-          GameSingletons.world = ChunkLoader.loadWorld(serverWorldName);
+          String var4 = "server-world-1";
+          GameSingletons.world = ChunkLoader.loadWorld(var4);
