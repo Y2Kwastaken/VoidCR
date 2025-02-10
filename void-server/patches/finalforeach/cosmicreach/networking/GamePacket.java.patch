@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/networking/GamePacket.java
 +++ b/finalforeach/cosmicreach/networking/GamePacket.java
-@@ -153,7 +_,7 @@
+@@ -164,7 +_,7 @@
              packetsToIntIds.put(packetClass, numId);
              packetNamesToIntIds.put(strId, numId);
              packetNamesToClasses.put(strId, packetClass);

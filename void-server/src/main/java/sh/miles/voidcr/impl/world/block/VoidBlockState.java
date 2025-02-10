@@ -55,6 +55,11 @@ public class VoidBlockState implements BlockState, Mirrored<finalforeach.cosmicr
     }
 
     @Override
+    public boolean isInCatalog() {
+        return !this.mirror.catalogHidden;
+    }
+
+    @Override
     public BlockType getBlockType() {
         return VoidBlockType.toVoid(this.mirror.getBlock());
     }

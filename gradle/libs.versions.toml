@@ -7,7 +7,8 @@ asm-version = "9.7.1"
 # Cosmic Reach
 libgdx-version = "1.12.1"
 tuningfork-version = "4.3.0"
-netty-version = "4.1.116.Final"
+netty-version = "4.1.24.Final"
+lz4-version = "1.8.0"
 # end Cosmic Reach
 gson-version = "2.11.0"
 guava-version = "33.4.0-jre"
@@ -18,13 +19,14 @@ jspecify-version = "1.0.0"
 # buildSrc
 vineflower = { module = "org.vineflower:vineflower", version.ref = "vineflower-version" }
 diffpath = { module = "io.codechicken:DiffPatch", version.ref = "diffpatch-version" }
-asm = { module = "org.ow2.asm:asm", version.ref="asm-version" }
+asm = { module = "org.ow2.asm:asm", version.ref = "asm-version" }
 # End buildSrc
 # Cosmic Reach
 libgdx-api = { module = "com.badlogicgames.gdx:gdx", version.ref = "libgdx-version" }
 libgdx-headless = { module = "com.badlogicgames.gdx:gdx-backend-headless", version.ref = "libgdx-version" }
 tuningfork = { module = "com.github.Hangman:TuningFork", version.ref = "tuningfork-version" }
 netty-all = { module = "io.netty:netty-all", version.ref = "netty-version" }
+lz4 = { module = "org.lz4:lz4-java", version.ref = "lz4-version" }
 # End Cosmic Reach
 gson = { module = "com.google.code.gson:gson", version.ref = "gson-version" }
 guava = { module = "com.google.guava:guava", version.ref = "guava-version" }

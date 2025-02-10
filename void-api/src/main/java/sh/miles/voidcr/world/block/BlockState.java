@@ -40,6 +40,15 @@ public interface BlockState {
     boolean isOccluding();
 
     /**
+     * Gets whether or not the given block state is within the creative catalog
+     *
+     * @return true if in the catalog, otherwise false
+     */
+    boolean isInCatalog();
+
+
+
+    /**
      * the type of block this state belongs to
      *
      * @return the block type related to this state

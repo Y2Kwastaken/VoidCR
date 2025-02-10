@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/savelib/crbin/CRBinSerializer.java
 +++ b/finalforeach/cosmicreach/savelib/crbin/CRBinSerializer.java
-@@ -228,7 +_,7 @@
+@@ -229,7 +_,7 @@
        if (consumer != null) {
           consumer.accept(this, name, (T)item);
        } else if (ICRBinSerializable.class.isAssignableFrom(elementType)) {

@@ -10,7 +10,7 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
-val crVersion = "0.3.14"
+val crVersion = "0.3.22"
 
 group = rootProject.group
 version = rootProject.name
@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.libgdx.headless)
     implementation(libs.tuningfork)
     implementation(libs.netty.all)
+    implementation(libs.lz4)
     // Cosmic Reach
 
     implementation(libs.gson)
@@ -76,6 +77,7 @@ val filterJar by tasks.registering(FilterAndTransformZipTask::class) {
         "de/",
         "com/",
         "io/",
+        "net/jpountz/"
     )
 
     this.inputJar = file("decompile/Cosmic-Reach-Server-$crVersion.jar")
