@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import sh.miles.voidcr.Main;
 import sh.miles.voidcr.feature.chat.command.VoidServerStopCommand;
 import sh.miles.voidcr.impl.plugin.VoidPluginLoader;
+import sh.miles.voidcr.impl.plugin.lifecycle.VoidLifecycleManager;
 import sh.miles.voidcr.impl.server.configuration.VoidServerConfiguration;
 import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.server.Server;
@@ -22,6 +23,7 @@ public final class VoidServer implements Server {
     private final VoidServerConfiguration configuration;
     private final VoidPluginLoader pluginLoader;
     private final VoidMagicMethods magicMethods;
+    private final VoidLifecycleManager<Server> lifecycle;
     private final Path serverFolder;
     private final Logger logger;
 
@@ -30,6 +32,7 @@ public final class VoidServer implements Server {
         this.serverFolder = VoidConstants.JAR_DIRECTORY;
         this.pluginLoader = new VoidPluginLoader(this);
         this.magicMethods = new VoidMagicMethods();
+        this.lifecycle = new VoidLifecycleManager<>(this);
         this.configuration = VoidServerConfiguration.read(this);
     }
 
@@ -41,6 +44,11 @@ public final class VoidServer implements Server {
     @Override
     public Logger getLogger() {
         return this.logger;
+    }
+
+    @Override
+    public VoidLifecycleManager<Server> getLifecycle() {
+        return lifecycle;
     }
 
     @Override
