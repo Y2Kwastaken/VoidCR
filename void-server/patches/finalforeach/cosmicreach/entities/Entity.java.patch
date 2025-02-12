@@ -1,21 +1,11 @@
 --- a/finalforeach/cosmicreach/entities/Entity.java
 +++ b/finalforeach/cosmicreach/entities/Entity.java
-@@ -116,7 +_,7 @@
-    private transient Vector3 posDiff = new Vector3();
-    private transient Vector3 targetPosition = new Vector3();
-    protected transient float blockBouncinessY = 0.0F;
--   private VoidEntity cache;
-+   protected VoidEntity cache;
- 
-    public static void setLightingColor(
-       Chunk blockChunk,
-@@ -273,19 +_,27 @@
- 
+@@ -274,18 +_,27 @@
     public boolean hasTag(String tag) {
        return this.tags == null ? false : this.tags.contains(tag, false);
--   }
+    }
 -
-+   } // VoidCR start - add method parameter to carry through sourceEntity
++   // VoidCR start - add method parameter to carry through sourceEntity
     public void hit(float amount) {
 +      hit(amount, null);
 +   }
