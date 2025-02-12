@@ -10,7 +10,7 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
-val crVersion = "0.3.22"
+val crVersion = "0.3.23"
 
 group = rootProject.group
 version = rootProject.name

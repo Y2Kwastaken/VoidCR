@@ -32,9 +32,9 @@
 -
           if (amount < 0.0F) {
              this.hitpoints = Math.min(this.hitpoints - amount, this.maxHitpoints);
-          } else if (this.pendingDamage == 0.0F && this.invulnerabiltyFrames <= 0) {
+          } else if (this.getPendingDamage() == 0.0F && this.invulnerabiltyFrames <= 0) {
 +            // VoidCR start - PreEntityDamageEvent
-             this.pendingDamage = Math.max(this.pendingDamage, amount);
+             this.setPendingDamage(Math.max(this.getPendingDamage(), amount));
 -            this.invulnerabiltyFrames = 5;
 +            this.invulnerabiltyFrames = event == null ? 5 : event.getInvulnerabilityFrames();
 +            // VoidCR end - PreEntityDamageEvent
