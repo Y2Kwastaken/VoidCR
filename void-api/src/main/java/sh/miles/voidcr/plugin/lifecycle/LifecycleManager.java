@@ -1,6 +1,7 @@
 package sh.miles.voidcr.plugin.lifecycle;
 
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 
 import java.util.function.BiConsumer;
@@ -31,10 +32,11 @@ public interface LifecycleManager<C> {
      * @param owner      the owner of the event
      * @param eventClass the event class to listen to
      * @param event      the event logic function containing the event and observer id
+     * @param <T>        the type of event called
      * @return the observer id
      * @since 0.3.22
      */
-    int observe(LifecycleAware<C> owner, Class<? extends LifecycleEvent<C>> eventClass, BiConsumer<LifecycleEvent<C>, Integer> event);
+    <T extends LifecycleEvent<C>> int observe(LifecycleAware<C> owner, Class<T> eventClass, BiConsumer<T, Integer> event);
 
     /**
      * Begins observing an event.
@@ -48,9 +50,10 @@ public interface LifecycleManager<C> {
      * @param priority   the priority that the event has, which must be between {@link #MIN_PRIORITY} and
      *                   {@link #MAX_PRIORITY} inclusively
      * @param event      the event
+     * @param <T>        the type of event called
      * @return the observer id
      */
-    int observe(LifecycleAware<C> owner, Class<? extends LifecycleEvent<C>> eventClass, int priority, BiConsumer<LifecycleEvent<C>, Integer> event);
+    <T extends LifecycleEvent<C>> int observe(LifecycleAware<C> owner, Class<T> eventClass, int priority, BiConsumer<T, Integer> event);
 
     /**
      * Dismisses an observe, stopping it from being run
@@ -83,7 +86,9 @@ public interface LifecycleManager<C> {
      * conjunction with internals to call already implemented events as this may create unexpected behaviour in plugins
      *
      * @param event the event to construct and call when provided the proper context
+     * @return the called event, null if the event wasn't called
      * @since 0.3.22
      */
-    void call(Function<C, LifecycleEvent<C>> event);
+    @Nullable
+    <T extends LifecycleEvent<C>> T call(Function<C, T> event);
 }

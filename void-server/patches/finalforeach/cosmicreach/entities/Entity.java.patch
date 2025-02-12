@@ -1,0 +1,52 @@
+--- a/finalforeach/cosmicreach/entities/Entity.java
++++ b/finalforeach/cosmicreach/entities/Entity.java
+@@ -116,7 +_,7 @@
+    private transient Vector3 posDiff = new Vector3();
+    private transient Vector3 targetPosition = new Vector3();
+    protected transient float blockBouncinessY = 0.0F;
+-   private VoidEntity cache;
++   protected VoidEntity cache;
+ 
+    public static void setLightingColor(
+       Chunk blockChunk,
+@@ -273,19 +_,27 @@
+ 
+    public boolean hasTag(String tag) {
+       return this.tags == null ? false : this.tags.contains(tag, false);
+-   }
+-
++   } // VoidCR start - add method parameter to carry through sourceEntity
+    public void hit(float amount) {
++      hit(amount, null);
++   }
++   public void hit(float amount, Entity sourceEntity) { // VoidCR end - add method parameter to carry through sourceEntity
+       if (amount != 0.0F) {
++         // VoidCR start - PreEntityDamageEvent
++         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.entity.VoidPreEntityDamageEvent.dispatch(amount, 5, sourceEntity, this);
++         amount = event == null ? amount : event.getDamage();
++         // VoidCR end - PreEntityDamageEvent
++
+          if (ServerSingletons.SERVER != null) {
+             ServerSingletons.SERVER.broadcast(this.zone, new HitEntityPacket(this, amount));
+          }
+-
+          if (amount < 0.0F) {
+             this.hitpoints = Math.min(this.hitpoints - amount, this.maxHitpoints);
+          } else if (this.pendingDamage == 0.0F && this.invulnerabiltyFrames <= 0) {
++            // VoidCR start - PreEntityDamageEvent
+             this.pendingDamage = Math.max(this.pendingDamage, amount);
+-            this.invulnerabiltyFrames = 5;
++            this.invulnerabiltyFrames = event == null ? 5 : event.getInvulnerabilityFrames();
++            // VoidCR end - PreEntityDamageEvent
+          }
+       }
+    }
+@@ -299,7 +_,7 @@
+    }
+ 
+    public void onAttackInteraction(Entity sourceEntity) {
+-      this.hit(100.0F);
++      this.hit(100.0F, sourceEntity); // VoidCR provide sourceEntity
+    }
+ 
+    public void onCollideWithBlock(Axis axis, BlockState block, int bx, int by, int bz) {

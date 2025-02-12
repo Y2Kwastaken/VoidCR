@@ -9,6 +9,7 @@ public finalforeach/cosmicreach/entities/Entity sightRange
 
 ~APIGEN
 sh/miles/voidcr/impl/entity/VoidEntity finalforeach/cosmicreach/entities/Entity
+sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/player/PlayerEntity
 
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
 sh/miles/voidcr/impl/world/VoidWorld finalforeach/cosmicreach/world/Zone

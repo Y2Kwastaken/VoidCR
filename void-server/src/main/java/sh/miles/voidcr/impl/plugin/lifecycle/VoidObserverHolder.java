@@ -10,16 +10,16 @@ import java.util.function.BiConsumer;
  * holds event data
  */
 @NullMarked
-public class VoidObserverHolder<C> implements Comparable<VoidObserverHolder<C>> {
+public class VoidObserverHolder<T extends LifecycleEvent<C>, C> implements Comparable<VoidObserverHolder<T, C>> {
 
     private static int ID = 0;
 
     private final int id;
     private final int priority;
     private final LifecycleAware<C> owner;
-    private final BiConsumer<LifecycleEvent<C>, Integer> event;
+    private final BiConsumer<T, Integer> event;
 
-    public VoidObserverHolder(final int priority, LifecycleAware<C> owner, BiConsumer<LifecycleEvent<C>, Integer> event) {
+    public VoidObserverHolder(final int priority, LifecycleAware<C> owner, BiConsumer<T, Integer> event) {
         if (ID + 1 == Integer.MAX_VALUE) {
             throw new IllegalArgumentException("the observer id has exceeded the int limit. This should really never happen. Make an issue on github if you ever see this");
         }
@@ -38,7 +38,7 @@ public class VoidObserverHolder<C> implements Comparable<VoidObserverHolder<C>> 
         return id;
     }
 
-    public void observe(LifecycleEvent<C> event) {
+    public void observe(T event) {
         this.event.accept(event, this.id);
     }
 
@@ -47,7 +47,7 @@ public class VoidObserverHolder<C> implements Comparable<VoidObserverHolder<C>> 
     }
 
     @Override
-    public int compareTo(final VoidObserverHolder<C> other) {
+    public int compareTo(final VoidObserverHolder<T, C> other) {
         return Integer.compare(this.priority, other.priority);
     }
 }

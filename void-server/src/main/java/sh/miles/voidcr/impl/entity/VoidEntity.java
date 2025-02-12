@@ -7,10 +7,10 @@ import sh.miles.voidcr.util.Mirrored;
 
 import java.util.Objects;
 
-public final class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.entities.Entity> {
+public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.entities.Entity> {
 
-    private final finalforeach.cosmicreach.entities.Entity mirror;
-    private final EntityIdentifier cachedIdentifier;
+    protected final finalforeach.cosmicreach.entities.Entity mirror;
+    protected final EntityIdentifier cachedIdentifier;
 
     public VoidEntity(finalforeach.cosmicreach.entities.Entity mirror) {
         this.mirror = mirror;

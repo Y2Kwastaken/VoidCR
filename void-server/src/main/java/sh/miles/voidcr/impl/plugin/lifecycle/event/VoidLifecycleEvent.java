@@ -4,7 +4,7 @@ import org.jspecify.annotations.NullMarked;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 
 @NullMarked
-public class VoidLifecycleEvent<C> implements LifecycleEvent<C> {
+public abstract class VoidLifecycleEvent<C> implements LifecycleEvent<C> {
 
     private final C context;
 
