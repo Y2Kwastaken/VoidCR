@@ -1,6 +1,8 @@
 package sh.miles.voidcr.server;
 
 import org.apache.logging.log4j.Logger;
+import sh.miles.voidcr.plugin.lifecycle.LifecycleManager;
+import sh.miles.voidcr.plugin.type.StandardPlugin;
 import sh.miles.voidcr.server.configuration.ServerConfiguration;
 import sh.miles.voidcr.util.MagicMethods;
 
@@ -28,6 +30,14 @@ public interface Server {
      * @since 0.3.14
      */
     Logger getLogger();
+
+    /**
+     * Gets the lifecycle manager for the server lifecycle
+     *
+     * @return the server lifecycle
+     * @since 0.3.22
+     */
+    LifecycleManager<Server> getLifecycle();
 
     /**
      * Gets the folder of the server

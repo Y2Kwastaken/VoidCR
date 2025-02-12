@@ -26,3 +26,4 @@ void-server/src/cosmic-reach/
 VoidCR.iml
 
 void-api/build/
+void-test-plugin/build/
