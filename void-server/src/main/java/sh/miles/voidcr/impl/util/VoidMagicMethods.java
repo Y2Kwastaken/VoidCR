@@ -9,11 +9,13 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.impl.entity.VoidEntityIdentifier;
 import sh.miles.voidcr.impl.server.registry.VoidRegistries;
+import sh.miles.voidcr.impl.world.inventory.item.VoidItemKey;
 import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.MagicMethods;
 import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.util.collection.Pair;
+import sh.miles.voidcr.world.inventory.item.ItemKey;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -59,6 +61,11 @@ public final class VoidMagicMethods implements MagicMethods {
     }
 
     @Override
+    public NamedKey createNamedKey(final String namespace, final String key) throws IllegalArgumentException {
+        return new VoidNamedKey(namespace, key);
+    }
+
+    @Override
     public NamedKey createNamedKey(final String keyString) throws IllegalArgumentException {
         final String[] split = keyString.split(":");
         Preconditions.checkArgument(split.length == 2, "keyString must be splittable by ':'. key %s is not splittable array results in %s".formatted(keyString, Arrays.toString(split)));
@@ -67,12 +74,20 @@ public final class VoidMagicMethods implements MagicMethods {
     }
 
     @Override
-    public <E extends Keyed> Registry<E> getRegistry(final Class<E> clazz) throws IllegalArgumentException {
-        return (Registry<E>) VoidRegistries.createRegistry(clazz);
+    public ItemKey createItemKey(final String namespace, final String key) throws IllegalArgumentException {
+        return new VoidItemKey(namespace, key);
     }
 
     @Override
-    public NamedKey createNamedKey(final String namespace, final String key) throws IllegalArgumentException {
-        return new VoidNamedKey(namespace, key);
+    public ItemKey createItemKey(final String keyString) throws IllegalArgumentException {
+        final String[] split = keyString.split(":");
+        Preconditions.checkArgument(split.length == 2, "keyString must be splittable by ':'. key %s is not splittable array results in %s".formatted(keyString, Arrays.toString(split)));
+
+        return new VoidItemKey(split[0], split[1]);
+    }
+
+    @Override
+    public <E extends Keyed> Registry<E> getRegistry(final Class<E> clazz) throws IllegalArgumentException {
+        return (Registry<E>) VoidRegistries.createRegistry(clazz);
     }
 }

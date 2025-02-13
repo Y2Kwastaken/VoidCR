@@ -6,7 +6,6 @@ import finalforeach.cosmicreach.world.Zone;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.impl.entity.VoidEntity;
 import sh.miles.voidcr.impl.plugin.lifecycle.VoidLifecycleManager;
-import sh.miles.voidcr.impl.server.VoidServer;
 import sh.miles.voidcr.impl.world.VoidWorld;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.PreEntityDamageEvent;

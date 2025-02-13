@@ -1,7 +1,6 @@
 package sh.miles.voidcr.impl.server.registry;
 
 import finalforeach.cosmicreach.blocks.Block;
-import finalforeach.cosmicreach.items.Item;
 import finalforeach.cosmicreach.items.ItemThing;
 import sh.miles.voidcr.impl.world.block.VoidBlockType;
 import sh.miles.voidcr.impl.world.inventory.item.VoidItemType;

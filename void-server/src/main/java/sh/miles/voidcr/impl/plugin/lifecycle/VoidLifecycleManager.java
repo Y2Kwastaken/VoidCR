@@ -66,7 +66,6 @@ public class VoidLifecycleManager<C> implements LifecycleManager<C> {
         final T realized = event.apply(this.context);
         final VoidObserverContainer<T, C> container = (VoidObserverContainer<T, C>) observers.get(realized.getEventClass()); // fix this child is not expected super
         if (container == null) {
-            System.out.println("No containers");
             return null;
         }
 

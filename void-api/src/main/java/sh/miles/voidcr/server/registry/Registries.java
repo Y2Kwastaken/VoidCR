@@ -22,9 +22,12 @@ public interface Registries {
     /**
      * The Item Type registry
      *
-     * @since 0.322
+     * @since 0.3.22
      */
     Registry<ItemType> ITEM = registry(ItemType.class);
+
+    private void init() { // hack to init all registries
+    }
 
     private static <E extends Keyed> Registry<E> registry(Class<E> clazz) {
         return VoidCR.getMagic().getRegistry(clazz);

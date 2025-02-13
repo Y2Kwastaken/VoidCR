@@ -10,6 +10,7 @@ import sh.miles.voidcr.impl.server.configuration.VoidServerConfiguration;
 import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.server.Server;
 import sh.miles.voidcr.server.VoidCR;
+import sh.miles.voidcr.server.registry.Registries;
 import sh.miles.voidcr.util.MagicMethods;
 import sh.miles.voidcr.util.ReflectionUtils;
 import sh.miles.voidcr.util.VoidConstants;

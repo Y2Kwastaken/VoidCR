@@ -1,6 +1,7 @@
 package sh.miles.voidcr.util;
 
 import sh.miles.voidcr.server.registry.Registry;
+import sh.miles.voidcr.world.inventory.item.ItemKey;
 
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
@@ -47,6 +48,27 @@ public interface MagicMethods {
      * @since 0.3.14
      */
     NamedKey createNamedKey(String keyString) throws IllegalArgumentException;
+
+    /**
+     * Delegation for ItemKey static method
+     *
+     * @param namespace the namespace
+     * @param key       the key
+     * @return the item key
+     * @throws IllegalArgumentException thrown if entries don't pass tests
+     * @since 0.3.14
+     */
+    ItemKey createItemKey(String namespace, String key) throws IllegalArgumentException;
+
+    /**
+     * Delegation for ItemKey static method
+     *
+     * @param keyString the keyString to turn into a ItemKey
+     * @return the item key
+     * @throws IllegalArgumentException thrown if a parameter doesn't past test
+     * @since 0.3.23
+     */
+    ItemKey createItemKey(String keyString) throws IllegalArgumentException;
 
     /**
      * Delegation for registry access

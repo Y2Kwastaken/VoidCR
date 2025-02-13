@@ -5,9 +5,9 @@ import sh.miles.voidcr.util.NamedKey;
 
 import java.util.Objects;
 
-public final class VoidNamedKey implements NamedKey {
+public class VoidNamedKey implements NamedKey {
 
-    private static final String REGEX = "[a-zA-Z_\\-\\[\\]=,]";
+    private static final String REGEX = "[a-zA-Z_-]";
 
     private final String namespace;
     private final String key;
@@ -60,6 +60,6 @@ public final class VoidNamedKey implements NamedKey {
     }
 
     private static boolean isValidChar(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-' || c == '[' || c == ']' || c == '=' || c == ',';
+        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '.' || c == '_' || c == '-';
     }
 }

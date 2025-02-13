@@ -1,10 +1,10 @@
 package sh.miles.voidcr.impl.world.inventory.item;
 
 import finalforeach.cosmicreach.items.Item;
-import sh.miles.voidcr.impl.util.VoidNamedKey;
 import sh.miles.voidcr.server.registry.Registries;
 import sh.miles.voidcr.util.Mirrored;
 import sh.miles.voidcr.util.NamedKey;
+import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemType;
 
 import java.util.Objects;
@@ -12,19 +12,19 @@ import java.util.Objects;
 public class VoidItemType implements ItemType, Mirrored<Item> {
 
     public static Item toCosmicReach(ItemType item) {
-        return Item.allItems.get(((VoidNamedKey) item.getKey()).getCosmicReachId());
+        return Item.allItems.get(((VoidItemKey) item.getKey()).getCosmicReachId());
     }
 
     public static VoidItemType toVoid(Item item) {
-        return (VoidItemType) Registries.ITEM.get(NamedKey.key(item.getID()));
+        return (VoidItemType) Registries.ITEM.get(ItemKey.key(item.getID()));
     }
 
     private final Item mirror;
-    private final NamedKey key;
+    private final ItemKey key;
 
     public VoidItemType(Item mirror) {
         this.mirror = mirror;
-        this.key = NamedKey.key(mirror.getID());
+        this.key = ItemKey.key(mirror.getID());
     }
 
     @Override
@@ -43,7 +43,12 @@ public class VoidItemType implements ItemType, Mirrored<Item> {
     }
 
     @Override
-    public NamedKey getKey() {
+    public ItemKey getItemKey() {
+        return this.key;
+    }
+
+    @Override
+    public ItemKey getKey() {
         return this.key;
     }
 
