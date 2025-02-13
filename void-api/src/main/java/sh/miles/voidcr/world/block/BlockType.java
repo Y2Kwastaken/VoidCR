@@ -76,6 +76,6 @@ public interface BlockType extends Keyed {
     BlockState getDefaultBlockState();
 
     private static BlockType block(String key) {
-        return Registries.BLOCK.get(NamedKey.cosmicReach(key));
+        return Registries.BLOCK.getOrThrow(NamedKey.cosmicReach(key));
     }
 }

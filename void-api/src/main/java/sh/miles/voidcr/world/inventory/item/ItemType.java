@@ -53,7 +53,17 @@ public interface ItemType extends Keyed {
      */
     boolean isInCatalog();
 
+    /**
+     * Utility helper for a cast to {@link #getKey()}
+     * <p>
+     * ItemKeys are generally more permissible than {@link NamedKey}
+     *
+     * @return the item key
+     * @since 0.3.23
+     */
+    ItemKey getItemKey();
+
     private static ItemType item(String key) {
-        return Registries.ITEM.get(NamedKey.cosmicReach(key));
+        return Registries.ITEM.get(ItemKey.cosmicReach(key));
     }
 }

@@ -10,6 +10,7 @@ dependencies {
     implementation(libs.jspecify)
 
     compileOnly(project(":void-api"))
+    compileOnly(project(":void-server"))
 }
 
 val copyToTestServer by tasks.registering(Copy::class) {
