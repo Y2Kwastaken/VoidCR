@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/entities/EntityUtils.java
++++ b/finalforeach/cosmicreach/entities/EntityUtils.java
+@@ -37,7 +_,7 @@
+          Player p = (Player)players.get(i);
+          if (p != null) {
+             Entity pe = p.getEntity();
+-            if (pe != null) {
++            if (pe != null && !pe.isDead()) { // VoidCR - don't target dead players
+                float dst = sourceEntity.position.dst(pe.position);
+                if (!(dst > range)) {
+                   if (closest == null) {

@@ -9,16 +9,3 @@
              this.attackChargeTime = MathUtils.random(20, 60);
           }
        }
-@@ -220,6 +_,12 @@
-       if (target == null) {
-          target = EntityUtils.getClosestPlayerToEntity(this, zone);
-       }
-+
-+      // VoidCR start - don't target dead entities
-+      if (target.isDead()) {
-+         target = null;
-+      }
-+      // VoidCR end - don't target dead entities
- 
-       return target;
-    }
