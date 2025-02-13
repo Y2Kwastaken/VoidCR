@@ -9,12 +9,12 @@
     public void hit(float amount) {
 +      hit(amount, null);
 +   }
-+   public void hit(float amount, Entity sourceEntity) { // VoidCR end - add method parameter to carry through sourceEntity
++   public void hit(float amount, Entity sourceEntity) {
        if (amount != 0.0F) {
-+         // VoidCR start - PreEntityDamageEvent
++         if (sourceEntity != null && sourceEntity.isDead()) return; // fix event trigger while dead
 +         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.entity.VoidPreEntityDamageEvent.dispatch(amount, 5, sourceEntity, this);
 +         amount = event == null ? amount : event.getDamage();
-+         // VoidCR end - PreEntityDamageEvent
++         // VoidCR end - add method parameter to carry through sourceEntity
 +
           if (ServerSingletons.SERVER != null) {
              ServerSingletons.SERVER.broadcast(this.zone, new HitEntityPacket(this, amount));

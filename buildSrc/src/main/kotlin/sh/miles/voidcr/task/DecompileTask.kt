@@ -33,6 +33,10 @@ abstract class DecompileTask : DefaultTask() {
             outputFile.parentFile.mkdirs()
         }
 
+        if (outputFile.exists()) {
+            outputFile.delete()
+        }
+
         val arguments = decompilerArguments.get().toMutableList()
         arguments.addLast(jarFile.toString())
         arguments.addLast(outputFile.toString())

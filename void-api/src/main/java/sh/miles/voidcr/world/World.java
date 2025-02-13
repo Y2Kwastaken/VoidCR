@@ -1,6 +1,7 @@
 package sh.miles.voidcr.world;
 
 import com.badlogic.gdx.math.Vector3;
+import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.util.NamedKey;
@@ -29,6 +30,7 @@ public interface World {
      * @return the identifier
      * @since 0.3.14
      */
+    @Nullable
     Entity getEntity(final EntityIdentifier identifier);
 
     /**

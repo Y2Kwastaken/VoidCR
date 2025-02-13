@@ -17,7 +17,6 @@ public class TestStandardPlugin implements StandardPlugin {
     @Override
     public void initialize(final Server server) {
         server.getLifecycle().observe(this, PreEntityDamageEvent.class, (event, id) -> {
-            event.setDamage(0f);
             System.out.println("Triggered PreEntityDamageEvent");
             System.out.println(event.getEntity());
             System.out.println(event.getDamager());

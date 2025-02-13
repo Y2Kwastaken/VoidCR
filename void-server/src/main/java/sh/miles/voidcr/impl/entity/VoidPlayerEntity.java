@@ -1,6 +1,7 @@
 package sh.miles.voidcr.impl.entity;
 
 import com.google.common.base.Preconditions;
+import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.entities.player.Player;
 import sh.miles.voidcr.entity.PlayerEntity;
 import sh.miles.voidcr.world.World;
@@ -42,7 +43,12 @@ public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
         return player().getUsername();
     }
 
+    @Override
+    public finalforeach.cosmicreach.entities.player.PlayerEntity getMirror() {
+        return (finalforeach.cosmicreach.entities.player.PlayerEntity) super.mirror;
+    }
+
     private Player player() {
-        return ((finalforeach.cosmicreach.entities.player.PlayerEntity) super.mirror).player;
+        return getMirror().player;
     }
 }

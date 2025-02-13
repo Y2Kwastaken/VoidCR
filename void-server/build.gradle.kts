@@ -67,10 +67,6 @@ tasks.build {
     dependsOn(tasks.shadowJar)
 }
 
-tasks.register("setup") {
-    group = "voidcr-setup"
-}
-
 val filterJar by tasks.registering(FilterAndTransformZipTask::class) {
     group = "voidcr-setup"
     val exclusions = listOf(
@@ -105,6 +101,8 @@ val decompileJar by tasks.registering(DecompileTask::class) {
         "-pll=120",
         "--file",
     )
+
+    dependsOn(filterJar)
 }
 
 val setupSources by tasks.registering(SetupSourcesTask::class) {
@@ -120,6 +118,8 @@ val applyPatches by tasks.registering(ApplyPatchesTask::class) {
     this.inputFile = file("decompile/Cosmic-Reach-Server-$crVersion-decompiled.jar")
     this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion-patched.jar")
     this.failedPatchesJar = file("decompile/Cosmic-Reach-Server-$crVersion-failed-patched.jar")
+
+    dependsOn(decompileJar)
 }
 
 val applyPatchesFuzzy by tasks.registering(ApplyPatchesFuzzyTask::class) {
@@ -128,6 +128,8 @@ val applyPatchesFuzzy by tasks.registering(ApplyPatchesFuzzyTask::class) {
     this.inputFile = file("decompile/Cosmic-Reach-Server-$crVersion-decompiled.jar")
     this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion-patched.jar")
     this.failedPatchesJar = file("decompile/Cosmic-Reach-Server-$crVersion-failed-patched.jar")
+
+    dependsOn(decompileJar)
 }
 
 val buildPatches by tasks.registering(BuildPatchesTask::class) {
@@ -141,4 +143,18 @@ val generateResources by tasks.registering(Copy::class) {
     from(zipTree("decompile/Cosmic-Reach-Server-$crVersion.jar"))
     include("base/**", "build_assets/**", "icons/**", "post_build/**", "assets.txt")
     into(project.layout.buildDirectory.file("generated/cosmic-reach-assets"))
+}
+
+tasks.register("setup") {
+    group = "voidcr-setup"
+
+    setupSources.get().mustRunAfter(applyPatches)
+    dependsOn(filterJar, decompileJar, applyPatches, setupSources)
+}
+
+tasks.register("update") {
+    group = "voidcr-setup"
+
+    setupSources.get().mustRunAfter(applyPatchesFuzzy)
+    dependsOn(filterJar, decompileJar, applyPatchesFuzzy, setupSources, buildPatches)
 }

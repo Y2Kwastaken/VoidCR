@@ -1,14 +1,15 @@
 ~AT
-# Fields
 public finalforeach/cosmicreach/GameSingletons playersToUniqueIds
 
 public finalforeach/cosmicreach/entities/Entity sightRange
-
-# Methods
+public finalforeach/cosmicreach/entities/EntityLaserProjectile radius
+public finalforeach/cosmicreach/entities/EntityLaserProjectile sourceEntityId
+public finalforeach/cosmicreach/entities/EntityLaserProjectile strength
 ~AT
 
 ~APIGEN
 sh/miles/voidcr/impl/entity/VoidEntity finalforeach/cosmicreach/entities/Entity
+sh/miles/voidcr/impl/entity/VoidProjectileEntity finalforeach/cosmicreach/entities/EntityLaserProjectile
 sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/player/PlayerEntity
 
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
