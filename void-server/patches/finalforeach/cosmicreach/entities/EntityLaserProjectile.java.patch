@@ -16,8 +16,8 @@
                          while (var13.hasNext()) {
                             BoundingBox bb = (BoundingBox)var13.next();
                             if (bb.intersects(this.tmpEntityBoundingBox)) {
-+                           // this.hit(this.hitpoints); VoidCR - Kill laser projectile after direct hit
-+                           this.age = maxAge; // ^
++                              // this.hit(this.hitpoints); VoidCR - Kill laser projectile after direct hit
++                              this.age = maxAge; // ^
                                this.velocity.setZero();
                                float dist = GameMath.distanceBoundingBoxPoint(bb, this.lastPosition);
                                float len = this.lastPosition.dst(targetPosition);
