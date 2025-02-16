@@ -10,6 +10,7 @@ import sh.miles.voidcr.server.VoidCR;
 public interface NamedKey {
 
     String COSMIC_REACH = "base";
+    String VOID_CR = "void_cr";
 
     /**
      * Gets the key of this key e.g. the "value" portion of "namespace:value"
@@ -67,5 +68,18 @@ public interface NamedKey {
      */
     static NamedKey cosmicReach(final String key) throws IllegalArgumentException {
         return VoidCR.getMagic().createNamedKey(COSMIC_REACH, key);
+    }
+
+    /**
+     * Creates a {@link NamedKey} in VoidCr's namespace of the given key
+     * <p>
+     *     This key should not have anything that is not a letter, hyphen or underscore. [a-zA-Z_-]
+     *
+     * @param key the key of the {@link NamedKey}
+     * @return the named key
+     * @throws IllegalArgumentException thrown if the parameter violates the naming restrictions
+     */
+    static NamedKey voidcr(final String key) throws IllegalArgumentException {
+        return VoidCR.getMagic().createNamedKey(VOID_CR, key);
     }
 }

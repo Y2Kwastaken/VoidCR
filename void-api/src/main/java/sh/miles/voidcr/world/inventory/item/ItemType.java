@@ -54,7 +54,7 @@ public interface ItemType extends Keyed {
     boolean isInCatalog();
 
     /**
-     * Utility helper for a cast to {@link #getKey()}
+     * Utility helper for a cast to {@link #key()}
      * <p>
      * ItemKeys are generally more permissible than {@link NamedKey}
      *

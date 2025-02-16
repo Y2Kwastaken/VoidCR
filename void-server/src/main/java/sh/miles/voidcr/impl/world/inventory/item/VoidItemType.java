@@ -3,7 +3,6 @@ package sh.miles.voidcr.impl.world.inventory.item;
 import finalforeach.cosmicreach.items.Item;
 import sh.miles.voidcr.server.registry.Registries;
 import sh.miles.voidcr.util.Mirrored;
-import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemType;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
 public class VoidItemType implements ItemType, Mirrored<Item> {
 
     public static Item toCosmicReach(ItemType item) {
-        return Item.allItems.get(((VoidItemKey) item.getKey()).getCosmicReachId());
+        return Item.allItems.get(((VoidItemKey) item.key()).getCosmicReachId());
     }
 
     public static VoidItemType toVoid(Item item) {
@@ -48,7 +47,7 @@ public class VoidItemType implements ItemType, Mirrored<Item> {
     }
 
     @Override
-    public ItemKey getKey() {
+    public ItemKey key() {
         return this.key;
     }
 

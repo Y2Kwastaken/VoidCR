@@ -10,14 +10,7 @@ public class TestStandardPlugin implements StandardPlugin {
 
     @Override
     public void initialize(final Server server) {
-        Registries.ITEM.forEach(item -> {
-            System.out.println("Direct Item: " + item.getKey());
-        });
-        Registries.BLOCK.forEach((block) -> {
-            block.getAllBlockStates().forEach(state -> {
-                System.out.println(state.getItemType());
-            });
-        });
+        Registries.ITEM_PROPERTY.forEach((i) -> System.out.println(i.key()));
         server.getLogger().info("Hello, World! From Test Plugin!");
     }
 

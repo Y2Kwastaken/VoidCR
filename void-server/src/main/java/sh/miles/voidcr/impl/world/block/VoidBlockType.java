@@ -16,7 +16,7 @@ import java.util.Objects;
 public class VoidBlockType implements BlockType, Mirrored<Block> {
 
     public static Block toCosmicReach(BlockType type) {
-        return Block.getById(((VoidNamedKey) type.getKey()).getCosmicReachId());
+        return Block.getById(((VoidNamedKey) type.key()).getCosmicReachId());
     }
 
     public static VoidBlockType toVoid(Block block) {
@@ -37,7 +37,7 @@ public class VoidBlockType implements BlockType, Mirrored<Block> {
     }
 
     @Override
-    public NamedKey getKey() {
+    public NamedKey key() {
         return this.key;
     }
 

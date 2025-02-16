@@ -5,6 +5,7 @@ public finalforeach/cosmicreach/entities/Entity sightRange
 public finalforeach/cosmicreach/entities/EntityLaserProjectile radius
 public finalforeach/cosmicreach/entities/EntityLaserProjectile sourceEntityId
 public finalforeach/cosmicreach/entities/EntityLaserProjectile strength
+public finalforeach/cosmicreach/items/ItemStack durability
 ~AT
 
 ~APIGEN
@@ -15,4 +16,5 @@ sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/p
 
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
 sh/miles/voidcr/impl/world/VoidWorld finalforeach/cosmicreach/world/Zone
+sh/miles/voidcr/impl/world/inventory/item/VoidItemStack finalforeach/cosmicreach/items/ItemStack
 ~APIGEN

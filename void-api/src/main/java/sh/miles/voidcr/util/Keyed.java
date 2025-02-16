@@ -12,5 +12,5 @@ public interface Keyed {
      * @return the key
      * @since 0.3.14
      */
-    NamedKey getKey();
+    NamedKey key();
 }

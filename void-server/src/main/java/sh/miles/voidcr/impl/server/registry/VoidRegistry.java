@@ -1,22 +1,18 @@
 package sh.miles.voidcr.impl.server.registry;
 
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.google.common.base.Preconditions;
+import org.checkerframework.checker.units.qual.K;
 import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.server.registry.exception.RegistryValueNotFoundException;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.NamedKey;
 
-import java.security.Key;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public final class VoidRegistry<E extends Keyed> implements Registry<E> {
 
@@ -44,7 +40,7 @@ public final class VoidRegistry<E extends Keyed> implements Registry<E> {
 
     public void register(E entry) {
         if (isFrozen()) throw new IllegalStateException("Can not register while registry is frozen");
-        this.registry.put(entry.getKey(), entry);
+        this.registry.put(entry.key(), entry);
     }
 
     @Override
@@ -62,6 +58,16 @@ public final class VoidRegistry<E extends Keyed> implements Registry<E> {
     }
 
     public static <E extends Keyed, I> VoidRegistry<E> fromNaiveInternalSource(Collection<I> provision, Function<I, E> map) {
+        final VoidRegistry<E> registry = new VoidRegistry<>();
+        for (final I entry : provision) {
+            registry.register(map.apply(entry));
+        }
+
+        registry.freeze();
+        return registry;
+    }
+
+    public static <E extends Keyed, I> VoidRegistry<E> fromVoidCRArraySource(I[] provision, Function<I, E> map) {
         final VoidRegistry<E> registry = new VoidRegistry<>();
         for (final I entry : provision) {
             registry.register(map.apply(entry));
