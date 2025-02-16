@@ -1,6 +1,7 @@
 package sh.miles.voidcr.impl.entity;
 
 import com.badlogic.gdx.math.Vector3;
+import com.google.common.base.Preconditions;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.util.Mirrored;
@@ -18,6 +19,17 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     }
 
     @Override
+    public int getMaximumInvulnerabilityFrames() {
+        return mirror.maxInvulnerabilityFrames;
+    }
+
+    @Override
+    public void setMaximumInvulnerabilityFrames(final int frames) {
+        Preconditions.checkArgument(frames >= 0, "The provided amount of invulnerability frames must be greater than or equal to 0");
+        mirror.maxInvulnerabilityFrames = frames;
+    }
+
+    @Override
     public float getRangeOfSight() {
         return mirror.sightRange;
     }
@@ -28,8 +40,20 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     }
 
     @Override
+    public void setHealth(final float health) {
+        Preconditions.checkArgument(health >= 0, "The provided health value must be greater than or equal to 0");
+        mirror.hitpoints = health;
+    }
+
+    @Override
     public float getMaxHealth() {
         return mirror.maxHitpoints;
+    }
+
+    @Override
+    public void setMaxHealth(final float health) {
+        Preconditions.checkArgument(health > 0, "The provided maximum health must be greater than 0");
+        mirror.maxHitpoints = health;
     }
 
     @Override

@@ -73,7 +73,7 @@ public class VoidLifecycleManager<C> implements LifecycleManager<C> {
         return realized;
     }
 
-    public static <T extends LifecycleEvent<Server>> T callServerEvent(final Function<Server, T> event) {
+    public static <T extends LifecycleEvent<Server>> T dispatchEvent(final Function<Server, T> event) {
         return VoidServer.SERVER.getLifecycle().call(event);
     }
 

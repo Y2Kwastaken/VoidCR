@@ -1,5 +1,6 @@
 package sh.miles.voidcr.server;
 
+import com.google.common.base.Preconditions;
 import org.apache.logging.log4j.Logger;
 import sh.miles.voidcr.server.configuration.ServerConfiguration;
 import sh.miles.voidcr.util.MagicMethods;
@@ -13,7 +14,7 @@ import java.nio.file.Path;
  */
 public final class VoidCR {
 
-    private static Server server;
+    private static Server server = null;
 
     private VoidCR() {
         throw new UnsupportedOperationException("Can not initialize VoidCR, which is a delegation class");
@@ -56,6 +57,7 @@ public final class VoidCR {
      */
     @Deprecated
     public static void setServer(final Server server) {
+        Preconditions.checkState(VoidCR.server == null, "The provided server must not be null to utilize this method");
         VoidCR.server = server;
     }
 }

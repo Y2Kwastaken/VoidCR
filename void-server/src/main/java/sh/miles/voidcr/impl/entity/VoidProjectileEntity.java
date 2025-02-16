@@ -1,5 +1,6 @@
 package sh.miles.voidcr.impl.entity;
 
+import com.google.common.base.Preconditions;
 import finalforeach.cosmicreach.entities.EntityLaserProjectile;
 import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.entity.EntityIdentifier;
@@ -13,6 +14,7 @@ public class VoidProjectileEntity extends VoidEntity implements ProjectileEntity
 
     @Override
     public void setStrength(final float strength) {
+        Preconditions.checkArgument(strength >= 0, "The provided strength must be greater than or equal to zero");
         getMirror().strength = strength;
     }
 

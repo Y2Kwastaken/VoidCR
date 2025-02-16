@@ -12,7 +12,7 @@ public interface ProjectileEntity extends Entity {
     /**
      * Sets the strength of the projectile
      *
-     * @param strength the projectile strength
+     * @param strength the projectile strength, which must be greater than or equal to zero
      * @since 0.3.23
      */
     void setStrength(float strength);
