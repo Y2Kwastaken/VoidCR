@@ -1,8 +1,8 @@
 --- a/finalforeach/cosmicreach/entities/EntityUtils.java
 +++ b/finalforeach/cosmicreach/entities/EntityUtils.java
-@@ -37,7 +_,7 @@
+@@ -42,7 +_,7 @@
           Player p = (Player)players.get(i);
-          if (p != null) {
+          if (p != null && (canTarget == null || canTarget.test(p))) {
              Entity pe = p.getEntity();
 -            if (pe != null) {
 +            if (pe != null && !pe.isDead()) { // VoidCR - don't target dead players

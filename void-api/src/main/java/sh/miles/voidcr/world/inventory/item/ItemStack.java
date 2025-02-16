@@ -1,10 +1,9 @@
 package sh.miles.voidcr.world.inventory.item;
 
 import org.jspecify.annotations.Nullable;
-import sh.miles.voidcr.world.inventory.container.Container;
 
 /**
- * Represents a stack of {@link ItemType} that can be stored inside of a {@link Container}
+ * Represents a stack of {@link ItemType} that can be stored inside of a
  * <p>
  * ItemStack's on top of just storing multiples of items can store extra information that can be displayed
  *

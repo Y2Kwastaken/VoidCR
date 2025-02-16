@@ -10,7 +10,7 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta4"
 }
 
-val crVersion = "0.3.23"
+val crVersion = "0.3.24"
 
 group = rootProject.group
 version = rootProject.name
@@ -156,5 +156,5 @@ tasks.register("update") {
     group = "voidcr-setup"
 
     setupSources.get().mustRunAfter(applyPatchesFuzzy)
-    dependsOn(filterJar, decompileJar, applyPatchesFuzzy, setupSources, buildPatches)
+    dependsOn(filterJar, decompileJar, applyPatchesFuzzy, setupSources)
 }

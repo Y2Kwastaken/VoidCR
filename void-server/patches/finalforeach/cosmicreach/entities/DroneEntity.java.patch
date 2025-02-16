@@ -8,4 +8,4 @@
 +            targetEntity.hit(1.0F, this); // VoidCR - provide source entity
              this.attackChargeTime = MathUtils.random(20, 60);
           }
-       }
+       } else {
