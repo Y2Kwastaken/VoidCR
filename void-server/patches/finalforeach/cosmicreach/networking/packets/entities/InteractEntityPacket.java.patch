@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/networking/packets/entities/InteractEntityPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/entities/InteractEntityPacket.java
+@@ -44,7 +_,7 @@
+             Player player = identity.getPlayer();
+             if (!player.isDead()) {
+                ItemSlot itemSlot = player.inventory.getSlot(this.itemSlotNum);
+-               if (itemSlot != null) {
++               if (true || itemSlot != null) { // VoidCR - allow interactions on null item
+                   ItemStack itemStack = itemSlot.getItemStack();
+                   entity.onUseInteraction(player, itemStack);
+                }

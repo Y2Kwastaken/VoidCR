@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public record VoidServerConfiguration(Path pluginsDirectory) implements ServerConfiguration {
+public record VoidServerConfiguration(Path pluginsDirectory, VoidBehaviorChangeConfiguration behaviorChanges) implements ServerConfiguration {
 
     public static final String CONFIG_NAME = "void.json";
 
@@ -25,8 +25,9 @@ public record VoidServerConfiguration(Path pluginsDirectory) implements ServerCo
         }
 
         final JsonObject object = VoidGson.fromPath(configLocation);
-        final Path pluginsDirectory = Path.of(object.get("pluginsDirectory").getAsString());
+        final Path pluginsDirectory = Path.of(object.get("plugins_directory").getAsString());
+        final VoidBehaviorChangeConfiguration behaviorChangeConfiguration = VoidBehaviorChangeConfiguration.parse(object.getAsJsonObject("game_behavior_changes"));
 
-        return new VoidServerConfiguration(pluginsDirectory);
+        return new VoidServerConfiguration(pluginsDirectory, behaviorChangeConfiguration);
     }
 }
