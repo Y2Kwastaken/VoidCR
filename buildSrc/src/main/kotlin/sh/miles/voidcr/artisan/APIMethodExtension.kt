@@ -30,11 +30,13 @@ import org.objectweb.asm.tree.MethodInsnNode
 import org.objectweb.asm.tree.MethodNode
 import org.objectweb.asm.tree.TypeInsnNode
 import org.objectweb.asm.tree.VarInsnNode
+import sh.miles.artisan.asm.ArtisanAccessUtil
 import sh.miles.artisan.extension.ArtisanExtension
 import sh.miles.artisan.extension.ContainerHandler
 import sh.miles.artisan.util.JvmClasspath
 import sh.miles.artisan.util.log.ArtisanLogger
 import sh.miles.artisan.visitor.LiteralResult
+import kotlin.math.log
 
 class APIMethodExtension : ArtisanExtension {
 
@@ -52,19 +54,24 @@ class APIMethodExtension : ArtisanExtension {
 }
 
 class ApiMethodContainerHandler : ContainerHandler {
+    private val extendAccess = mutableMapOf<JvmClasspath, Int>()
     private val generations = mutableMapOf<JvmClasspath, JvmClasspath>()
 
     override fun parse(literal: LiteralResult, logger: ArtisanLogger) {
         val pair = literal.literal.split(" ").map { JvmClasspath(JvmClasspath.CLASS, it, null, null) }
         generations[pair[1]] = pair[0]
+        val expandAccess = literal.getMetaValue("ExtendAccess")
+        if (expandAccess != null) extendAccess[pair[0]] = ArtisanAccessUtil.scopeToOpcode(expandAccess)
         logger.info("Found Api Generation for class ${pair[0].path} in ${pair[1].path}")
     }
 
     override fun visit(node: ClassNode, path: JvmClasspath, logger: ArtisanLogger) {
         val generation = this.generations[path]!!
+        val expandAccess = this.extendAccess.getOrDefault(generation, 0)
         node.fields.add(
-            FieldNode(ASM9, ACC_PRIVATE, "cache", "L${generation.path};", null, null)
+            FieldNode(ASM9, ACC_PRIVATE + expandAccess, "cache", "L${generation.path};", null, null)
         )
+
 
         val instructions = InsnList()
         val getterMethod = MethodNode(ACC_PUBLIC, "getVoidMirror", "()L${generation.path};", null, null)
