@@ -50,6 +50,11 @@ public final class VoidItemStack implements ItemStack, Mirrored<finalforeach.cos
     }
 
     @Override
+    public ItemStack copy() {
+        return new VoidItemStack(this.mirror.copy());
+    }
+
+    @Override
     public ItemType getItemType() {
         return VoidItemType.toVoid(mirror.getItem());
     }
@@ -57,5 +62,9 @@ public final class VoidItemStack implements ItemStack, Mirrored<finalforeach.cos
     @Override
     public finalforeach.cosmicreach.items.ItemStack getMirror() {
         return this.mirror;
+    }
+
+    public finalforeach.cosmicreach.items.ItemStack getMirrorCopy() {
+        return this.mirror.copy();
     }
 }

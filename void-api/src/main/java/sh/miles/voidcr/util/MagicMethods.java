@@ -2,6 +2,8 @@ package sh.miles.voidcr.util;
 
 import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
+import sh.miles.voidcr.world.inventory.item.ItemStack;
+import sh.miles.voidcr.world.inventory.item.ItemType;
 
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
@@ -65,10 +67,19 @@ public interface MagicMethods {
      *
      * @param keyString the keyString to turn into a ItemKey
      * @return the item key
-     * @throws IllegalArgumentException thrown if a parameter doesn't past test
+     * @throws IllegalArgumentException thrown if a parameter doesn't past tests
      * @since 0.3.23
      */
     ItemKey createItemKey(String keyString) throws IllegalArgumentException;
+
+    /**
+     * Delegation for ItemStack static method
+     *
+     * @param itemType the itemType to create with
+     * @return the new stack
+     * @throws IllegalArgumentException thrown if a parameter doesn't past tests
+     */
+    ItemStack createItemStack(ItemType itemType) throws IllegalArgumentException;
 
     /**
      * Delegation for registry access

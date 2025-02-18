@@ -1,6 +1,7 @@
 package sh.miles.voidcr.world.inventory.item;
 
 import org.jspecify.annotations.Nullable;
+import sh.miles.voidcr.server.VoidCR;
 
 /**
  * Represents a stack of {@link ItemType} that can be stored inside of a
@@ -10,6 +11,16 @@ import org.jspecify.annotations.Nullable;
  * @since 0.3.23
  */
 public interface ItemStack {
+
+    /**
+     * Creates a new ItemStack from the given {@link ItemType}
+     *
+     * @param itemType the type of item
+     * @return the newly created ItemStack
+     */
+    static ItemStack create(ItemType itemType) {
+        return VoidCR.getMagic().createItemStack(itemType);
+    }
 
     /**
      * Sets the provided ItemProperty on this item
@@ -53,6 +64,14 @@ public interface ItemStack {
      * @since 0.3.23
      */
     <V> boolean canSet(ItemProperty<V> property);
+
+    /**
+     * Creates a copy of this ItemStack
+     *
+     * @return the copy
+     * @since 0.3.24
+     */
+    ItemStack copy();
 
     /**
      * Gets the {@link ItemType} of this ItemStack

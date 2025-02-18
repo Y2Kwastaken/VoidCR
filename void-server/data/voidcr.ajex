@@ -16,5 +16,6 @@ sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/p
 
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
 sh/miles/voidcr/impl/world/VoidWorld finalforeach/cosmicreach/world/Zone
+sh/miles/voidcr/impl/world/inventory/container/VoidItemContainer finalforeach/cosmicreach/items/containers/SlotContainer
 sh/miles/voidcr/impl/world/inventory/item/VoidItemStack finalforeach/cosmicreach/items/ItemStack
 ~APIGEN

@@ -10,12 +10,16 @@ import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.impl.entity.VoidEntityIdentifier;
 import sh.miles.voidcr.impl.server.registry.VoidRegistries;
 import sh.miles.voidcr.impl.world.inventory.item.VoidItemKey;
+import sh.miles.voidcr.impl.world.inventory.item.VoidItemStack;
+import sh.miles.voidcr.impl.world.inventory.item.VoidItemType;
 import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.MagicMethods;
 import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.util.collection.Pair;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
+import sh.miles.voidcr.world.inventory.item.ItemStack;
+import sh.miles.voidcr.world.inventory.item.ItemType;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -84,6 +88,11 @@ public final class VoidMagicMethods implements MagicMethods {
         Preconditions.checkArgument(split.length == 2, "keyString must be splittable by ':'. key %s is not splittable array results in %s".formatted(keyString, Arrays.toString(split)));
 
         return new VoidItemKey(split[0], split[1]);
+    }
+
+    @Override
+    public ItemStack createItemStack(final ItemType itemType) throws IllegalArgumentException {
+        return new VoidItemStack(new finalforeach.cosmicreach.items.ItemStack(((VoidItemType) itemType).getMirror()));
     }
 
     @Override

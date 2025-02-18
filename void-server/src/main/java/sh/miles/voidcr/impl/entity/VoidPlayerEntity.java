@@ -5,12 +5,18 @@ import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.entities.player.Player;
 import sh.miles.voidcr.entity.PlayerEntity;
 import sh.miles.voidcr.world.World;
+import sh.miles.voidcr.world.inventory.container.ItemContainer;
 
 public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
 
     public VoidPlayerEntity(finalforeach.cosmicreach.entities.player.PlayerEntity mirror) {
         super(mirror);
         Preconditions.checkState(player() != null, "Every VoidPlayerEntity must have a player associated with it");
+    }
+
+    @Override
+    public ItemContainer getInventory() {
+        return player().inventory.getVoidMirror();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package sh.miles.voidcr.entity;
 
 import sh.miles.voidcr.world.World;
+import sh.miles.voidcr.world.inventory.container.ItemContainer;
 
 /**
  * Represents a player
@@ -8,6 +9,14 @@ import sh.miles.voidcr.world.World;
  * @since 0.3.22
  */
 public interface PlayerEntity extends Entity {
+
+    /**
+     * Gets the player's inventory
+     *
+     * @return an ItemContainer containing inventory contents
+     * @since 0.3.24
+     */
+    ItemContainer getInventory();
 
     /**
      * Respawns the player in their current world

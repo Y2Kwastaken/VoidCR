@@ -1,0 +1,19 @@
+--- a/finalforeach/cosmicreach/entities/player/Player.java
++++ b/finalforeach/cosmicreach/entities/player/Player.java
+@@ -24,7 +_,7 @@
+    public Gamemode gamemode = Gamemode.SURVIVAL;
+    public String zoneId;
+    private Entity entity;
+-   public SlotContainer inventory = new SlotContainer(40);
++   public SlotContainer inventory; // VoidCR - modification of slots
+    public CraftingSlotContainer craftingContainer = new CraftingSlotContainer();
+    public boolean isSprinting;
+    public boolean isProne;
+@@ -57,6 +_,7 @@
+    public void setEntity(Entity entity) {
+       this.entity = entity;
+       if (entity != null) {
++         inventory = new SlotContainer(40, this.entity, 0); // VoidCR allow for easier modification of slots
+          this.entity.localBoundingBox.set(this.standingBoundingBox);
+          this.entity.viewPositionOffset.set(this.standingViewPositionOffset);
+       }
