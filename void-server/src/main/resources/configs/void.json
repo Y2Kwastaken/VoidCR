@@ -1,6 +1,6 @@
 {
   "plugins_directory": "plugins",
   "game_behavior_changes": {
-    "passive_drone_traps_in_creative": true
+    "activate_done_traps_in_creative_with_interact": true
   }
 }

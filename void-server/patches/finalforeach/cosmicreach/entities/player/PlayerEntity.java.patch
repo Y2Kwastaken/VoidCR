@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/entities/player/PlayerEntity.java
 +++ b/finalforeach/cosmicreach/entities/player/PlayerEntity.java
-@@ -86,7 +_,7 @@
+@@ -88,7 +_,7 @@
     public void onAttackInteraction(Entity sourceEntity) {
        if (sourceEntity instanceof PlayerEntity) {
           if (!ServerSettings.PVP_ENABLED.isFalse()) {

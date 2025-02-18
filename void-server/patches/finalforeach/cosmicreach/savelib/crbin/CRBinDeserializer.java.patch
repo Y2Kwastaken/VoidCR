@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/savelib/crbin/CRBinDeserializer.java
 +++ b/finalforeach/cosmicreach/savelib/crbin/CRBinDeserializer.java
-@@ -280,7 +_,7 @@
+@@ -334,7 +_,7 @@
           if (d == null) {
              return null;
           } else if (ICRBinSerializable.class.isAssignableFrom(elementType)) {

@@ -8,20 +8,16 @@ import finalforeach.cosmicreach.items.ItemStack;
 import java.util.function.Predicate;
 
 public record VoidBehaviorChangeConfiguration(
-        boolean passiveDroneTrapsInCreative
+        boolean activeDroneTrapsInCreativeWithInteraction
 ) {
 
     public boolean activateDroneTrapOnRightClick(Player player, ItemStack heldItemStack) {
-        return passiveDroneTrapsInCreative && heldItemStack == null && player.gamemode == finalforeach.cosmicreach.entities.player.Gamemode.CREATIVE;
-    }
-
-    public Predicate<Player> activateDroneTrapInCreative() {
-        return passiveDroneTrapsInCreative ? player -> player.gamemode != Gamemode.CREATIVE : null;
+        return activeDroneTrapsInCreativeWithInteraction && heldItemStack == null && player.gamemode == finalforeach.cosmicreach.entities.player.Gamemode.CREATIVE;
     }
 
     public static VoidBehaviorChangeConfiguration parse(JsonObject object) {
         return new VoidBehaviorChangeConfiguration(
-                object.get("passive_drone_traps_in_creative").getAsBoolean()
+                object.get("activate_done_traps_in_creative_with_interact").getAsBoolean()
         );
     }
 }

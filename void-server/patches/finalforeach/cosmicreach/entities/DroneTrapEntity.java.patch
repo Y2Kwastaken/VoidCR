@@ -9,12 +9,3 @@
           this.activateTrap();
        }
     }
-@@ -154,7 +_,7 @@
- 
-       EntityUtils.nudgeEntityFromOthers(this);
-       if (!this.friendly) {
--         Entity closestPlayerEntity = EntityUtils.getClosestPlayerToEntity(this, zone);
-+         Entity closestPlayerEntity = EntityUtils.getClosestPlayerToEntity(this, zone, (p) -> p.gamemode != finalforeach.cosmicreach.entities.player.Gamemode.CREATIVE); // VoidCR - Don't target creative players
-          if (closestPlayerEntity != null && this.timeSinceActivated < 0.0F) {
-             this.activateTrap();
-          }
