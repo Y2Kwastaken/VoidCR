@@ -15,7 +15,7 @@ public abstract class VoidEntityDamageEvent extends VoidEntityEvent implements E
         super(ctx, entity, zone);
         this.invulnerabilityFrames = invulnerabilityFrames;
         this.damage = damage;
-        this.damager = damager.getVoidMirror();
+        this.damager = damager == null ? null : damager.getVoidMirror();
     }
 
     @Override

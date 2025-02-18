@@ -1,5 +1,6 @@
 package sh.miles.voidcr.plugin.lifecycle.event.entity;
 
+import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.entity.Entity;
 
 /**
@@ -31,6 +32,7 @@ public interface EntityDamageEvent extends EntityEvent {
      * @return the targeted entity
      * @since 0.3.22
      */
+    @Nullable
     Entity getDamager();
 
 }
