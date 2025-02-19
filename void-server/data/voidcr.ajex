@@ -10,10 +10,8 @@ public finalforeach/cosmicreach/items/ItemStack durability
 
 ~APIGEN
 sh/miles/voidcr/impl/entity/VoidDroneTrapEntity finalforeach/cosmicreach/entities/DroneTrapEntity
-@ExtendAccess: transient
 sh/miles/voidcr/impl/entity/VoidEntity finalforeach/cosmicreach/entities/Entity
 sh/miles/voidcr/impl/entity/VoidProjectileEntity finalforeach/cosmicreach/entities/EntityLaserProjectile
-@ExtendAccess: transient
 sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/player/PlayerEntity
 
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
