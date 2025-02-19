@@ -1,20 +1,6 @@
 --- a/finalforeach/cosmicreach/items/containers/SlotContainer.java
 +++ b/finalforeach/cosmicreach/items/containers/SlotContainer.java
-@@ -3,6 +_,7 @@
- import com.badlogic.gdx.utils.Json;
- import com.badlogic.gdx.utils.JsonValue;
- import com.badlogic.gdx.utils.Json.Serializable;
-+import finalforeach.cosmicreach.entities.player.Player;
- import finalforeach.cosmicreach.items.ISlotContainer;
- import finalforeach.cosmicreach.items.Item;
- import finalforeach.cosmicreach.items.ItemMergeStrategy;
-@@ -18,11 +_,17 @@
- import finalforeach.cosmicreach.savelib.utils.IDynamicArray;
- import finalforeach.cosmicreach.util.ArrayUtils;
- import finalforeach.cosmicreach.world.Zone;
-+
- import java.util.function.Consumer;
- import java.util.function.Predicate;
+@@ -23,6 +_,11 @@
  import sh.miles.voidcr.impl.world.inventory.container.VoidItemContainer;
  
  public class SlotContainer implements Serializable, ISlotContainer, ICRBinSerializable {
@@ -25,7 +11,7 @@
 +   // VoidCR end - allow easier managing of slot containers
     private IDynamicArray<ItemSlot> slots = DynamicArrays.<ItemSlot>getNew(ItemSlot.class);
     public int numberOfSlots;
-    private VoidItemContainer cache;
+    private transient VoidItemContainer cache;
 @@ -173,6 +_,7 @@
     }
  

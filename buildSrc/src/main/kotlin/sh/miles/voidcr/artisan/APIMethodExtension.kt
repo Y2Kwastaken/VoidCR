@@ -72,7 +72,7 @@ class ApiMethodContainerHandler : ContainerHandler {
         val generation = this.generations[path]!!
         val expandAccess = this.extendAccess.getOrDefault(generation, ACC_PRIVATE)
         node.fields.add(
-            FieldNode(ASM9, ACC_TRANSIENT + expandAccess, "cache", "L${generation.path};", null, null)
+            FieldNode(ASM9, expandAccess + ACC_TRANSIENT, "cache", "L${generation.path};", null, null)
         )
 
 

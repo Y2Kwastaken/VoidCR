@@ -4,6 +4,7 @@ import sh.miles.voidcr.server.registry.Registry;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemStack;
 import sh.miles.voidcr.world.inventory.item.ItemType;
+import sh.miles.voidcr.world.position.BlockPos;
 
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
@@ -46,7 +47,7 @@ public interface MagicMethods {
      *
      * @param keyString the keyString to turn into a NamedKey
      * @return the named key
-     * @throws IllegalArgumentException thrown if parameter doesn't past test
+     * @throws IllegalArgumentException thrown if parameter doesn't pass test
      * @since 0.3.14
      */
     NamedKey createNamedKey(String keyString) throws IllegalArgumentException;
@@ -67,7 +68,7 @@ public interface MagicMethods {
      *
      * @param keyString the keyString to turn into a ItemKey
      * @return the item key
-     * @throws IllegalArgumentException thrown if a parameter doesn't past tests
+     * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
      * @since 0.3.23
      */
     ItemKey createItemKey(String keyString) throws IllegalArgumentException;
@@ -77,9 +78,22 @@ public interface MagicMethods {
      *
      * @param itemType the itemType to create with
      * @return the new stack
-     * @throws IllegalArgumentException thrown if a parameter doesn't past tests
+     * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
+     * @since 0.3.23
      */
     ItemStack createItemStack(ItemType itemType) throws IllegalArgumentException;
+
+    /**
+     * Delegation for BlockPos static method
+     *
+     * @param x x
+     * @param y y
+     * @param z z
+     * @return the new BlockPos
+     * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
+     * @since 0.3.26
+     */
+    BlockPos createBlockPos(int x, int y, int z) throws IllegalArgumentException;
 
     /**
      * Delegation for registry access
