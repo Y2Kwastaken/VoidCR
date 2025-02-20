@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/entities/EntityLaserProjectile.java
 +++ b/finalforeach/cosmicreach/entities/EntityLaserProjectile.java
-@@ -105,8 +_,9 @@
+@@ -102,8 +_,9 @@
                 }
  
                 if (GameMath.distanceSegmentBoundingBox(this.displacementSegment, e.globalBoundingBox) < this.radius) {
@@ -12,7 +12,7 @@
                 }
              }
           });
-@@ -146,6 +_,8 @@
+@@ -143,6 +_,8 @@
                          while (var13.hasNext()) {
                             BoundingBox bb = (BoundingBox)var13.next();
                             if (bb.intersects(this.tmpEntityBoundingBox)) {

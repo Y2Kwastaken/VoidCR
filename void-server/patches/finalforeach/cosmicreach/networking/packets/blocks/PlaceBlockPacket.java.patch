@@ -1,0 +1,38 @@
+--- a/finalforeach/cosmicreach/networking/packets/blocks/PlaceBlockPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/blocks/PlaceBlockPacket.java
+@@ -12,6 +_,7 @@
+ import finalforeach.cosmicreach.world.Zone;
+ import io.netty.buffer.ByteBuf;
+ import io.netty.channel.ChannelHandlerContext;
++import sh.miles.voidcr.impl.world.block.VoidBlockState;
+ 
+ public class PlaceBlockPacket extends GamePacket {
+    Zone zone;
+@@ -44,6 +_,19 @@
+    @Override
+    public void handle(NetworkIdentity identity, ChannelHandlerContext ctx) {
+       if (identity.getSide() != NetworkSide.CLIENT) {
++         // VoidCR - start PrePlayerPlaceBlockEvent
++         if (identity.getZone() != this.zone) return; // return if the player tries to place a block in another zone
++
++         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerPlaceBlock(identity, this.blockPos, this.targetBlockState);
++         if (event != null && event.isCanceled()) {
++            // re-sync world and inventory
++            identity.send(new finalforeach.cosmicreach.networking.packets.blocks.BlockReplacePacket(this.zone, blockPos.getBlockState(), this.blockPos));
++            identity.send(new finalforeach.cosmicreach.networking.packets.items.ContainerSyncPacket(0, identity.getPlayer().inventory));
++            return;
++         }
++
++         if (event != null) this.targetBlockState = ((VoidBlockState)event.getState()).getMirror();
++         // VoidCR - end PrePlayerPlaceBlockEvent
+          BlockEventTrigger[] triggers = this.targetBlockState.getTrigger("onPlace");
+          if (triggers != null) {
+             BlockEventArgs args = new BlockEventArgs();
+@@ -56,6 +_,7 @@
+                triggers[i].act(args);
+             }
+          }
++          sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerPlaceBlock(identity, this.blockPos, this.targetBlockState); // VoidCR - PostPlayerPlaceBlockEvent
+       }
+    }
+ }

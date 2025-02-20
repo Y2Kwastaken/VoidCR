@@ -1,0 +1,43 @@
+--- a/finalforeach/cosmicreach/networking/packets/blocks/InteractBlockPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/blocks/InteractBlockPacket.java
+@@ -59,6 +_,7 @@
+ 
+    @Override
+    public void handle(NetworkIdentity identity, ChannelHandlerContext ctx) {
++      boolean hasCalled = false; // VoidCR has called PrePlayerInteractBlockEvent event
+       if (identity.getSide() != NetworkSide.CLIENT) {
+          Zone zone = identity.getZone();
+          Player player = identity.getPlayer();
+@@ -76,6 +_,11 @@
+             if (this.iteractTarget != InteractBlockPacket.IteractTarget.IGNORE_BLOCK_ENTITY) {
+                BlockEntity blockEntity = this.blockPos.getBlockEntity();
+                if (blockEntity != null) {
++                  // VoidCR start - PrePlayerInteractBlockEvent
++                  final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerInteractBlock(identity, this.blockPos, this.blockState);
++                  if (event != null && event.isCanceled()) return;
++                  hasCalled = true;
++                  // VoidCR end - PrePlayerInteractBlockEvent
+                   blockEntity.onInteract(player, zone);
+                }
+             }
+@@ -89,6 +_,12 @@
+                identity.send(new ContainerSyncPacket(0, player.inventory));
+             }
+          } else {
++            if (!hasCalled) {
++               // VoidCR start - PrePlayerInteractBlockEvent
++               final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerInteractBlock(identity, this.blockPos, this.blockState);
++               if (event != null && event.isCanceled()) return;
++               // VoidCR end - PrePlayerInteractBlockEvent
++            }
+             BlockEventTrigger[] triggers = this.blockState != null ? this.blockState.getTrigger("onInteract") : null;
+             if (triggers != null) {
+                BlockEventArgs args = new BlockEventArgs();
+@@ -102,6 +_,7 @@
+                }
+             }
+          }
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerBreakBlock(identity, this.blockPos, this.blockState); // VoidCR - PostPlayerInteractBlockEvent
+       }
+    }
+ 

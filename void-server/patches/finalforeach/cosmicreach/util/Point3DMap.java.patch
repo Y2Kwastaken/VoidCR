@@ -1,5 +1,25 @@
 --- a/finalforeach/cosmicreach/util/Point3DMap.java
 +++ b/finalforeach/cosmicreach/util/Point3DMap.java
+@@ -5,6 +_,19 @@
+ import java.util.function.Consumer;
+ 
+ public class Point3DMap<T> implements IPoint3DMap<T> {
++   // VoidCR start - allow retrieval of all values
++   public java.util.Collection<T> values() {
++      final var collector = new java.util.ArrayList<T>();
++      final var iter = map.iterator();
++      while (iter.hasNext()) {
++         final var innerIter = iter.next().value.values();
++         while (innerIter.hasNext) {
++            collector.add(innerIter.next());
++         }
++      }
++      return collector;
++   }
++   // VoidCR end - allow retrieval of all values
+    LongMap<IntMap<T>> map = new LongMap();
+    int totalPoints = 0;
+ 
 @@ -83,7 +_,7 @@
     public void forEach(Consumer<T> consumer) {
        this.map.forEach(lt -> {

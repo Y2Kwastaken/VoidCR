@@ -1,0 +1,12 @@
+--- a/finalforeach/cosmicreach/util/IPoint3DMap.java
++++ b/finalforeach/cosmicreach/util/IPoint3DMap.java
+@@ -3,6 +_,9 @@
+ import java.util.function.Consumer;
+ 
+ public interface IPoint3DMap<T> {
++   // VoidCR start - allow retrieval of values
++   java.util.Collection<T> values();
++   // VoidCR end - allow retrieval of values
+    T get(int var1, int var2, int var3);
+ 
+    void put(T var1, int var2, int var3, int var4);

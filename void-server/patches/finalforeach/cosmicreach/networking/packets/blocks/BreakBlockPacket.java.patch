@@ -1,0 +1,35 @@
+--- a/finalforeach/cosmicreach/networking/packets/blocks/BreakBlockPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/blocks/BreakBlockPacket.java
+@@ -12,6 +_,7 @@
+ import finalforeach.cosmicreach.world.Zone;
+ import io.netty.buffer.ByteBuf;
+ import io.netty.channel.ChannelHandlerContext;
++import sh.miles.voidcr.impl.world.block.VoidBlockState;
+ 
+ public class BreakBlockPacket extends GamePacket {
+    Zone zone;
+@@ -50,6 +_,16 @@
+                identity.send(new BlockReplacePacket(this.zone, actualCurrentBlockState, this.blockPos));
+             }
+          } else {
++            // VoidCR start - PrePlayerBlockBreakEvent
++            if (identity.getZone() != this.zone) return; // return if the player tries to break a block in another world
++            final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerBreakBlock(identity, this.blockPos, this.brokenBlockState);
++            if (event != null && event.isCanceled()) {
++               identity.send(new BlockReplacePacket(this.zone, this.brokenBlockState, this.blockPos));
++               return;
++            }
++            if (event != null) this.brokenBlockState = ((VoidBlockState) event.getState()).getMirror();
++            // VoidCR end - PrePlayerBlockBreakEvent
++
+             if (this.brokenBlockState.hardness > 0.0F) {
+             }
+ 
+@@ -66,6 +_,7 @@
+                }
+             }
+          }
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerBreakBlock(identity, this.blockPos, this.brokenBlockState); // VoidCR call PostPlayerBlockBreakEvent
+       }
+    }
+ }

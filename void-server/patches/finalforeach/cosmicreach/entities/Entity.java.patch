@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/entities/Entity.java
 +++ b/finalforeach/cosmicreach/entities/Entity.java
-@@ -45,6 +_,9 @@
+@@ -46,6 +_,9 @@
     private static final BlockPosition tmpBlockPos1 = new BlockPosition(null, 0, 0, 0);
     private static final BlockPosition tmpBlockPos2 = new BlockPosition(null, 0, 0, 0);
     private static EntityPositionPacket positionPacket = new EntityPositionPacket();
@@ -10,9 +10,9 @@
     public boolean shouldSaveInChunks = true;
     @CRBSerialized
     public EntityUniqueId uniqueId = EntityUniqueId.getNew();
-@@ -279,19 +_,29 @@
-    public boolean hasTag(String tag) {
-       return this.tags == null ? false : this.tags.contains(tag, false);
+@@ -281,19 +_,30 @@
+    public boolean hasTag(GameTag tag) {
+       return this.tags == null ? false : this.tags.contains(tag);
     }
 -
 +   // VoidCR start - add method parameter to carry through sourceEntity
@@ -22,7 +22,8 @@
 +   public void hit(float amount, Entity sourceEntity) {
        if (amount != 0.0F) {
 +         if (sourceEntity != null && sourceEntity.isDead()) return; // fix event trigger while dead
-+         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.preEntityDamageEvent(amount, maxInvulnerabilityFrames, sourceEntity, this);
++         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.preEntityDamage(amount, maxInvulnerabilityFrames, sourceEntity, this);
++         if (event != null && event.isCanceled()) return;
 +         amount = event == null ? amount : event.getDamage();
 +         // VoidCR end - add method parameter to carry through sourceEntity
 +
@@ -39,11 +40,11 @@
 +            this.invulnerabiltyFrames = event == null ? maxInvulnerabilityFrames : event.getInvulnerabilityFrames(); // apply max invulnerability frames
 +            // VoidCR end - PreEntityDamageEvent
           }
-+         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postEntityDamageEvent(this.pendingDamage, this.invulnerabiltyFrames, sourceEntity, this); // VoidCR - PostEntityDamageEvent
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postEntityDamage(this.pendingDamage, this.invulnerabiltyFrames, sourceEntity, this); // VoidCR - PostEntityDamageEvent
        }
     }
  
-@@ -318,7 +_,7 @@
+@@ -320,7 +_,7 @@
     }
  
     public void onAttackInteraction(Entity sourceEntity) {

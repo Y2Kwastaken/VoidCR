@@ -9,6 +9,8 @@ import sh.miles.voidcr.server.Server;
 
 public class VoidPreEntityDamageEvent extends VoidEntityDamageEvent implements PreEntityDamageEvent {
 
+    private boolean canceled = false;
+
     public VoidPreEntityDamageEvent(final Server ctx, final Entity entity, final Zone zone, final int invulnerabilityFrames, final float damage, final Entity damager) {
         super(ctx, entity, zone, invulnerabilityFrames, damage, damager);
     }
@@ -21,6 +23,16 @@ public class VoidPreEntityDamageEvent extends VoidEntityDamageEvent implements P
     @Override
     public void setDamage(final float pendingDamage) {
         super.damage = pendingDamage;
+    }
+
+    @Override
+    public void setCanceled(final boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    @Override
+    public boolean isCanceled() {
+        return this.canceled;
     }
 
     @Override

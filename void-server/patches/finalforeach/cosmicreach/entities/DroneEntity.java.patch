@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/entities/DroneEntity.java
 +++ b/finalforeach/cosmicreach/entities/DroneEntity.java
-@@ -171,7 +_,7 @@
+@@ -170,7 +_,7 @@
           this.tmpDesiredLocation.add(0.0F, hoverHeight, 0.0F);
           this.tmpDesiredLocation.add(targetEntity.getPosition());
           if (!this.isTargetingFriend && targetEntity.globalBoundingBox.intersects(this.globalBoundingBox)) {
