@@ -1,0 +1,37 @@
+--- /dev/null
++++ b/finalforeach/cosmicreach/settings/StringSetting.java
+@@ -1,0 +_,34 @@
++package finalforeach.cosmicreach.settings;
++
++public class StringSetting extends GameSetting {
++   private final String key;
++   private String value;
++
++   public StringSetting(String key, String defaultValue) {
++      this.key = key;
++      if (ALL_SETTINGS.getOrDefault(key, defaultValue) instanceof String s) {
++         this.value = s;
++      } else {
++         this.value = defaultValue;
++      }
++   }
++
++   public String getValue() {
++      return this.value;
++   }
++
++   private void save() {
++      if (this.value == null) {
++         ALL_SETTINGS.remove(this.key);
++      } else {
++         ALL_SETTINGS.put(this.key, this.value);
++      }
++
++      saveSettings();
++   }
++
++   public void setValue(String newValue) {
++      this.value = newValue;
++      this.save();
++   }
++}

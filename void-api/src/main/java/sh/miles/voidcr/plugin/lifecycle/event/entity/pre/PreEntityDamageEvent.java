@@ -1,5 +1,6 @@
 package sh.miles.voidcr.plugin.lifecycle.event.entity.pre;
 
+import sh.miles.voidcr.plugin.lifecycle.Cancelable;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.EntityDamageEvent;
 import sh.miles.voidcr.server.Server;
@@ -9,7 +10,7 @@ import sh.miles.voidcr.server.Server;
  *
  * @since 0.3.22
  */
-public interface PreEntityDamageEvent extends EntityDamageEvent, LifecycleEvent<Server> {
+public interface PreEntityDamageEvent extends EntityDamageEvent, Cancelable, LifecycleEvent<Server> {
 
     /**
      * Sets the amount of invulnerability frames applied after this event

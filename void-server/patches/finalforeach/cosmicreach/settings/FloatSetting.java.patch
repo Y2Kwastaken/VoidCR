@@ -1,0 +1,38 @@
+--- /dev/null
++++ b/finalforeach/cosmicreach/settings/FloatSetting.java
+@@ -1,0 +_,35 @@
++package finalforeach.cosmicreach.settings;
++
++public class FloatSetting extends GameSetting implements INumberSetting {
++   private final String key;
++   private float value;
++
++   public FloatSetting(String key, float defaultValue) {
++      this.key = key;
++      if (ALL_SETTINGS.getOrDefault(key, defaultValue) instanceof Number n) {
++         this.value = n.floatValue();
++      } else {
++         this.value = defaultValue;
++      }
++   }
++
++   public float getValue() {
++      return this.value;
++   }
++
++   private void save() {
++      ALL_SETTINGS.put(this.key, this.value);
++      saveSettings();
++   }
++
++   @Override
++   public void setValue(float newValue) {
++      this.value = newValue;
++      this.save();
++   }
++
++   @Override
++   public float getValueAsFloat() {
++      return this.getValue();
++   }
++}

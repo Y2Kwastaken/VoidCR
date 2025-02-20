@@ -1,5 +1,6 @@
 package sh.miles.voidcr.impl.world.block;
 
+import com.google.common.base.Preconditions;
 import finalforeach.cosmicreach.blocks.Block;
 import sh.miles.voidcr.impl.util.VoidNamedKey;
 import sh.miles.voidcr.server.registry.Registries;
@@ -43,21 +44,23 @@ public class VoidBlockType implements BlockType, Mirrored<Block> {
 
     @Override
     public BlockState getBlockState(final NamedKey key) throws IllegalArgumentException {
-        return new VoidBlockState(mirror.getBlockState(((VoidNamedKey) key).getCosmicReachId()));
+        Preconditions.checkArgument(key != null, "The provided NamedKey must not be null");
+        final var state = mirror.getBlockState(((VoidNamedKey) key).getCosmicReachId());
+        return state == null ? null : state.getVoidMirror();
     }
 
     @Override
     public Collection<BlockState> getAllBlockStates() {
         final List<BlockState> collector = new ArrayList<>();
         for (final finalforeach.cosmicreach.blocks.BlockState value : mirror.blockStates.values()) {
-            collector.add(new VoidBlockState(value));
+            collector.add(value.getVoidMirror());
         }
         return collector;
     }
 
     @Override
     public BlockState getDefaultBlockState() {
-        return new VoidBlockState(mirror.getDefaultBlockState());
+        return mirror.getDefaultBlockState().getVoidMirror();
     }
 
     @Override

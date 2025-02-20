@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
 +++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
-@@ -152,6 +_,7 @@
+@@ -152,26 +_,33 @@
        });
        registerBlockEntityOpeners();
        GameSingletons.postCreate();
@@ -8,3 +8,29 @@
     }
  
     private static void registerBlockEntityOpeners() {
+       GameSingletons.registerBlockEntityScreenOpener("base:container", info -> {
++         if(!sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerOpenBlockScreen(info)) return; // VoidCR call PrePlayerOpenBlockScreen
+          ServerIdentity id = getConnection(info.player());
+          BlockEntity blockEntity = info.blockEntity();
+          id.send(new BlockEntityDataPacket(blockEntity));
+          id.send(new BlockEntityScreenPacket(blockEntity));
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerOpenBlockScreen(info); // VoidCR call PostPlayerOpenBlockScreen
+       });
+       GameSingletons.registerBlockEntityScreenOpener("base:furnace", info -> {
++         if(!sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerOpenBlockScreen(info)) return; // VoidCR call PrePlayerOpenBlockScreen
+          ServerIdentity id = getConnection(info.player());
+          BlockEntity blockEntity = info.blockEntity();
+          id.send(new BlockEntityDataPacket(blockEntity));
+          id.send(new BlockEntityScreenPacket(blockEntity));
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerOpenBlockScreen(info); // VoidCR call PostPlayerOpenBlockScreen
+       });
+       GameSingletons.registerBlockEntityScreenOpener(BlockEntitySign.BLOCK_ENTITY_ID.toString(), info -> {
++         if(!sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerOpenBlockScreen(info)) return; // VoidCR call PrePlayerOpenBlockScreen
+          ServerIdentity id = getConnection(info.player());
+          BlockEntity blockEntity = info.blockEntity();
+          id.send(new BlockEntityDataPacket(blockEntity));
+          id.send(new BlockEntityScreenPacket(blockEntity));
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerOpenBlockScreen(info); // VoidCR call PostPlayerOpenBlockScreen
+       });
+    }
+ 

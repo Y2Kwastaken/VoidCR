@@ -1,0 +1,122 @@
+--- /dev/null
++++ b/finalforeach/cosmicreach/settings/IPListConfig.java
+@@ -1,0 +_,119 @@
++package finalforeach.cosmicreach.settings;
++
++import com.badlogic.gdx.utils.Array;
++import com.badlogic.gdx.utils.Array.ArrayIterator;
++import finalforeach.cosmicreach.io.SaveLocation;
++import java.io.BufferedReader;
++import java.io.BufferedWriter;
++import java.io.File;
++import java.io.FileInputStream;
++import java.io.FileWriter;
++import java.io.IOException;
++import java.nio.charset.StandardCharsets;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.Paths;
++
++public class IPListConfig {
++   Array<String> addresses = new Array();
++   String fileName;
++
++   public IPListConfig(String fileName) {
++      this.fileName = fileName;
++      this.load();
++   }
++
++   public boolean isValidAddress(String address) {
++      return address.matches("^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$");
++   }
++
++   public void addAddress(String address) {
++      synchronized (this.addresses) {
++         if (!this.addresses.contains(address, false)) {
++            try {
++               FileWriter fw = new FileWriter(SaveLocation.getSaveFolderLocation() + "/" + this.fileName, true);
++               BufferedWriter bw = new BufferedWriter(fw);
++               bw.write(address);
++               bw.newLine();
++               bw.close();
++               this.addresses.add(address);
++            } catch (IOException var6) {
++               var6.printStackTrace();
++            }
++         }
++      }
++   }
++
++   public void removeAddress(String address) {
++      synchronized (this.addresses) {
++         if (this.addresses.contains(address, false)) {
++            try {
++               Path path = Paths.get(SaveLocation.getSaveFolderLocation() + "/" + this.fileName);
++               Array<String> lines = new Array();
++
++               String line;
++               try (BufferedReader reader = Files.newBufferedReader(path)) {
++                  while ((line = reader.readLine()) != null) {
++                     int commentIndex = line.indexOf("#");
++                     if (commentIndex != -1) {
++                        line = line.substring(0, commentIndex);
++                     }
++
++                     if (!line.trim().equals(address)) {
++                        lines.add(line);
++                     }
++                  }
++               }
++
++               try (BufferedWriter writer = Files.newBufferedWriter(path)) {
++                  ArrayIterator var16 = lines.iterator();
++
++                  while (var16.hasNext()) {
++                     String linex = (String)var16.next();
++                     writer.write(linex);
++                     writer.newLine();
++                  }
++               }
++
++               this.addresses.removeValue(address, false);
++            } catch (IOException var13) {
++               var13.printStackTrace();
++            }
++         }
++      }
++   }
++
++   public void load() {
++      File f = new File(SaveLocation.getSaveFolderLocation() + "/" + this.fileName);
++      if (!f.exists()) {
++         try {
++            f.createNewFile();
++         } catch (IOException var10) {
++            var10.printStackTrace();
++         }
++      } else {
++         try (FileInputStream fis = new FileInputStream(f)) {
++            String wholeFileStr = new String(fis.readAllBytes(), StandardCharsets.UTF_8);
++            String[] lines = wholeFileStr.replaceAll("\r\n", "\n").split("\n");
++
++            for (String line : lines) {
++               line = line.trim();
++               if (!line.isBlank()) {
++                  int commentStartIdx = line.indexOf(35);
++                  if (commentStartIdx != -1) {
++                     line = line.substring(0, commentStartIdx).trim();
++                  }
++
++                  this.addresses.add(line);
++               }
++            }
++         } catch (Exception var13) {
++            var13.printStackTrace();
++         }
++      }
++   }
++
++   public boolean hasAddress(String address) {
++      return this.addresses.contains(address, false);
++   }
++}

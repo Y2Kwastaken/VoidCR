@@ -1,6 +1,6 @@
 --- a/finalforeach/cosmicreach/blocks/BlockState.java
 +++ b/finalforeach/cosmicreach/blocks/BlockState.java
-@@ -433,7 +_,7 @@
+@@ -438,7 +_,7 @@
        if (this.stateGenerators != null) {
           for (String genKey : this.stateGenerators) {
              BlockStateGenerator generator = BlockStateGenerator.getInstance(genKey);

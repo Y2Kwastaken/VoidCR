@@ -1,0 +1,45 @@
+--- /dev/null
++++ b/finalforeach/cosmicreach/settings/SettingsDictionary.java
+@@ -1,0 +_,42 @@
++package finalforeach.cosmicreach.settings;
++
++import com.badlogic.gdx.utils.Json;
++import com.badlogic.gdx.utils.JsonValue;
++import com.badlogic.gdx.utils.Json.Serializable;
++import com.badlogic.gdx.utils.JsonWriter.OutputType;
++import finalforeach.cosmicreach.GameSingletons;
++import java.util.HashMap;
++import java.util.Map.Entry;
++
++public class SettingsDictionary implements Serializable {
++   private HashMap<String, Object> dict = new HashMap<String, Object>();
++
++   public void write(Json json) {
++      for (Entry<String, Object> e : this.dict.entrySet()) {
++         json.writeValue(e.getKey(), e.getValue());
++      }
++   }
++
++   public void read(Json json, JsonValue jsonData) {
++      jsonData.forEach(c -> {
++         String jsonVal = c.toJson(OutputType.minimal);
++         this.dict.put(c.name, json.fromJson(null, jsonVal));
++      });
++   }
++
++   public Object getOrDefault(String key, Object defaultValue) {
++      if (!GameSingletons.isClient && !this.dict.containsKey(key)) {
++         this.dict.put(key, defaultValue);
++      }
++
++      return this.dict.getOrDefault(key, defaultValue);
++   }
++
++   public Object put(String key, Object value) {
++      return this.dict.put(key, value);
++   }
++
++   public Object remove(String key) {
++      return this.dict.remove(key);
++   }
++}

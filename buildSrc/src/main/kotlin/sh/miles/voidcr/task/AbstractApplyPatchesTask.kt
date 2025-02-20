@@ -64,7 +64,7 @@ abstract class AbstractApplyPatchesTask : DefaultTask() {
             .baseInput(MultiInput.archive(ArchiveFormat.ZIP, input))
             .patchedOutput(MultiOutput.archive(ArchiveFormat.ZIP, output.outputStream()))
             .patchesInput(MultiInput.folder(patchDir.asFile.get().toPath()))
-            .rejectsOutput(MultiOutput.archive(ArchiveFormat.ZIP, output.outputStream()))
+            .rejectsOutput(MultiOutput.archive(ArchiveFormat.ZIP, failed.outputStream()))
             .level(LogLevel.ALL)
             .mode(patchMode)
             .minFuzz(fuzz)

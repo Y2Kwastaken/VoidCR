@@ -1,0 +1,53 @@
+--- /dev/null
++++ b/finalforeach/cosmicreach/settings/EnumSetting.java
+@@ -1,0 +_,50 @@
++package finalforeach.cosmicreach.settings;
++
++public class EnumSetting<T extends Enum<T>> extends GameSetting {
++   private final String key;
++   private T value;
++
++   public EnumSetting(String key, T defaultValue) {
++      this.key = key;
++      if (ALL_SETTINGS.getOrDefault(key, defaultValue) instanceof String name) {
++         Class<? extends Enum> clazz = (Class<? extends Enum>)defaultValue.getClass();
++
++         try {
++            this.value = Enum.<T>valueOf((Class<T>)clazz, name);
++         } catch (IllegalArgumentException var12) {
++            this.value = defaultValue;
++            Enum<T>[] values = (Enum<T>[])clazz.getEnumConstants();
++
++            for (Enum<T> v : values) {
++               if (v.name().equalsIgnoreCase(name)) {
++                  this.value = (T)v;
++                  break;
++               }
++            }
++         }
++      } else {
++         this.value = defaultValue;
++      }
++   }
++
++   public T getValue() {
++      return this.value;
++   }
++
++   private void save() {
++      ALL_SETTINGS.put(this.key, this.value.name());
++      saveSettings();
++   }
++
++   public void setValue(T newValue) {
++      this.value = newValue;
++      this.save();
++   }
++
++   public void cycleNext() {
++      Class<? extends Enum> clazz = (Class<? extends Enum>)this.value.getClass();
++      Enum<T>[] values = (Enum<T>[])clazz.getEnumConstants();
++      this.value = (T)values[(this.value.ordinal() + 1) % values.length];
++      this.save();
++   }
++}
