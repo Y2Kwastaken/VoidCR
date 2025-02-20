@@ -1,5 +1,7 @@
 package sh.miles.voidcr.impl.world.position;
 
+import com.google.common.base.Preconditions;
+import finalforeach.cosmicreach.blockentities.BlockEntity;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.util.CRSerializerHelper;
@@ -9,6 +11,10 @@ import sh.miles.voidcr.world.position.BlockPos;
 import sh.miles.voidcr.world.position.LocalBlockPos;
 
 public class VoidBlockPos extends VoidIntPosition<BlockPos> implements BlockPos {
+
+    public static VoidBlockPos fromCRBlockEntity(BlockEntity blockEntity) {
+        return new VoidBlockPos(blockEntity.getGlobalX(), blockEntity.getGlobalY(), blockEntity.getGlobalZ());
+    }
 
     public VoidBlockPos(final int x, final int y, final int z) {
         super(x, y, z);
@@ -26,12 +32,16 @@ public class VoidBlockPos extends VoidIntPosition<BlockPos> implements BlockPos 
 
     @Override
     public LocalBlockPos bindTo(final Chunk chunk, final boolean truncate) throws IllegalStateException {
-        return null;
+        if (truncate) {
+            return new VoidLocalBlockPos(x >> 4, y >> 4, z >> 4, chunk);
+        }
+        Preconditions.checkState(x < 16 && y < 16 && z < 16, "The current BlockPos (%d, %d, %d) values must be truncated to be bound to a chunk".formatted(x, y, z));
+        return new VoidLocalBlockPos(x, y, z, chunk);
     }
 
     @Override
     public LocalBlockPos bindTo(final Chunk chunk) throws IllegalStateException {
-        return null;
+        return bindTo(chunk, false);
     }
 
     @Override

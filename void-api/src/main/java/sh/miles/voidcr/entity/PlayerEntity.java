@@ -2,16 +2,19 @@ package sh.miles.voidcr.entity;
 
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.inventory.container.ItemContainer;
+import sh.miles.voidcr.world.inventory.container.ItemContainerOwner;
 
 /**
  * Represents a player
  *
  * @since 0.3.22
  */
-public interface PlayerEntity extends Entity {
+public interface PlayerEntity extends Entity, ItemContainerOwner {
 
     /**
      * Gets the player's inventory
+     * <p>
+     * This method is simply an alias for {@link ItemContainerOwner#getItemContainer()}
      *
      * @return an ItemContainer containing inventory contents
      * @since 0.3.24
