@@ -57,7 +57,7 @@ public interface BlockType extends Keyed {
      * @since 0.3.14
      */
     @Nullable
-    BlockState getBlockState(NamedKey key) throws IllegalArgumentException;
+    BlockState getBlockState(NamedKey key);
 
     /**
      * Gets all block states of this block type

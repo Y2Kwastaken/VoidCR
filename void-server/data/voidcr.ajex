@@ -17,6 +17,7 @@ public finalforeach/cosmicreach/world/Chunk blockEntities
 ~AT
 
 ~APIGEN
+
 sh/miles/voidcr/impl/entity/VoidDroneTrapEntity finalforeach/cosmicreach/entities/DroneTrapEntity
 sh/miles/voidcr/impl/entity/VoidEntity finalforeach/cosmicreach/entities/Entity
 sh/miles/voidcr/impl/entity/VoidProjectileEntity finalforeach/cosmicreach/entities/EntityLaserProjectile
@@ -25,6 +26,8 @@ sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/p
 sh/miles/voidcr/impl/world/VoidChunk finalforeach/cosmicreach/world/Chunk
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
 sh/miles/voidcr/impl/world/VoidWorld finalforeach/cosmicreach/world/Zone
+
+sh/miles/voidcr/impl/world/block/VoidBlockState finalforeach/cosmicreach/blocks/BlockState
 
 sh/miles/voidcr/impl/world/block/entity/VoidBlockEntityCrate finalforeach/cosmicreach/blockentities/BlockEntityItemContainer
 sh/miles/voidcr/impl/world/block/entity/VoidBlockEntityFurnace finalforeach/cosmicreach/blockentities/BlockEntityFurnace

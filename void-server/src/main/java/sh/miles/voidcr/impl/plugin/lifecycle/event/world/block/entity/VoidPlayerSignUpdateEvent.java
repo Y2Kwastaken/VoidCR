@@ -24,6 +24,7 @@ public abstract class VoidPlayerSignUpdateEvent extends VoidWorldEvent implement
         super(context, zone);
         this.lines = lines;
         this.color = color;
+        this.fontSize = fontSize;
         this.player = ((finalforeach.cosmicreach.entities.player.PlayerEntity) player.getEntity()).getVoidMirror();
         this.pos = VoidBlockPos.fromCRBlockEntity(sign);
     }

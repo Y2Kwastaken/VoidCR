@@ -2,6 +2,7 @@ package sh.miles.voidcr.impl.world.position;
 
 import com.google.common.base.Preconditions;
 import finalforeach.cosmicreach.blockentities.BlockEntity;
+import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.util.CRSerializerHelper;
@@ -14,6 +15,10 @@ public class VoidBlockPos extends VoidIntPosition<BlockPos> implements BlockPos 
 
     public static VoidBlockPos fromCRBlockEntity(BlockEntity blockEntity) {
         return new VoidBlockPos(blockEntity.getGlobalX(), blockEntity.getGlobalY(), blockEntity.getGlobalZ());
+    }
+
+    public static VoidBlockPos fromCRPos(BlockPosition position) {
+        return new VoidBlockPos(position.getGlobalX(), position.getGlobalY(), position.getGlobalZ());
     }
 
     public VoidBlockPos(final int x, final int y, final int z) {

@@ -1,6 +1,7 @@
 package sh.miles.voidcr.plugin.lifecycle.event.world.block.entity.pre;
 
 import com.badlogic.gdx.graphics.Color;
+import sh.miles.voidcr.plugin.lifecycle.Cancelable;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.entity.PlayerSignUpdateEvent;
 import sh.miles.voidcr.server.Server;
@@ -8,7 +9,7 @@ import sh.miles.voidcr.server.Server;
 /**
  * Event that takes place before a sign is updated
  */
-public interface PrePlayerSignUpdateEvent extends PlayerSignUpdateEvent, LifecycleEvent<Server> {
+public interface PrePlayerSignUpdateEvent extends PlayerSignUpdateEvent, Cancelable, LifecycleEvent<Server> {
 
     /**
      * Sets the lines of the sign
