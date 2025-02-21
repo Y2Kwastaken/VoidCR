@@ -1,0 +1,23 @@
+--- a/finalforeach/cosmicreach/networking/packets/blocks/SignsEntityPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/blocks/SignsEntityPacket.java
+@@ -55,9 +_,20 @@
+          Zone zone = identity.getZone();
+          if (zone.getBlockEntity(this.x, this.y, this.z) instanceof BlockEntitySign sign
+             && sign.validateTexts(this.texts)) {
++            // VoidCR - start PrePlayerSignUpdateEvent
++            final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerSignUpdate(identity, sign, this.texts, this.fontSize, this.color);
++            if (event != null && event.isCanceled()) {
++               identity.send(new SignsEntityPacket(sign)); // re-sync with player
++               return;
++            }
++            this.fontSize = event == null ? this.fontSize : event.getTextSize();
++            this.color = event == null ? this.color : event.getColor().toIntBits();
++            this.texts = event == null ? this.texts : event.getLines();
++            // VoidCR - end PrePlayerSignUpdateEvent
+             sign.setFontSize(this.fontSize);
+             sign.setTextColor(this.color);
+             sign.setTexts(this.texts);
++            sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerSignUpdate(identity, sign); // VoidCR - PostPlayerSignUpdateEvent
+             ServerSingletons.SERVER.broadcast(zone, new BlockEntityDataPacket(sign));
+          }
+       }

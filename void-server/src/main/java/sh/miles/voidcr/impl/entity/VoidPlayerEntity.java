@@ -15,6 +15,11 @@ public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
     }
 
     @Override
+    public ItemContainer getItemContainer() {
+        return player().inventory.getVoidMirror();
+    }
+
+    @Override
     public ItemContainer getInventory() {
         return player().inventory.getVoidMirror();
     }

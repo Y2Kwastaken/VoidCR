@@ -1,14 +1,23 @@
 ~AT
 public finalforeach/cosmicreach/GameSingletons playersToUniqueIds
 
+public finalforeach/cosmicreach/blockentities/BlockEntityFurnace progressTicks
+public finalforeach/cosmicreach/blockentities/BlockEntityFurnace maxFuelTicks
+public finalforeach/cosmicreach/blockentities/BlockEntityFurnace fuelTicks
+public finalforeach/cosmicreach/blockentities/BlockEntityLaserEmitter willShoot
+
 public finalforeach/cosmicreach/entities/Entity sightRange
 public finalforeach/cosmicreach/entities/EntityLaserProjectile radius
 public finalforeach/cosmicreach/entities/EntityLaserProjectile sourceEntityId
 public finalforeach/cosmicreach/entities/EntityLaserProjectile strength
+
 public finalforeach/cosmicreach/items/ItemStack durability
+
+public finalforeach/cosmicreach/world/Chunk blockEntities
 ~AT
 
 ~APIGEN
+
 sh/miles/voidcr/impl/entity/VoidDroneTrapEntity finalforeach/cosmicreach/entities/DroneTrapEntity
 sh/miles/voidcr/impl/entity/VoidEntity finalforeach/cosmicreach/entities/Entity
 sh/miles/voidcr/impl/entity/VoidProjectileEntity finalforeach/cosmicreach/entities/EntityLaserProjectile
@@ -17,6 +26,14 @@ sh/miles/voidcr/impl/entity/VoidPlayerEntity finalforeach/cosmicreach/entities/p
 sh/miles/voidcr/impl/world/VoidChunk finalforeach/cosmicreach/world/Chunk
 sh/miles/voidcr/impl/world/VoidUniverse finalforeach/cosmicreach/world/World
 sh/miles/voidcr/impl/world/VoidWorld finalforeach/cosmicreach/world/Zone
+
+sh/miles/voidcr/impl/world/block/VoidBlockState finalforeach/cosmicreach/blocks/BlockState
+
+sh/miles/voidcr/impl/world/block/entity/VoidBlockEntityCrate finalforeach/cosmicreach/blockentities/BlockEntityItemContainer
+sh/miles/voidcr/impl/world/block/entity/VoidBlockEntityFurnace finalforeach/cosmicreach/blockentities/BlockEntityFurnace
+sh/miles/voidcr/impl/world/block/entity/VoidBlockEntityLaserEmitter finalforeach/cosmicreach/blockentities/BlockEntityLaserEmitter
+sh/miles/voidcr/impl/world/block/entity/VoidBlockEntitySign finalforeach/cosmicreach/blockentities/BlockEntitySign
+
 sh/miles/voidcr/impl/world/inventory/container/VoidItemContainer finalforeach/cosmicreach/items/containers/SlotContainer
 sh/miles/voidcr/impl/world/inventory/item/VoidItemStack finalforeach/cosmicreach/items/ItemStack
 ~APIGEN

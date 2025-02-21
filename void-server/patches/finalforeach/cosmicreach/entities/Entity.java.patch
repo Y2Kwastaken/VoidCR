@@ -10,7 +10,7 @@
     public boolean shouldSaveInChunks = true;
     @CRBSerialized
     public EntityUniqueId uniqueId = EntityUniqueId.getNew();
-@@ -279,19 +_,29 @@
+@@ -279,19 +_,30 @@
     public boolean hasTag(String tag) {
        return this.tags == null ? false : this.tags.contains(tag, false);
     }
@@ -22,7 +22,8 @@
 +   public void hit(float amount, Entity sourceEntity) {
        if (amount != 0.0F) {
 +         if (sourceEntity != null && sourceEntity.isDead()) return; // fix event trigger while dead
-+         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.preEntityDamageEvent(amount, maxInvulnerabilityFrames, sourceEntity, this);
++         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.preEntityDamage(amount, maxInvulnerabilityFrames, sourceEntity, this);
++         if (event != null && event.isCanceled()) return;
 +         amount = event == null ? amount : event.getDamage();
 +         // VoidCR end - add method parameter to carry through sourceEntity
 +
@@ -39,7 +40,7 @@
 +            this.invulnerabiltyFrames = event == null ? maxInvulnerabilityFrames : event.getInvulnerabilityFrames(); // apply max invulnerability frames
 +            // VoidCR end - PreEntityDamageEvent
           }
-+         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postEntityDamageEvent(this.pendingDamage, this.invulnerabiltyFrames, sourceEntity, this); // VoidCR - PostEntityDamageEvent
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postEntityDamage(this.pendingDamage, this.invulnerabiltyFrames, sourceEntity, this); // VoidCR - PostEntityDamageEvent
        }
     }
  
