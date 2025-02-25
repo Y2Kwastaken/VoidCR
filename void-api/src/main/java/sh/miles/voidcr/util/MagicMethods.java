@@ -5,6 +5,7 @@ import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemStack;
 import sh.miles.voidcr.world.inventory.item.ItemType;
 import sh.miles.voidcr.world.position.BlockPos;
+import sh.miles.voidcr.world.position.Position;
 
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
@@ -94,6 +95,18 @@ public interface MagicMethods {
      * @since 0.3.26
      */
     BlockPos createBlockPos(int x, int y, int z) throws IllegalArgumentException;
+
+    /**
+     * Delegation for Position static method
+     *
+     * @param x x
+     * @param y y
+     * @param z z
+     * @return the new Position
+     * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
+     * @since 0.3.27
+     */
+    Position createPosition(double x, double y, double z) throws IllegalArgumentException;
 
     /**
      * Delegation for registry access

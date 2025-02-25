@@ -1,10 +1,10 @@
 package sh.miles.voidcr.world;
 
-import com.badlogic.gdx.math.Vector3;
 import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.util.NamedKey;
+import sh.miles.voidcr.world.position.Position;
 
 import java.util.Collection;
 
@@ -21,7 +21,15 @@ public interface World {
      * @return the world spawn point
      * @since 0.3.14
      */
-    Vector3 getWorldSpawn();
+    Position getWorldSpawn();
+
+    /**
+     * Sets hte spawn point in this world
+     *
+     * @param spawnPoint the spawn point
+     * @since 0.3.27
+     */
+    void setWorldSpawn(Position spawnPoint);
 
     /**
      * Gets an entity from a given entity identifier

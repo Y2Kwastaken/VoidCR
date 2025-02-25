@@ -26,7 +26,7 @@ public class VoidBlockPos extends VoidIntPosition<BlockPos> implements BlockPos 
     }
 
     @Override
-    public BlockPos create(final int x, final int y, final int z, final Object... other) {
+    public BlockPos create(final int x, final int y, final int z, final Object[] other) {
         return new VoidBlockPos(x, y, z);
     }
 

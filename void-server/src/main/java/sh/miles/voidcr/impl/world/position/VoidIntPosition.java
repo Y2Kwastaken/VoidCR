@@ -37,7 +37,7 @@ public abstract class VoidIntPosition<T extends IntPosition<T>> implements IntPo
 
     @Override
     public T add(final int x, final int y, final int z) {
-        return create(this.x * x, this.y * y, this.z * z, others());
+        return create(this.x + x, this.y + y, this.z + z, others());
     }
 
     @Override
@@ -47,7 +47,7 @@ public abstract class VoidIntPosition<T extends IntPosition<T>> implements IntPo
 
     @Override
     public T divide(final int x, final int y, final int z) {
-        return create(this.x * x, this.y * y, this.z * z, others());
+        return create(this.x / x, this.y / y, this.z / z, others());
     }
 
     public abstract T create(int x, int y, int z, Object[] other);
