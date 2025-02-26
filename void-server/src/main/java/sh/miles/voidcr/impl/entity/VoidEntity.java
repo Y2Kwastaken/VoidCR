@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Preconditions;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
+import sh.miles.voidcr.impl.world.position.VoidPosition;
 import sh.miles.voidcr.util.Mirrored;
+import sh.miles.voidcr.world.position.Position;
 
 import java.util.Objects;
 
@@ -57,8 +59,8 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     }
 
     @Override
-    public Vector3 getPosition() {
-        return mirror.position.cpy();
+    public Position getPosition() {
+        return VoidPosition.fromVector3(mirror.position);
     }
 
     @Override

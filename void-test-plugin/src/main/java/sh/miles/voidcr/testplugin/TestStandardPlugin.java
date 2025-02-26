@@ -11,6 +11,7 @@ public class TestStandardPlugin implements StandardPlugin {
     @Override
     public void initialize(final Server server) {
         server.getLifecycle().observe(this, PrePlayerOpenBlockScreenEvent.class, (event, id) -> {
+            event.getPlayer().sendMessage("NO OPEN THIS THING!");
             event.setCanceled(true);
         });
         server.getLogger().info("Hello, World! From Test Plugin!");

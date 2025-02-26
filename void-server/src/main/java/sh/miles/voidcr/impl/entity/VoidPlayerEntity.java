@@ -1,8 +1,11 @@
 package sh.miles.voidcr.impl.entity;
 
 import com.google.common.base.Preconditions;
+import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.entities.player.Player;
+import finalforeach.cosmicreach.networking.packets.MessagePacket;
+import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import sh.miles.voidcr.entity.PlayerEntity;
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.inventory.container.ItemContainer;
@@ -61,5 +64,11 @@ public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
 
     private Player player() {
         return getMirror().player;
+    }
+
+    @Override
+    public void sendMessage(final String message) {
+        final var connection = ServerSingletons.getConnection(player());
+        connection.send(new MessagePacket(message));
     }
 }

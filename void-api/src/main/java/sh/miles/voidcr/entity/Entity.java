@@ -2,6 +2,7 @@ package sh.miles.voidcr.entity;
 
 import com.badlogic.gdx.math.Vector3;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.pre.PreEntityDamageEvent;
+import sh.miles.voidcr.world.position.Position;
 
 /**
  * Represents an entity within CosmicReach
@@ -73,7 +74,7 @@ public interface Entity {
      *
      * @return this entity's current position
      */
-    Vector3 getPosition();
+    Position getPosition();
 
     /**
      * Gets the current velocity of this entity
