@@ -1,6 +1,7 @@
 package sh.miles.voidcr.world.position;
 
-import sh.miles.voidcr.util.function.TripleDoubleFunction;
+import sh.miles.voidcr.util.function.TripleFloatFunction;
+import sh.miles.voidcr.util.function.TriplefloatFunction;
 
 /**
  * Represents some position on some 3d plane
@@ -13,39 +14,39 @@ public interface DecimalPosition<T extends DecimalPosition<T>> {
     /**
      * The x position
      *
-     * @return double
+     * @return float
      * @since 0.3.27
      */
-    double x();
+    float x();
 
     /**
      * The y position
      *
-     * @return double
+     * @return float
      * @since 0.3.27
      */
-    double y();
+    float y();
 
     /**
      * The z position
      *
-     * @return double
+     * @return float
      * @since 0.3.27
      */
-    double z();
+    float z();
 
     /**
-     * Makes changes to the DecimalPosition raw values through an implementation of {@link TripleDoubleFunction}. These
+     * Makes changes to the DecimalPosition raw values through an implementation of {@link TriplefloatFunction}. These
      * changes are applied to the returned DecimalPosition
      * <p>
-     * This method should be used over {@link #add(double, double, double)}, {@link #subtract(double, double, double)} or any other
+     * This method should be used over {@link #add(float, float, float)}, {@link #subtract(float, float, float)} or any other
      * provided operator for compound operations. This method will have less of an impact due to only cloning once.
      *
      * @param changes the changes to apply
      * @return the new DecimalPosition
      * @since 0.3.27
      */
-    T withChanges(TripleDoubleFunction<T> changes);
+    T withChanges(TripleFloatFunction<T> changes);
 
     /**
      * Adds values to this DecimalPosition
@@ -56,7 +57,7 @@ public interface DecimalPosition<T extends DecimalPosition<T>> {
      * @return the new DecimalPosition
      * @since 0.3.27
      */
-    T add(double x, double y, double z);
+    T add(float x, float y, float z);
 
     /**
      * Subtracts values from this DecimalPosition
@@ -67,7 +68,7 @@ public interface DecimalPosition<T extends DecimalPosition<T>> {
      * @return the new DecimalPosition
      * @since 0.3.27
      */
-    default T subtract(double x, double y, double z) {
+    default T subtract(float x, float y, float z) {
         return add(-x, -y, -z);
     }
 
@@ -80,7 +81,7 @@ public interface DecimalPosition<T extends DecimalPosition<T>> {
      * @return the new DecimalPosition
      * @since 0.3.27
      */
-    T multiply(double x, double y, double z);
+    T multiply(float x, float y, float z);
 
     /**
      * Divides values against this DecimalPosition
@@ -91,5 +92,5 @@ public interface DecimalPosition<T extends DecimalPosition<T>> {
      * @return the new DecimalPosition
      * @since 0.3.27
      */
-    T divide(double x, double y, double z);
+    T divide(float x, float y, float z);
 }

@@ -18,7 +18,7 @@ public interface Position extends DecimalPosition<Position>, ByteSerializable {
     BlockPos coerce();
 
     /**
-     * Creates a BlockPos from the provided information
+     * Creates a Position from the provided information
      *
      * @param x the x value
      * @param y the y value
@@ -26,8 +26,8 @@ public interface Position extends DecimalPosition<Position>, ByteSerializable {
      * @return the newly created BlockPos
      * @since 0.3.26
      */
-    static BlockPos create(final int x, final int y, final int z) {
-        return VoidCR.getMagic().createBlockPos(x, y, z);
+    static Position create(final float x, final float y, final float z) {
+        return VoidCR.getMagic().createPosition(x, y, z);
     }
 
     static Position fromBytes(byte[] input) {

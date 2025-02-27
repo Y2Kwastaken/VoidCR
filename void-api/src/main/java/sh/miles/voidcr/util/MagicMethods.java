@@ -6,6 +6,7 @@ import sh.miles.voidcr.world.inventory.item.ItemStack;
 import sh.miles.voidcr.world.inventory.item.ItemType;
 import sh.miles.voidcr.world.position.BlockPos;
 import sh.miles.voidcr.world.position.Position;
+import sh.miles.voidcr.world.position.Vector;
 
 /**
  * Internal exchange for values. This is an intermediary for methods that must be static. As the API is built entirely
@@ -106,7 +107,19 @@ public interface MagicMethods {
      * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
      * @since 0.3.27
      */
-    Position createPosition(double x, double y, double z) throws IllegalArgumentException;
+    Position createPosition(float x, float y, float z) throws IllegalArgumentException;
+
+    /**
+     * Delegation for Vector static method
+     *
+     * @param x x
+     * @param y y
+     * @param z z
+     * @return the new Vector
+     * @throws IllegalArgumentException thrown if a parameter doesn't pass tests
+     * @since 0.3.27
+     */
+    Vector createVector(float x, float y, float z) throws IllegalArgumentException;
 
     /**
      * Delegation for registry access

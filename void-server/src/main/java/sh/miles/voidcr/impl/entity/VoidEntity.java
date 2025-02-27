@@ -5,8 +5,10 @@ import com.google.common.base.Preconditions;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.impl.world.position.VoidPosition;
+import sh.miles.voidcr.impl.world.position.VoidVector;
 import sh.miles.voidcr.util.Mirrored;
 import sh.miles.voidcr.world.position.Position;
+import sh.miles.voidcr.world.position.Vector;
 
 import java.util.Objects;
 
@@ -64,8 +66,8 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     }
 
     @Override
-    public Vector3 getVelocity() {
-        return mirror.velocity.cpy();
+    public Vector getVelocity() {
+        return VoidVector.fromVector3(mirror.velocity);
     }
 
     @Override

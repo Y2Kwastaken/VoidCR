@@ -3,6 +3,7 @@ package sh.miles.voidcr.entity;
 import com.badlogic.gdx.math.Vector3;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.pre.PreEntityDamageEvent;
 import sh.miles.voidcr.world.position.Position;
+import sh.miles.voidcr.world.position.Vector;
 
 /**
  * Represents an entity within CosmicReach
@@ -81,7 +82,7 @@ public interface Entity {
      *
      * @return the entity's current velocity
      */
-    Vector3 getVelocity();
+    Vector getVelocity();
 
     /**
      * An Entity Identifier is much like a UUID, where it is used to identify a specific entity

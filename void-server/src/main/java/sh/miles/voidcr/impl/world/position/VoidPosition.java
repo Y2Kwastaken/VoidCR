@@ -14,10 +14,10 @@ public class VoidPosition extends VoidDecimalPosition<Position> implements Posit
     }
 
     public static Vector3 toVector3(Position position) {
-        return new Vector3((float) position.x(), (float) position.y(), (float) position.z());
+        return new Vector3(position.x(), position.y(), position.z());
     }
 
-    public VoidPosition(final double x, final double y, final double z) {
+    public VoidPosition(final float x, final float y, final float z) {
         super(x, y, z);
     }
 
@@ -27,7 +27,7 @@ public class VoidPosition extends VoidDecimalPosition<Position> implements Posit
     }
 
     @Override
-    public Position create(final double x, final double y, final double z, final Object[] other) {
+    public Position create(final float x, final float y, final float z, final Object[] other) {
         return new VoidPosition(x, y, z);
     }
 

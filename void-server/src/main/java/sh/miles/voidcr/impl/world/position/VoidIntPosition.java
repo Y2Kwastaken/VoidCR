@@ -3,6 +3,8 @@ package sh.miles.voidcr.impl.world.position;
 import sh.miles.voidcr.util.function.TripleIntFunction;
 import sh.miles.voidcr.world.position.IntPosition;
 
+import java.util.Objects;
+
 public abstract class VoidIntPosition<T extends IntPosition<T>> implements IntPosition<T> {
 
     protected final int x;
@@ -53,4 +55,15 @@ public abstract class VoidIntPosition<T extends IntPosition<T>> implements IntPo
     public abstract T create(int x, int y, int z, Object[] other);
 
     protected abstract Object[] others();
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof final VoidIntPosition<?> that)) return false;
+        return x == that.x && y == that.y && z == that.z;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
+    }
 }
