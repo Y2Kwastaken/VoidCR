@@ -58,6 +58,11 @@ public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
     }
 
     @Override
+    public boolean isOperator() {
+        return ServerSingletons.OP_LIST.hasAccount(player().getAccount());
+    }
+
+    @Override
     public finalforeach.cosmicreach.entities.player.PlayerEntity getMirror() {
         return (finalforeach.cosmicreach.entities.player.PlayerEntity) super.mirror;
     }

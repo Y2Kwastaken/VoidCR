@@ -61,6 +61,13 @@ public interface ItemContainer {
     int getSize();
 
     /**
+     * Clears the entire item container
+     *
+     * @since 0.3.27
+     */
+    void clear();
+
+    /**
      * Updates all remotes viewing this container
      *
      * @since 0.3.24

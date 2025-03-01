@@ -62,6 +62,14 @@ public interface PlayerEntity extends Entity, Messageable, ItemContainerOwner {
     boolean isDead();
 
     /**
+     * Determines whether or not the given player is an operator
+     *
+     * @return true if the player is an operator
+     * @since 0.3.27
+     */
+    boolean isOperator();
+
+    /**
      * Gets the user's display name
      *
      * @return the display name

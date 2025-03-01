@@ -54,6 +54,11 @@ public class VoidItemContainer implements ItemContainer, Mirrored<SlotContainer>
     }
 
     @Override
+    public void clear() {
+        this.mirror.clear();
+    }
+
+    @Override
     public SlotContainer getMirror() {
         return this.mirror;
     }

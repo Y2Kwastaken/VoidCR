@@ -48,6 +48,14 @@ public interface Server {
     Path getServerFolder();
 
     /**
+     * Gets the server console
+     *
+     * @return the console
+     * @since 0.3.27
+     */
+    Console getConsole();
+
+    /**
      * Gets the magic methods class see {@link MagicMethods} on why you should probably not be accessing this class.
      *
      * @return magic methods

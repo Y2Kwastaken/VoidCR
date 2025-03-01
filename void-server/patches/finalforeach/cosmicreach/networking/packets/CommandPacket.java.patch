@@ -1,0 +1,20 @@
+--- a/finalforeach/cosmicreach/networking/packets/CommandPacket.java
++++ b/finalforeach/cosmicreach/networking/packets/CommandPacket.java
+@@ -34,6 +_,9 @@
+    @Override
+    public void handle(final NetworkIdentity identity, ChannelHandlerContext ctx) {
+       if (!identity.isClient()) {
++         // VoidCR start - rewrite CommandPacket
++         sh.miles.voidcr.adjust.redirect.PacketRewrite.commandPacket(this.commandArgs, identity);
++         /*
+          Account acc = identity.getAccount();
+          if (acc.isOperator()) {
+             Logger.info(
+@@ -54,6 +_,7 @@
+          } else {
+             ((ServerIdentity)identity).sendChatMessage("You do not have permission to run commands.");
+          }
++          VoidCR end - rewrite CommandPacket */
+       }
+    }
+ }

@@ -13,15 +13,11 @@ public final class VoidServerStopCommand extends Command {
         final Player player = getCallingPlayer();
 
         if (player == null || ServerSingletons.OP_LIST.hasAccount(player.getAccount())) {
-            try {
-                GameSingletons.playersToUniqueIds.keySet().forEach((p) -> {
-                    ServerSingletons.SERVER.kick("Server has closed", ServerSingletons.getConnection(p));
-                });
+            GameSingletons.playersToUniqueIds.keySet().forEach((p) -> {
+                ServerSingletons.SERVER.kick("Server has closed", ServerSingletons.getConnection(p));
+            });
 
-                ServerSingletons.SERVER.running = false;
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
+            ServerSingletons.SERVER.running = false;
         } else {
             chat.addMessage(player.getAccount(), "Only operators may run this command");
         }

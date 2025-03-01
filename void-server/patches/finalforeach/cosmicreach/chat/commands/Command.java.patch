@@ -1,0 +1,15 @@
+--- a/finalforeach/cosmicreach/chat/commands/Command.java
++++ b/finalforeach/cosmicreach/chat/commands/Command.java
+@@ -173,6 +_,12 @@
+       if (!commandStr.equalsIgnoreCase("help") && !commandStr.equals("?")) {
+          try {
+             Command command = getCommand(commandStr);
++            // VoidCR start - fix this mess that is operator only commands
++            if (!(command instanceof sh.miles.voidcr.impl.plugin.lifecycle.command.VoidCommandWrapper<?>) && !account.isOperator()) {
++               finalforeach.cosmicreach.networking.server.ServerSingletons.getConnection(account.getPlayer()).sendChatMessage("You do not have permission to run the command " + commandStr);
++               return;
++            }
++            // VoidCR end - fix this mess that is operator only commands
+             command.setup(account, args);
+             command.run(chat);
+          } catch (ChatCommandException var5) {
