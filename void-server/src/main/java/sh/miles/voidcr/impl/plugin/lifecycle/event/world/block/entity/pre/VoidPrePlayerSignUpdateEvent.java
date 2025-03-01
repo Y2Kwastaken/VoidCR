@@ -9,7 +9,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.entity.pre.PrePlayerSignUpdateEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPrePlayerSignUpdateEvent extends VoidPlayerSignUpdateEvent implements PrePlayerSignUpdateEvent {
+public final class VoidPrePlayerSignUpdateEvent extends VoidPlayerSignUpdateEvent implements PrePlayerSignUpdateEvent {
 
     private boolean canceled = false;
 

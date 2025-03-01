@@ -9,19 +9,21 @@ import finalforeach.cosmicreach.savelib.crbin.ICRBinSerializable;
 import sh.miles.voidcr.entity.EntityIdentifier;
 import sh.miles.voidcr.impl.entity.VoidEntityIdentifier;
 import sh.miles.voidcr.impl.server.registry.VoidRegistries;
+import sh.miles.voidcr.impl.util.collection.VoidRegistry;
 import sh.miles.voidcr.impl.world.inventory.item.VoidItemKey;
 import sh.miles.voidcr.impl.world.inventory.item.VoidItemStack;
 import sh.miles.voidcr.impl.world.inventory.item.VoidItemType;
 import sh.miles.voidcr.impl.world.position.VoidBlockPos;
 import sh.miles.voidcr.impl.world.position.VoidPosition;
 import sh.miles.voidcr.impl.world.position.VoidVector;
-import sh.miles.voidcr.server.registry.Registry;
+import sh.miles.voidcr.server.registry.NamedRegistry;
 import sh.miles.voidcr.util.CRSerializerHelper;
-import sh.miles.voidcr.util.CRSerializerHelper.CRBinSerializerWrapper;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.MagicMethods;
 import sh.miles.voidcr.util.NamedKey;
+import sh.miles.voidcr.util.collection.KeyHolder;
 import sh.miles.voidcr.util.collection.Pair;
+import sh.miles.voidcr.util.collection.Registry;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemStack;
 import sh.miles.voidcr.world.inventory.item.ItemType;
@@ -122,7 +124,7 @@ public final class VoidMagicMethods implements MagicMethods {
     }
 
     @Override
-    public <E extends Keyed> Registry<E> getRegistry(final Class<E> clazz) throws IllegalArgumentException {
-        return (Registry<E>) VoidRegistries.createRegistry(clazz);
+    public <E extends KeyHolder<K>, K> Registry<E, K> getRegistry(final Class<E> clazz) throws IllegalArgumentException {
+        return (Registry<E, K>) VoidRegistries.createRegistry(clazz);
     }
 }

@@ -1,6 +1,5 @@
 package sh.miles.voidcr.impl.plugin.lifecycle;
 
-import org.checkerframework.checker.units.qual.C;
 import sh.miles.voidcr.plugin.lifecycle.LifecycleAware;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 
@@ -8,7 +7,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.BiConsumer;
 
-public class VoidObserverContainer<T extends LifecycleEvent<C>, C> {
+public final class VoidObserverContainer<T extends LifecycleEvent<C>, C> {
 
     private final SortedSet<VoidObserverHolder<T, C>> events;
 

@@ -9,7 +9,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.world.block.post.PostPlayerBreakBl
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.post.PostPlayerPlaceBlockEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPostPlayerBreakBlockEvent extends VoidPlayerBreakBlockEvent implements PostPlayerBreakBlockEvent {
+public final class VoidPostPlayerBreakBlockEvent extends VoidPlayerBreakBlockEvent implements PostPlayerBreakBlockEvent {
     public VoidPostPlayerBreakBlockEvent(final Server context, final Player player, final BlockPosition position, final BlockState state) {
         super(context, player, position, state);
     }

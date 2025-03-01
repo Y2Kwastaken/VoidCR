@@ -2,9 +2,12 @@ package sh.miles.voidcr.plugin.lifecycle;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import sh.miles.voidcr.plugin.lifecycle.command.CommandArgumentResolver;
+import sh.miles.voidcr.plugin.lifecycle.command.CommandContextBuilder;
 import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -19,6 +22,26 @@ public interface LifecycleManager<C> {
     int MAX_PRIORITY = 99;
     int DEFAULT_PRIORITY = 45;
     int MIN_PRIORITY = 1;
+
+    /**
+     * Registers a command that is available during this lifecycle
+     *
+     * @param owner   the owner of the command
+     * @param builder the builder, which provides extra information to the command
+     * @throws IllegalArgumentException thrown if the builder is not filled out completely
+     * @since 0.3.27
+     */
+    void registerCommand(LifecycleAware<C> owner, Consumer<CommandContextBuilder<C>> builder) throws IllegalArgumentException;
+
+    /**
+     * Registers a {@link CommandArgumentResolver to the life cycle manager}
+     * <p>
+     * Registered resolvers belong to a single "owner"
+     *
+     * @throws IllegalArgumentException thrown if an argument of this type is already registered
+     * @since 0.3.27
+     */
+    <R> void registerArgumentResolver(LifecycleAware<C> owner, Class<R> type, CommandArgumentResolver<R> argument) throws IllegalArgumentException;
 
     /**
      * Begins observing an event.

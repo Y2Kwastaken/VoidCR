@@ -1,7 +1,6 @@
 package sh.miles.voidcr.world.position;
 
 import sh.miles.voidcr.util.function.TripleFloatFunction;
-import sh.miles.voidcr.util.function.TriplefloatFunction;
 
 /**
  * Represents some position on some 3d plane

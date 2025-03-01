@@ -3,6 +3,8 @@ package sh.miles.voidcr.server.registry;
 import sh.miles.voidcr.server.VoidCR;
 import sh.miles.voidcr.util.Keyed;
 import sh.miles.voidcr.util.NamedKey;
+import sh.miles.voidcr.util.collection.KeyHolder;
+import sh.miles.voidcr.util.collection.Registry;
 import sh.miles.voidcr.world.block.BlockType;
 import sh.miles.voidcr.world.inventory.item.ItemProperty;
 import sh.miles.voidcr.world.inventory.item.ItemType;
@@ -15,21 +17,21 @@ import sh.miles.voidcr.world.inventory.item.ItemType;
 public interface Registries {
 
     /**
-     * The Block Type registry
+     * The Block Type registry, does not support registration
      *
      * @since 0.3.14
      */
-    Registry<BlockType> BLOCK = registry(BlockType.class);
+    NamedRegistry<BlockType> BLOCK = namedRegistry(BlockType.class);
 
     /**
-     * The Item Type registry
+     * The Item Type registry, does not support registration
      *
      * @since 0.3.22
      */
-    Registry<ItemType> ITEM = registry(ItemType.class);
+    NamedRegistry<ItemType> ITEM = namedRegistry(ItemType.class);
 
     /**
-     * The Item Property registry
+     * The Item Property registry, does not support registration
      * <p>
      * Item Properties themselves are not a concept internally, thus this registry is the invention of VoidCR itself,
      * the long term stability is based off of a likely stable and somewhat flexible API design, however it is possible
@@ -38,9 +40,13 @@ public interface Registries {
      *
      * @since 0.3.23
      */
-    Registry<ItemProperty> ITEM_PROPERTY = registry(ItemProperty.class);
+    NamedRegistry<ItemProperty> ITEM_PROPERTY = namedRegistry(ItemProperty.class);
 
-    private static <E extends Keyed> Registry<E> registry(Class<E> clazz) {
+    private static <E extends Keyed> NamedRegistry<E> namedRegistry(Class<E> clazz) {
+        return (NamedRegistry<E>) VoidCR.getMagic().getRegistry(clazz);
+    }
+
+    private static <E extends KeyHolder<K>, K> Registry<E, K> registry(Class<E> clazz) {
         return VoidCR.getMagic().getRegistry(clazz);
     }
 

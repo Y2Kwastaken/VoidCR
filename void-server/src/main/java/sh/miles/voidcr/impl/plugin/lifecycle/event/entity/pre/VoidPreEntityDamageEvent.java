@@ -7,7 +7,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.pre.PreEntityDamageEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPreEntityDamageEvent extends VoidEntityDamageEvent implements PreEntityDamageEvent {
+public final class VoidPreEntityDamageEvent extends VoidEntityDamageEvent implements PreEntityDamageEvent {
 
     private boolean canceled = false;
 

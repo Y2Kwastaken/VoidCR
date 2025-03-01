@@ -8,7 +8,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.world.block.pre.PrePlayerBreakBloc
 import sh.miles.voidcr.server.Server;
 import sh.miles.voidcr.world.block.BlockState;
 
-public class VoidPrePlayerBreakBlockEvent extends VoidPlayerBreakBlockEvent implements PrePlayerBreakBlockEvent {
+public final class VoidPrePlayerBreakBlockEvent extends VoidPlayerBreakBlockEvent implements PrePlayerBreakBlockEvent {
 
     private boolean canceled = false;
 

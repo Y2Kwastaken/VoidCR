@@ -1,5 +1,13 @@
 --- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
 +++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
+@@ -99,6 +_,7 @@
+       Zone zone = player.getZone();
+       zone.addPlayer(player);
+       world.players.add(player);
++      world.nameToPlayer.put(player.getUsername(), player); // VoidCR nameToPlayerMap
+       ArrayIterator var5 = world.players.iterator();
+ 
+       while (var5.hasNext()) {
 @@ -152,26 +_,33 @@
        });
        registerBlockEntityOpeners();

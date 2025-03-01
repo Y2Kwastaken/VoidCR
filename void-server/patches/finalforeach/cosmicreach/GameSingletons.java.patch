@@ -1,0 +1,11 @@
+--- a/finalforeach/cosmicreach/GameSingletons.java
++++ b/finalforeach/cosmicreach/GameSingletons.java
+@@ -244,7 +_,7 @@
+          World world = GameSingletons.world;
+          if (world != null) {
+             world.players.clear();
+-
++            world.nameToPlayer.clear(); // VoidCR nameToPlayerMap
+             for (Zone zone : world.getZones()) {
+                zone.getPlayers().clear();
+             }

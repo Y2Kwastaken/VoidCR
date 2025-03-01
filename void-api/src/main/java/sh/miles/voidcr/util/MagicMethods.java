@@ -1,6 +1,8 @@
 package sh.miles.voidcr.util;
 
-import sh.miles.voidcr.server.registry.Registry;
+import sh.miles.voidcr.server.registry.NamedRegistry;
+import sh.miles.voidcr.util.collection.KeyHolder;
+import sh.miles.voidcr.util.collection.Registry;
 import sh.miles.voidcr.world.inventory.item.ItemKey;
 import sh.miles.voidcr.world.inventory.item.ItemStack;
 import sh.miles.voidcr.world.inventory.item.ItemType;
@@ -130,5 +132,5 @@ public interface MagicMethods {
      * @throws IllegalArgumentException thrown if the parameter doesn't past tests
      * @since 0.3.14
      */
-    <E extends Keyed> Registry<E> getRegistry(Class<E> clazz) throws IllegalArgumentException;
+    <E extends KeyHolder<K>, K> Registry<E, K> getRegistry(Class<E> clazz) throws IllegalArgumentException;
 }

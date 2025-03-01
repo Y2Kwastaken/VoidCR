@@ -1,6 +1,7 @@
-package sh.miles.voidcr.plugin.lifecycle.event.world.block;
+package sh.miles.voidcr.plugin.lifecycle.event.world.block.entity;
 
 import sh.miles.voidcr.entity.PlayerEntity;
+import sh.miles.voidcr.plugin.lifecycle.event.world.block.BlockEvent;
 import sh.miles.voidcr.world.block.entity.BlockEntity;
 
 /**

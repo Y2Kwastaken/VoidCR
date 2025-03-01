@@ -8,7 +8,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.post.PostPlayerInteractBlockEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPostPlayerInteractEvent extends VoidPlayerInteractBlockEvent implements PostPlayerInteractBlockEvent {
+public final class VoidPostPlayerInteractEvent extends VoidPlayerInteractBlockEvent implements PostPlayerInteractBlockEvent {
     public VoidPostPlayerInteractEvent(final Server context, final Player player, final BlockPosition position, final BlockState state) {
         super(context, player, position, state);
     }

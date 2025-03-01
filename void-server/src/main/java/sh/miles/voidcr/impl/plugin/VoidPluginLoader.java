@@ -12,6 +12,7 @@ import sh.miles.voidcr.impl.plugin.meta.VoidPluginMeta;
 import sh.miles.voidcr.impl.server.VoidServer;
 import sh.miles.voidcr.plugin.exception.InvalidPluginMetaException;
 import sh.miles.voidcr.plugin.exception.PluginLoadException;
+import sh.miles.voidcr.plugin.lifecycle.LifecycleAware;
 import sh.miles.voidcr.plugin.meta.PluginApiVersion;
 import sh.miles.voidcr.plugin.meta.PluginDependency;
 import sh.miles.voidcr.plugin.meta.PluginMeta;
@@ -35,6 +36,7 @@ import java.util.zip.ZipFile;
 
 public final class VoidPluginLoader {
     private final Map<String, PluginMeta> metas = new HashMap<>();
+    private final Map<LifecycleAware<?>, String> pluginNames = new HashMap<>();
     private final List<VoidPluginClassLoader> loaders = new ArrayList<>();
     private final VoidServer server;
 
@@ -55,6 +57,7 @@ public final class VoidPluginLoader {
         for (final VoidPluginClassLoader loader : loaders) {
             if (loader.getStandardPlugin() != null) {
                 loader.getStandardPlugin().disable(server);
+                server.getLifecycle().dismissAll(loader.getStandardPlugin());
                 server.getLogger().info("Disabled plugin {}", loader.getPluginMeta().name());
             }
         }
@@ -130,8 +133,10 @@ public final class VoidPluginLoader {
         meta.mainClass((Class<? extends StandardPlugin>) SupplyingSilencer.silence(() -> Class.forName(meta.main(), true, loader)));
         try {
             Constructor<? extends StandardPlugin> constructor = meta.mainClass().getDeclaredConstructor();
-            loader.setStandardPlugin(constructor.newInstance());
+            final StandardPlugin standardPlugin = constructor.newInstance();
+            loader.setStandardPlugin(standardPlugin);
             loaders.add(loader);
+            pluginNames.put(standardPlugin, loader.getPluginMeta().name());
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
                  InvocationTargetException e) {
             throw new RuntimeException(e);
@@ -154,6 +159,10 @@ public final class VoidPluginLoader {
 
     public List<VoidPluginClassLoader> getLoaders() {
         return ImmutableList.copyOf(this.loaders);
+    }
+
+    public String getPluginName(LifecycleAware<?> plugin) {
+        return pluginNames.get(plugin);
     }
 
     private String getStringField(JsonObject object, String field, Path jarFile) throws InvalidPluginMetaException {

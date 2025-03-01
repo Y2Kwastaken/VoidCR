@@ -12,11 +12,11 @@ import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.post.VoidP
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.pre.VoidPrePlayerSignUpdateEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerBreakBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerInteractEvent;
-import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerOpenBlockScreenEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.post.VoidPostPlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerPlaceBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerBreakBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerInteractBlockEvent;
-import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerOpenBlockScreenEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.pre.VoidPrePlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerPlaceBlockEvent;
 
 import static sh.miles.voidcr.impl.plugin.lifecycle.VoidLifecycleManager.dispatchEvent;

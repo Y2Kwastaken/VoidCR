@@ -1,6 +1,11 @@
 ~AT
 public finalforeach/cosmicreach/GameSingletons playersToUniqueIds
 
+public finalforeach/cosmicreach/chat/commands/Command REGISTERED_COMMANDS
+public finalforeach/cosmicreach/chat/commands/Command REGISTERED_ALIAS_COMMANDS
+public finalforeach/cosmicreach/chat/commands/Command REGISTERED_COMMAND_ALIAS_LIST
+public finalforeach/cosmicreach/chat/commands/Command args
+
 public finalforeach/cosmicreach/blockentities/BlockEntityFurnace progressTicks
 public finalforeach/cosmicreach/blockentities/BlockEntityFurnace maxFuelTicks
 public finalforeach/cosmicreach/blockentities/BlockEntityFurnace fuelTicks

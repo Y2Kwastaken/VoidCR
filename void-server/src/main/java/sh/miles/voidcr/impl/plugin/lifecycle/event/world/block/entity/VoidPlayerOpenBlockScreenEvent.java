@@ -1,8 +1,9 @@
-package sh.miles.voidcr.impl.plugin.lifecycle.event.world.block;
+package sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity;
 
 import finalforeach.cosmicreach.entities.player.Player;
 import sh.miles.voidcr.entity.PlayerEntity;
-import sh.miles.voidcr.plugin.lifecycle.event.world.block.PlayerOpenBlockScreenEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.VoidBlockEvent;
+import sh.miles.voidcr.plugin.lifecycle.event.world.block.entity.PlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.server.Server;
 import sh.miles.voidcr.world.block.entity.BlockEntity;
 

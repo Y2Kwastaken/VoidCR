@@ -8,7 +8,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.pre.PrePlayerInteractBlockEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPrePlayerInteractBlockEvent extends VoidPlayerInteractBlockEvent implements PrePlayerInteractBlockEvent {
+public final class VoidPrePlayerInteractBlockEvent extends VoidPlayerInteractBlockEvent implements PrePlayerInteractBlockEvent {
 
     private boolean canceled = false;
 

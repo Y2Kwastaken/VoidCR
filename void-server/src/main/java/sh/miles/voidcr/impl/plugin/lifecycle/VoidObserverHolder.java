@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
  * holds event data
  */
 @NullMarked
-public class VoidObserverHolder<T extends LifecycleEvent<C>, C> implements Comparable<VoidObserverHolder<T, C>> {
+public final class VoidObserverHolder<T extends LifecycleEvent<C>, C> implements Comparable<VoidObserverHolder<T, C>> {
 
     private static int ID = 0;
 

@@ -8,7 +8,7 @@ import sh.miles.voidcr.plugin.lifecycle.event.LifecycleEvent;
 import sh.miles.voidcr.plugin.lifecycle.event.world.block.post.PostPlayerPlaceBlockEvent;
 import sh.miles.voidcr.server.Server;
 
-public class VoidPostPlayerPlaceBlockEvent extends VoidPlayerPlaceBlockEvent {
+public final class VoidPostPlayerPlaceBlockEvent extends VoidPlayerPlaceBlockEvent {
     public VoidPostPlayerPlaceBlockEvent(final Server context, final Player player, final BlockPosition position, final BlockState state) {
         super(context, player, position, state);
     }
