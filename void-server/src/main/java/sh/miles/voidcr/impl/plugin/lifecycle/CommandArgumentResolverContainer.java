@@ -24,7 +24,7 @@ public final class CommandArgumentResolverContainer<C, R> {
     }
 
     public boolean load(LifecycleAware<C> owner, CommandArgumentResolver<R> argumentResolver) {
-        return contents.putIfAbsent(owner, argumentResolver) != null;
+        return contents.putIfAbsent(owner, argumentResolver) == null;
     }
 
     @Nullable

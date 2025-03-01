@@ -30,7 +30,7 @@ public class VoidCommandWrapper<C> extends Command implements CommandContext {
     public <R> R getArgumentOrElse(final int index, final Class<R> type, @Nullable final R fallback) throws IndexOutOfBoundsException, IllegalArgumentException {
         try {
             return getArgument(index, index, type);
-        } catch (IllegalStateException exception) {
+        } catch (IndexOutOfBoundsException | IllegalStateException exception) {
             return fallback;
         }
     }

@@ -1,17 +1,11 @@
 --- a/finalforeach/cosmicreach/world/World.java
 +++ b/finalforeach/cosmicreach/world/World.java
-@@ -15,11 +_,15 @@
- import finalforeach.cosmicreach.worldgen.ZoneGenerator;
- import java.util.Collection;
- import java.util.HashMap;
-+import java.util.Map;
- import java.util.Random;
- import java.util.Set;
+@@ -20,6 +_,9 @@
  import sh.miles.voidcr.impl.world.VoidUniverse;
  
  public class World implements Serializable {
 +   // VoidCR start
-+   public final Map<String, Player> nameToPlayer = new HashMap<>(); // name to player for fast player resolution
++   public final java.util.Map<String, Player> nameToPlayer = new HashMap<>(); // name to player for fast player resolution
 +   // VoidCR end
     public String defaultZoneId;
     private transient HashMap<String, Zone> zoneMap = new HashMap<String, Zone>();
