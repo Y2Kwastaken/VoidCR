@@ -6,6 +6,8 @@ import sh.miles.voidcr.world.block.BlockState;
 import sh.miles.voidcr.world.block.BlockType;
 import sh.miles.voidcr.world.inventory.item.ItemType;
 
+import java.util.Objects;
+
 public class VoidBlockState implements BlockState, Mirrored<finalforeach.cosmicreach.blocks.BlockState> {
 
     private final finalforeach.cosmicreach.blocks.BlockState mirror;
@@ -69,5 +71,21 @@ public class VoidBlockState implements BlockState, Mirrored<finalforeach.cosmicr
     @Override
     public BlockType getBlockType() {
         return VoidBlockType.toVoid(this.mirror.getBlock());
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (!(o instanceof final VoidBlockState that)) return false;
+        return Objects.equals(mirror, that.mirror);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(mirror);
+    }
+
+    @Override
+    public String toString() {
+        return mirror.toString();
     }
 }

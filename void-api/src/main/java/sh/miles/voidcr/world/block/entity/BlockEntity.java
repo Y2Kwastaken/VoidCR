@@ -1,5 +1,6 @@
 package sh.miles.voidcr.world.block.entity;
 
+import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.position.BlockPos;
 
@@ -34,4 +35,12 @@ public interface BlockEntity {
      * @since 0.3.26
      */
     boolean isLoaded();
+
+    /**
+     * Gets the id of this block entity
+     *
+     * @return the entity id
+     * @since 0.3.27
+     */
+    NamedKey getBlockEntityId();
 }

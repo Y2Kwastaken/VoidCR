@@ -1,6 +1,7 @@
 package sh.miles.voidcr.impl.world.block.entity;
 
 import sh.miles.voidcr.impl.world.position.VoidBlockPos;
+import sh.miles.voidcr.util.NamedKey;
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.block.entity.BlockEntity;
 import sh.miles.voidcr.world.position.BlockPos;
@@ -26,5 +27,10 @@ public class VoidBlockEntity<T extends finalforeach.cosmicreach.blockentities.Bl
     @Override
     public boolean isLoaded() {
         return mirror.loaded;
+    }
+
+    @Override
+    public NamedKey getBlockEntityId() {
+        return NamedKey.key(mirror.getBlockEntityId());
     }
 }

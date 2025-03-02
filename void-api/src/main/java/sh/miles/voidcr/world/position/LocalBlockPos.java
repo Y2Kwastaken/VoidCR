@@ -1,6 +1,7 @@
 package sh.miles.voidcr.world.position;
 
 import sh.miles.voidcr.world.Chunk;
+import sh.miles.voidcr.world.block.BlockState;
 
 /**
  * Represents a BlockPos bounded to a chunk
@@ -13,6 +14,23 @@ import sh.miles.voidcr.world.Chunk;
  * @since 0.3.26
  */
 public interface LocalBlockPos extends IntPosition<LocalBlockPos> {
+
+    /**
+     * Sets the block state of this block position
+     *
+     * @param state the state to set
+     * @return this position
+     * @since 0.3.27
+     */
+    LocalBlockPos setBlockState(BlockState state);
+
+    /**
+     * Gets the block state of this position
+     *
+     * @return the state
+     * @since 0.3.27
+     */
+    BlockState getBlockState();
 
     /**
      * Gets the chunk that this LocalBlocKPos is bound too
@@ -34,7 +52,8 @@ public interface LocalBlockPos extends IntPosition<LocalBlockPos> {
     /**
      * Returns a copy of this LocalBlockPos not bound to any Chunk
      * <p>
-     * Note if this BlockPos was originally truncated per explanation in {@link BlockPos#bindTo(Chunk, boolean)} see {@link #unbind(boolean)}
+     * Note if this BlockPos was originally truncated per explanation in {@link BlockPos#bindTo(Chunk, boolean)} see
+     * {@link #unbind(boolean)}
      *
      * @return a new BlockPos
      * @since 0.3.26

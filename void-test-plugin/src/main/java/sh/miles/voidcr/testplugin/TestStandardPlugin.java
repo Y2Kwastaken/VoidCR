@@ -1,61 +1,40 @@
 package sh.miles.voidcr.testplugin;
 
 import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
 import sh.miles.voidcr.entity.PlayerEntity;
-import sh.miles.voidcr.impl.entity.VoidPlayerEntity;
 import sh.miles.voidcr.plugin.type.StandardPlugin;
 import sh.miles.voidcr.server.Server;
+import sh.miles.voidcr.world.block.BlockState;
+import sh.miles.voidcr.world.block.BlockType;
 
 @NullMarked
 public class TestStandardPlugin implements StandardPlugin {
 
-    enum Daylight {
-        MIDNIGHT(30000),
-        DUSK(20000),
-        DAWN(0),
-        MIDDAY(10000);
-
-        public final int ticks;
-
-        Daylight(int ticks) {
-            this.ticks = ticks;
-        }
-
-        @Nullable
-        public static Daylight fromString(String name) {
-            for (final Daylight value : values()) {
-                if (value.name().equalsIgnoreCase(name)) {
-                    return value;
-                }
-            }
-
-            return null;
-        }
-    }
-
     @Override
     public void initialize(final Server server) {
-        server.getLifecycle().registerArgumentResolver(this, Daylight.class, (literal) -> {
-            final Daylight light = Daylight.fromString(literal);
-            if (light == null) {
-                throw new IllegalStateException("Can not parse daylight from argument %s".formatted(light));
-            }
-            return light;
-        });
         server.getLifecycle().registerCommand(this, (builder) -> {
-            builder.name("time")
-                    .yieldOnConflict(false)
-                    .description("A Command that overwrites the default CosmicReach day command")
-                    .executor(((executor, context) -> {
+            builder.name("test")
+                    .executor((executor, context) -> {
                         if (!(executor instanceof PlayerEntity player)) {
                             return;
                         }
 
-                        final Daylight daylight = context.getArgumentOrElse(0, Daylight.class, Daylight.MIDDAY);
-                        final var vplayer = (VoidPlayerEntity) player; // no API for this yet lol so this is internals
-                        vplayer.getMirror().zone.getWorld().currentWorldTick = daylight.ticks;
-                    }));
+                        final var gold = BlockType.GOLD_BLOCK.getDefaultBlockState();
+                        for (final BlockState allBlockState : BlockType.LIGHT.getAllBlockStates()) {
+                            System.out.println(allBlockState);
+                        }
+                        player.getPosition().coerce().subtract(0, 1, 0)
+                                .bindTo(player.getWorld())
+                                .setBlockState(BlockType.LIGHT.getBlockState("power", "on"))
+                                .add(1, 0, 0).setBlockState(gold)
+                                .add(-2, 0, 0).setBlockState(gold)
+                                .add(0, 0, 1).setBlockState(gold)
+                                .add(1, 0, 0).setBlockState(gold)
+                                .add(1, 0, 0).setBlockState(gold)
+                                .add(0, 0, -2).setBlockState(gold)
+                                .add(-1, 0, 0).setBlockState(gold)
+                                .add(-1, 0, 0).setBlockState(gold);
+                    });
         });
         server.getLogger().info("Hello, World! From Test Plugin!");
     }

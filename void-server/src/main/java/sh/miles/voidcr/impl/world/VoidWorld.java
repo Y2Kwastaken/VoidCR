@@ -11,6 +11,7 @@ import sh.miles.voidcr.impl.world.position.VoidBlockPos;
 import sh.miles.voidcr.impl.world.position.VoidPosition;
 import sh.miles.voidcr.util.Mirrored;
 import sh.miles.voidcr.util.NamedKey;
+import sh.miles.voidcr.world.Chunk;
 import sh.miles.voidcr.world.Universe;
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.position.BlockPos;
@@ -38,6 +39,18 @@ public final class VoidWorld implements World, Mirrored<Zone> {
     @Override
     public Position getWorldSpawn() {
         return VoidPosition.fromVector3(mirror.spawnPoint);
+    }
+
+    @Override
+    public Chunk getChunk(final int chunkX, final int chunkY, final int chunkZ) {
+        final var chunk = mirror.getChunkAtChunkCoords(chunkX, chunkY, chunkZ);
+        return chunk == null ? null : chunk.getVoidMirror();
+    }
+
+    @Override
+    public Chunk getChunkAt(final BlockPos pos) {
+        final var chunk = mirror.getChunkAtBlock(pos.x(), pos.y(), pos.z());
+        return chunk == null ? null : chunk.getVoidMirror();
     }
 
     @Override

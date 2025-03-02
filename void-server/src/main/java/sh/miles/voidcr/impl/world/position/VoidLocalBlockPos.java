@@ -3,6 +3,7 @@ package sh.miles.voidcr.impl.world.position;
 import com.google.common.base.Preconditions;
 import sh.miles.voidcr.impl.world.VoidChunk;
 import sh.miles.voidcr.world.Chunk;
+import sh.miles.voidcr.world.block.BlockState;
 import sh.miles.voidcr.world.position.BlockPos;
 import sh.miles.voidcr.world.position.LocalBlockPos;
 
@@ -28,13 +29,24 @@ public class VoidLocalBlockPos extends VoidIntPosition<LocalBlockPos> implements
     }
 
     @Override
+    public LocalBlockPos setBlockState(final BlockState state) {
+        chunk.setBlockState(this.x, this.y, this.z, state);
+        return this;
+    }
+
+    @Override
+    public BlockState getBlockState() {
+        return chunk.getBlockState(this.x, this.y, this.z);
+    }
+
+    @Override
     public Chunk chunk() {
         return this.chunk;
     }
 
     @Override
     public BlockPos unbind(final boolean expand) {
-        return expand ? new VoidBlockPos(this.x >> 4, this.y >> 4, this.z >> 4) : new VoidBlockPos(this.x, this.y, this.z);
+        return expand ? new VoidBlockPos(this.x + (chunk.chunkX() << 4), this.y + (chunk.chunkY() << 4), this.x + (chunk.chunkZ() << 4)) : new VoidBlockPos(this.x, this.y, this.z);
     }
 
     @Override

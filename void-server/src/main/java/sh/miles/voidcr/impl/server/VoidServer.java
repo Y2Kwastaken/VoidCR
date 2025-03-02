@@ -1,5 +1,6 @@
 package sh.miles.voidcr.impl.server;
 
+import com.google.common.base.Suppliers;
 import finalforeach.cosmicreach.chat.commands.Command;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +37,7 @@ public final class VoidServer implements Server {
         this.magicMethods = new VoidMagicMethods();
         this.lifecycle = new VoidLifecycleManager<>(this);
         this.configuration = VoidServerConfiguration.read(this);
-        this.console = new VoidConsole(ServerSingletons.SERVER.systemChat);
+        this.console = new VoidConsole(Suppliers.memoize(() -> ServerSingletons.SERVER.systemChat));
     }
 
     @Override

@@ -8,6 +8,7 @@ import sh.miles.voidcr.impl.util.VoidMagicMethods;
 import sh.miles.voidcr.util.CRSerializerHelper;
 import sh.miles.voidcr.util.CRSerializerHelper.CRBinSerializerWrapper;
 import sh.miles.voidcr.world.Chunk;
+import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.position.BlockPos;
 import sh.miles.voidcr.world.position.LocalBlockPos;
 
@@ -36,9 +37,21 @@ public class VoidBlockPos extends VoidIntPosition<BlockPos> implements BlockPos 
     }
 
     @Override
+    public BlockPos truncate() {
+        return new VoidBlockPos(x & 0xF, y & 0xF, z & 0xF);
+    }
+
+    @Override
+    public LocalBlockPos bindTo(final World world) throws IllegalStateException {
+        final var chunk = world.getChunkAt(this);
+        Preconditions.checkState(chunk != null, "The target chunk of this location must be loaded in order for a successful bind");
+        return bindTo(chunk, true);
+    }
+
+    @Override
     public LocalBlockPos bindTo(final Chunk chunk, final boolean truncate) throws IllegalStateException {
         if (truncate) {
-            return new VoidLocalBlockPos(x >> 4, y >> 4, z >> 4, chunk);
+            return new VoidLocalBlockPos(x & 0xF, y & 0xF, z & 0xF, chunk);
         }
         Preconditions.checkState(x < 16 && y < 16 && z < 16, "The current BlockPos (%d, %d, %d) values must be truncated to be bound to a chunk".formatted(x, y, z));
         return new VoidLocalBlockPos(x, y, z, chunk);
