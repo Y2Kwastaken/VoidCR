@@ -1,9 +1,4 @@
-import sh.miles.voidcr.task.ApplyPatchesFuzzyTask
-import sh.miles.voidcr.task.ApplyPatchesTask
-import sh.miles.voidcr.task.BuildPatchesTask
-import sh.miles.voidcr.task.DecompileTask
-import sh.miles.voidcr.task.FilterAndTransformZipTask
-import sh.miles.voidcr.task.SetupSourcesTask
+import sh.miles.voidcr.task.*
 
 plugins {
     java
@@ -145,11 +140,21 @@ val generateResources by tasks.registering(Copy::class) {
     into(project.layout.buildDirectory.file("generated/cosmic-reach-assets"))
 }
 
+val downloadCosmicReachServer by tasks.registering(DownloadCosmicReachServer::class) {
+    group = "voidcr-setup"
+
+    this.archiveRepoUrl = "https://raw.githubusercontent.com/CRModders/CosmicArchive/main/versions/"
+    this.phase = "pre-alpha"
+    this.CRVersion = crVersion
+    this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion.jar")
+}
+
 tasks.register("setup") {
     group = "voidcr-setup"
 
+    filterJar.get().mustRunAfter(downloadCosmicReachServer)
     setupSources.get().mustRunAfter(applyPatches)
-    dependsOn(filterJar, decompileJar, applyPatches, setupSources)
+    dependsOn(downloadCosmicReachServer, filterJar, decompileJar, applyPatches, setupSources)
 }
 
 tasks.register("update") {
