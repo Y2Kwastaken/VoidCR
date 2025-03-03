@@ -1,4 +1,12 @@
-import sh.miles.voidcr.task.*
+import sh.miles.voidcr.task.ApplyPatchesFuzzyTask
+import sh.miles.voidcr.task.ApplyPatchesTask
+import sh.miles.voidcr.task.BuildPatchesTask
+import sh.miles.voidcr.task.DecompileTask
+import sh.miles.voidcr.task.FilterAndTransformZipTask
+import sh.miles.voidcr.task.SetupSourcesTask
+import sh.miles.voidcr.task.DownloadCosmicReachServer
+
+
 
 plugins {
     java
@@ -6,6 +14,8 @@ plugins {
 }
 
 val crVersion = "0.3.27"
+val phase = "pre-alpha"
+
 
 group = rootProject.group
 version = rootProject.name
@@ -144,7 +154,7 @@ val downloadCosmicReachServer by tasks.registering(DownloadCosmicReachServer::cl
     group = "voidcr-setup"
 
     this.archiveRepoUrl = "https://raw.githubusercontent.com/CRModders/CosmicArchive/main/versions/"
-    this.phase = "pre-alpha"
+    this.crPhase = phase
     this.CRVersion = crVersion
     this.outputJar = file("decompile/Cosmic-Reach-Server-$crVersion.jar")
 }
