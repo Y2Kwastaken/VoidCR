@@ -17,3 +17,14 @@
           this.entity.localBoundingBox.set(this.standingBoundingBox);
           this.entity.viewPositionOffset.set(this.standingViewPositionOffset);
        }
+@@ -250,6 +_,10 @@
+       if (jsonData.has("inventory")) {
+          try {
+             this.inventory = (SlotContainer)json.readValue("inventory", SlotContainer.class, jsonData);
++            // VoidCR start - set back properties on loaded inventory
++            this.inventory.owner = this.entity;
++            this.inventory.windowId = 0;
++            // VoidCR end - set back properties on loaded inventory
+          } catch (Exception var6) {
+             System.err.println("Failed to load inventory for player: " + this.getUsername());
+             var6.printStackTrace();

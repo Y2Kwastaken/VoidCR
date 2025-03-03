@@ -5,8 +5,8 @@
  
  public class SlotContainer implements Serializable, ISlotContainer, ICRBinSerializable {
 +   // VoidCR start - allow easier managing of slot containers
-+   public int windowId = -1;
-+   public Object owner = null;
++   public transient int windowId = -1;
++   public transient Object owner = null;
 +   public SlotContainer(int numSlots, Object owner, int windowId) { this.numberOfSlots = numSlots; this.owner = owner; this.windowId = windowId; }
 +   // VoidCR end - allow easier managing of slot containers
     private IDynamicArray<ItemSlot> slots = DynamicArrays.<ItemSlot>getNew(ItemSlot.class);
