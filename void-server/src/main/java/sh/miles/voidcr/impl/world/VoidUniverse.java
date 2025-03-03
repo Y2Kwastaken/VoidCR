@@ -29,6 +29,17 @@ public final class VoidUniverse implements Universe, Mirrored<World> {
     }
 
     @Override
+    public void setTime(final long time) {
+        Preconditions.checkArgument(time >= 0, "The provided time must be greater than or equal to 0");
+        mirror.currentWorldTick = time;
+    }
+
+    @Override
+    public long getTime() {
+        return mirror.currentWorldTick;
+    }
+
+    @Override
     public sh.miles.voidcr.world.World getWorld(final NamedKey key) {
         Preconditions.checkArgument(key != null, "The provided key must not be null");
         final var zone = mirror.getZoneIfExists(((VoidNamedKey) key).getCosmicReachId());

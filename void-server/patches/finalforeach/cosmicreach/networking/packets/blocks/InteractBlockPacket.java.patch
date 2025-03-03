@@ -37,7 +37,7 @@
                 }
              }
           }
-+         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerBreakBlock(identity, this.blockPos, this.blockState); // VoidCR - PostPlayerInteractBlockEvent
++         if (blockPos != null) sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerBreakBlock(identity, this.blockPos, this.blockState); // VoidCR - PostPlayerInteractBlockEvent
        }
     }
  

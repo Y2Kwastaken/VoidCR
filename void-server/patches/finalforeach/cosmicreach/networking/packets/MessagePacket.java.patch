@@ -1,0 +1,33 @@
+--- a/finalforeach/cosmicreach/networking/packets/MessagePacket.java
++++ b/finalforeach/cosmicreach/networking/packets/MessagePacket.java
+@@ -56,6 +_,15 @@
+          }
+ 
+          Account accountx = ServerSingletons.getAccount(identity);
++         // VoidCR start - PrePlayerChatEvent
++         com.badlogic.gdx.utils.Array<finalforeach.cosmicreach.networking.server.ServerIdentity> recipients = null;
++         final var event = sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.prePlayerChat(this.message, accountx.getPlayer());
++         if (event != null) {
++            this.message = event.getMessage();
++            recipients = event.getCosmicReachRecipients();
++            if (event.isCanceled()) return;
++         }
++         // VoidCR end - PrePlayerChatEvent
+          String logMessage = "Chat from "
+             + accountx.getUniqueId()
+             + " | "
+@@ -76,7 +_,14 @@
+ 
+          Logger.info(logMessage);
+          this.playerUniqueId = accountx.getUniqueId();
++         // VoidCR start - only send to designated senders
++         if (recipients != null) {
++            setupAndSendToAllExcept(recipients, identity);
++            return;
++         }
++         // VoidCR end - only send to designated senders
+          ServerSingletons.SERVER.broadcastAsServerExcept(this, identity);
++         sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.postPlayerChat(this.message, accountx.getPlayer()); // VoidCR - post chat event
+       }
+    }
+ }

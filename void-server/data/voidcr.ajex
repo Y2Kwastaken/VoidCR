@@ -18,6 +18,8 @@ public finalforeach/cosmicreach/entities/EntityLaserProjectile strength
 
 public finalforeach/cosmicreach/items/ItemStack durability
 
+public finalforeach/cosmicreach/networking/netty/NettyServer authenticatedConnections
+
 public finalforeach/cosmicreach/world/Chunk blockEntities
 ~AT
 

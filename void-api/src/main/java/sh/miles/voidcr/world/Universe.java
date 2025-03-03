@@ -14,6 +14,22 @@ import java.util.Collection;
 public interface Universe {
 
     /**
+     * Sets the current time in the universe
+     *
+     * @param time the time to set, which must be greater than or equal to 0
+     * @since 0.3.27
+     */
+    void setTime(long time);
+
+    /**
+     * Gets the time of the universe
+     *
+     * @return the time
+     * @since 0.3.27
+     */
+    long getTime();
+
+    /**
      * Gets a world from the given named key
      *
      * @param key the key

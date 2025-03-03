@@ -5,19 +5,24 @@ import finalforeach.cosmicreach.BlockEntityScreenInfo;
 import finalforeach.cosmicreach.blockentities.BlockEntitySign;
 import finalforeach.cosmicreach.blocks.BlockPosition;
 import finalforeach.cosmicreach.blocks.BlockState;
+import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.networking.NetworkIdentity;
+import finalforeach.cosmicreach.world.World;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.chat.post.VoidPostPlayerChatEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.chat.pre.VoidPrePlayerChatEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.entity.post.VoidPostEntityDamageEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.entity.pre.VoidPreEntityDamageEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.post.VoidPostPlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.post.VoidPostPlayerSignUpdateEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.pre.VoidPrePlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.pre.VoidPrePlayerSignUpdateEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerBreakBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerInteractEvent;
-import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.post.VoidPostPlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.post.VoidPostPlayerPlaceBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerBreakBlockEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerInteractBlockEvent;
-import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.entity.pre.VoidPrePlayerOpenBlockScreenEvent;
 import sh.miles.voidcr.impl.plugin.lifecycle.event.world.block.pre.VoidPrePlayerPlaceBlockEvent;
+import sh.miles.voidcr.impl.plugin.lifecycle.event.world.pre.VoidPreUniverseEndTickEvent;
 
 import static sh.miles.voidcr.impl.plugin.lifecycle.VoidLifecycleManager.dispatchEvent;
 
@@ -80,5 +85,17 @@ public final class VoidEventFactory {
 
     public static void postPlayerOpenBlockScreen(BlockEntityScreenInfo info) {
         dispatchEvent(ctx -> new VoidPostPlayerOpenBlockScreenEvent(ctx, info.player(), info.blockEntity()));
+    }
+
+    public static void preUniverseEndTick(World world, long time) {
+        dispatchEvent(ctx -> new VoidPreUniverseEndTickEvent(ctx, world, time));
+    }
+
+    public static VoidPrePlayerChatEvent prePlayerChat(String message, Player sender) {
+        return dispatchEvent(ctx -> new VoidPrePlayerChatEvent(ctx, message, sender));
+    }
+
+    public static void postPlayerChat(String message, Player sender) {
+        dispatchEvent(ctx -> new VoidPostPlayerChatEvent(ctx, message, sender));
     }
 }

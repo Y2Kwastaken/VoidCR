@@ -8,7 +8,12 @@
        ArrayIterator var5 = world.players.iterator();
  
        while (var5.hasNext()) {
-@@ -152,26 +_,33 @@
+@@ -148,30 +_,38 @@
+          world.currentWorldTick++;
+          if (SERVER != null) {
+             SERVER.broadcastToAll(new EndTickPacket(world.currentWorldTick));
++            sh.miles.voidcr.impl.plugin.lifecycle.event.VoidEventFactory.preUniverseEndTick(world, world.currentWorldTick); // VoidCR call pre tick end
+          }
        });
        registerBlockEntityOpeners();
        GameSingletons.postCreate();
