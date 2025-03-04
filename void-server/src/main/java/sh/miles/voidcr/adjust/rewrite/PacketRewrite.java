@@ -1,8 +1,9 @@
-package sh.miles.voidcr.adjust.redirect;
+package sh.miles.voidcr.adjust.rewrite;
 
 import finalforeach.cosmicreach.accounts.Account;
 import finalforeach.cosmicreach.chat.commands.Command;
 import finalforeach.cosmicreach.networking.NetworkIdentity;
+import sh.miles.voidcr.adjust.original.IdentityChat;
 import sh.miles.voidcr.impl.server.VoidServer;
 
 public final class PacketRewrite {

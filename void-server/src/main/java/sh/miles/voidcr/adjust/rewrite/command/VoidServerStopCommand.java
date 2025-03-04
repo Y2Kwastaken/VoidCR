@@ -1,6 +1,7 @@
-package sh.miles.voidcr.feature.chat.command;
+package sh.miles.voidcr.adjust.rewrite.command;
 
 import finalforeach.cosmicreach.GameSingletons;
+import finalforeach.cosmicreach.Threads;
 import finalforeach.cosmicreach.chat.IChat;
 import finalforeach.cosmicreach.chat.commands.Command;
 import finalforeach.cosmicreach.entities.player.Player;
@@ -13,11 +14,14 @@ public final class VoidServerStopCommand extends Command {
         final Player player = getCallingPlayer();
 
         if (player == null || ServerSingletons.OP_LIST.hasAccount(player.getAccount())) {
-            GameSingletons.playersToUniqueIds.keySet().forEach((p) -> {
-                ServerSingletons.SERVER.kick("Server has closed", ServerSingletons.getConnection(p));
+            Threads.runOnMainThread(() -> {
+                GameSingletons.playersToUniqueIds.keySet().forEach((p) -> {
+                    ServerSingletons.SERVER.kick("Server has closed", ServerSingletons.getConnection(p));
+                });
+
+                ServerSingletons.running.set(false);
             });
 
-            ServerSingletons.SERVER.running = false;
         } else {
             chat.addMessage(player.getAccount(), "Only operators may run this command");
         }

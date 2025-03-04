@@ -1,5 +1,13 @@
 --- a/finalforeach/cosmicreach/networking/server/ServerSingletons.java
 +++ b/finalforeach/cosmicreach/networking/server/ServerSingletons.java
+@@ -36,6 +_,7 @@
+ import io.netty.util.AttributeKey;
+ 
+ public class ServerSingletons {
++   public static java.util.concurrent.atomic.AtomicBoolean running = new java.util.concurrent.atomic.AtomicBoolean(true); // VoidCR - allow control of server termination
+    public static NettyServer SERVER;
+    private static ObjectMap<NetworkIdentity, Account> netIdsToAccounts = new ObjectMap();
+    private static ObjectMap<Account, NetworkIdentity> accountsToNetIds = new ObjectMap();
 @@ -99,6 +_,7 @@
        Zone zone = player.getZone();
        zone.addPlayer(player);

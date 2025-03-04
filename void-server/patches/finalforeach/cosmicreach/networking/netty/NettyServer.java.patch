@@ -1,13 +1,5 @@
 --- a/finalforeach/cosmicreach/networking/netty/NettyServer.java
 +++ b/finalforeach/cosmicreach/networking/netty/NettyServer.java
-@@ -35,6 +_,7 @@
- import java.io.InputStreamReader;
- 
- public class NettyServer {
-+   public boolean running = true; // VoidCR - allow control of server termination
-    public final ServerBroadcastIdentity broadcastIdentity;
-    ObjectMap<ChannelHandlerContext, ServerIdentity> contextToIdentity = new ObjectMap();
-    private Array<ServerIdentity> unauthenticatedConnections = new Array();
 @@ -47,7 +_,7 @@
           if (account != null) {
              Logger.info(account.getUsername() + ": " + messageText);
@@ -17,17 +9,25 @@
           }
        }
     };
-@@ -90,11 +_,11 @@
+@@ -86,6 +_,7 @@
+                .option(ChannelOption.SO_BACKLOG, 128))
+             .childOption(ChannelOption.SO_KEEPALIVE, true);
+          this.channelFuture = b.bind(this.port).sync();
++         /* VoidCR start - smart console
+          BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
           String inputString = null;
           Logger.info("Server started, type 'stop' to shutdown and 'help' for commands.");
- 
--         while (!"stop".equals(inputString) && this.channelFuture.channel().isActive()) {
-+         while (!"".equals(inputString) && this.channelFuture.channel().isActive() && running) { // VoidCR - allow control of server termination
-             inputString = bufferRead.readLine();
+@@ -95,6 +_,13 @@
              this.processCommand(inputString);
           }
--
+ 
++          */
++         final var console = new sh.miles.voidcr.adjust.rewrite.SmartConsole();
++         console.spin();
++         while(ServerSingletons.running.get());
++         console.halt();
 +         sh.miles.voidcr.impl.server.VoidServer.SERVER.unload(); // VoidCR - unload server
++         // VoidCR end - smart console
           this.shutdown();
           this.channelFuture.channel().closeFuture().sync();
        } finally {

@@ -1,4 +1,4 @@
-package sh.miles.voidcr.adjust.redirect;
+package sh.miles.voidcr.adjust.original;
 
 import finalforeach.cosmicreach.accounts.Account;
 import finalforeach.cosmicreach.chat.IChat;

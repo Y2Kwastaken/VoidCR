@@ -5,7 +5,7 @@
     public void handle(final NetworkIdentity identity, ChannelHandlerContext ctx) {
        if (!identity.isClient()) {
 +         // VoidCR start - rewrite CommandPacket
-+         sh.miles.voidcr.adjust.redirect.PacketRewrite.commandPacket(this.commandArgs, identity);
++         sh.miles.voidcr.adjust.rewrite.PacketRewrite.commandPacket(this.commandArgs, identity);
 +         /*
           Account acc = identity.getAccount();
           if (acc.isOperator()) {

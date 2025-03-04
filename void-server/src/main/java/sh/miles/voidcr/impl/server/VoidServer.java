@@ -5,7 +5,7 @@ import finalforeach.cosmicreach.chat.commands.Command;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import org.apache.logging.log4j.Logger;
 import sh.miles.voidcr.Main;
-import sh.miles.voidcr.feature.chat.command.VoidServerStopCommand;
+import sh.miles.voidcr.adjust.rewrite.command.VoidServerStopCommand;
 import sh.miles.voidcr.impl.plugin.VoidPluginLoader;
 import sh.miles.voidcr.impl.plugin.lifecycle.VoidLifecycleManager;
 import sh.miles.voidcr.impl.server.configuration.VoidServerConfiguration;
