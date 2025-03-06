@@ -5,16 +5,26 @@ import finalforeach.cosmicreach.GameSingletons;
 import finalforeach.cosmicreach.entities.Entity;
 import finalforeach.cosmicreach.entities.player.Player;
 import finalforeach.cosmicreach.networking.packets.MessagePacket;
+import finalforeach.cosmicreach.networking.packets.entities.PlayerPositionPacket;
 import finalforeach.cosmicreach.networking.server.ServerSingletons;
 import sh.miles.voidcr.entity.PlayerEntity;
 import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.inventory.container.ItemContainer;
+import sh.miles.voidcr.world.position.Position;
 
 public final class VoidPlayerEntity extends VoidEntity implements PlayerEntity {
 
     public VoidPlayerEntity(finalforeach.cosmicreach.entities.player.PlayerEntity mirror) {
         super(mirror);
         Preconditions.checkState(player() != null, "Every VoidPlayerEntity must have a player associated with it");
+    }
+
+    @Override
+    public void teleport(final World world, final Position to) {
+        super.teleport(world, to);
+        // notify player they have been moved
+        final var connection = ServerSingletons.getConnection(player());
+        connection.send(new PlayerPositionPacket(player()));
     }
 
     @Override

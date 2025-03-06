@@ -1,8 +1,7 @@
 package sh.miles.voidcr.entity;
 
-import com.badlogic.gdx.math.Vector3;
 import sh.miles.voidcr.plugin.lifecycle.event.entity.pre.PreEntityDamageEvent;
-import sh.miles.voidcr.world.position.BlockPos;
+import sh.miles.voidcr.world.World;
 import sh.miles.voidcr.world.position.Position;
 import sh.miles.voidcr.world.position.Vector;
 
@@ -12,6 +11,23 @@ import sh.miles.voidcr.world.position.Vector;
  * @since 0.3.14
  */
 public interface Entity {
+
+    /**
+     * Teleports this entity to some position
+     *
+     * @param world the world to teleport the entity within
+     * @param to    the to position
+     * @since 0.3.27
+     */
+    void teleport(World world, Position to);
+
+    /**
+     * Teleports this entity to some position
+     *
+     * @param to the to position
+     * @since 0.3.27
+     */
+    void teleport(Position to);
 
     /**
      * Gets the maximum amount of invulnerability frames after hit
@@ -72,9 +88,18 @@ public interface Entity {
     void setMaxHealth(float health);
 
     /**
+     * Gets the current world of this entity
+     *
+     * @return the world
+     * @since 0.3.27
+     */
+    World getWorld();
+
+    /**
      * Gets the current position of this entity
      *
      * @return this entity's current position
+     * @since 0.3.26
      */
     Position getPosition();
 
@@ -82,6 +107,7 @@ public interface Entity {
      * Gets the current velocity of this entity
      *
      * @return the entity's current velocity
+     * @since 0.3.27
      */
     Vector getVelocity();
 

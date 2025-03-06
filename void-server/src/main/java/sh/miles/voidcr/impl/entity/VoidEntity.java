@@ -2,11 +2,17 @@ package sh.miles.voidcr.impl.entity;
 
 import com.badlogic.gdx.math.Vector3;
 import com.google.common.base.Preconditions;
+import finalforeach.cosmicreach.networking.packets.entities.EntityPositionPacket;
+import finalforeach.cosmicreach.networking.server.ServerSingletons;
+import finalforeach.cosmicreach.world.Zone;
 import sh.miles.voidcr.entity.Entity;
 import sh.miles.voidcr.entity.EntityIdentifier;
+import sh.miles.voidcr.impl.world.VoidWorld;
 import sh.miles.voidcr.impl.world.position.VoidPosition;
 import sh.miles.voidcr.impl.world.position.VoidVector;
 import sh.miles.voidcr.util.Mirrored;
+import sh.miles.voidcr.world.World;
+import sh.miles.voidcr.world.position.BlockPos;
 import sh.miles.voidcr.world.position.Position;
 import sh.miles.voidcr.world.position.Vector;
 
@@ -20,6 +26,20 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     public VoidEntity(finalforeach.cosmicreach.entities.Entity mirror) {
         this.mirror = mirror;
         this.cachedIdentifier = new VoidEntityIdentifier(mirror.uniqueId);
+    }
+
+    @Override
+    public void teleport(final Position to) {
+        teleport(getWorld(), to);
+    }
+
+    @Override
+    public void teleport(final World world, final Position to) {
+        Preconditions.checkArgument(world != null, "The provided world must not be null");
+        Preconditions.checkArgument(to != null, "The provided to position must not be null");
+
+        mirror.position = new Vector3(to.x(), to.y(), to.z());
+        ServerSingletons.SERVER.broadcast(((VoidWorld) world).getMirror(), new EntityPositionPacket(this.getMirror()));
     }
 
     @Override
@@ -58,6 +78,11 @@ public class VoidEntity implements Entity, Mirrored<finalforeach.cosmicreach.ent
     public void setMaxHealth(final float health) {
         Preconditions.checkArgument(health > 0, "The provided maximum health must be greater than 0");
         mirror.maxHitpoints = health;
+    }
+
+    @Override
+    public World getWorld() {
+        return mirror.zone.getVoidMirror();
     }
 
     @Override
